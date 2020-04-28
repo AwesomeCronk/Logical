@@ -1,0 +1,4 @@
+INPUT inA
+INPUT inB
+OUTPUT outA
+AND inA inB outA
