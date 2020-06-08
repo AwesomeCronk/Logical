@@ -54,3 +54,62 @@ class _orGate(_gate):
             self._out.set(True)
         else:
             self._out.set(False)
+
+class _xorGate(_gate):
+    def __init__(self):
+        _gate.__init__(self)                #I may decide to switch these in the future
+        #super(_gate, self).__init__(self)
+
+    def update(self):
+        if self._in[0].fetch() != self._in[1].fetch():
+            self._out.set(False)
+        else:
+            self._out.set(True)
+
+class _nandGate(_gate):
+    def __init__(self):
+        _gate.__init__(self)                #I may decide to switch these in the future
+        #super(_gate, self).__init__(self)
+
+    def update(self):
+        if self._in[0].fetch() and self._in[1].fetch():
+            self._out.set(False)
+        else:
+            self._out.set(True)
+            
+class _norGate(_gate):
+    def __init__(self):
+        _gate.__init__(self)                #I may decide to switch these in the future
+        #super(_gate, self).__init__(self)
+
+    def update(self):
+        if self._in[0].fetch() and not self._in[1].fetch():
+            self._out.set(False)
+        elif not self._in[0].fetch() and self._in[1].fetch():
+            self._out.set(False)
+        elif self._in[0].fetch() and self._in[1].fetch():
+            self._out.set(False)
+        else:
+            self._out.set(True)
+
+class _xnorGate(_gate):
+    def __init__(self):
+        _gate.__init__(self)                #I may decide to switch these in the future
+        #super(_gate, self).__init__(self)
+
+    def update(self):
+        if self._in[0].fetch() != self._in[1].fetch():
+            self._out.set(False)
+        else:
+            self._out.set(True)
+
+class _notGate(_gate):
+    def __init__(self):
+        _gate.__init__(self)
+        self._in = _input()
+
+    def update(self):
+        if self._in.fetch():
+            self._out.set(False)
+        else:
+            self._out.set(True)

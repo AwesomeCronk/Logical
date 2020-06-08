@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\images",
-    "\\images\\gates"
+    "\\images\\gates",
+    "\\projects",
+    "\\projects\\test"
   ],
-  "SelectedNode": "\\main.py",
+  "SelectedNode": "\\images\\gates\\orRaw.svg",
   "PreviewInSolutionExplorer": false
 }

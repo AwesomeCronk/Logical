@@ -1,27 +1,45 @@
 try:
-    from PyQt5 import QtWidgets
+    import PyQt5
     from PyQt5.QtWidgets import QApplication, QMainWindow, QAbstractButton, QPushButton, QLabel
-    from PyQt5.QtGui import QPixmap, QPainter
+    from PyQt5.QtGui import QPixmap, QPainter, QCursor
 except:
     input('Error importing PyQt5 components. (press enter to close)')
     exit()
 
-from logic import _input, _output, _andGate, _orGate
+from logic import (_input, _output, _andGate, _orGate, _xorGate,
+                   _nandGate, _norGate, _xnorGate, _notGate)
 
 class mainWindow(QMainWindow):
     def __init__(self):
-        super(mainWindow, self).__init__()
+        QMainWindow.__init__(self)
         print('starting...')
-        self.setGeometry(200, 500, 800, 500)
-        self.objects = []
-        self.generateStaticControls()
+        self.initData()
+        self.initUI()
         self.testObjects()
-        #with open('test.lgc', 'r') as f:
-         #   data = f.read()
-          #  print(data)
-           # f.close()
+                
+    def initData(self):
+        self.objects = []
+        self.updateCycles = 5
+        self.projectDir = 'projects/'
+        self.objectToPlace = ''
+        self.placeLocation = ()
+        self.objectTypes = {'in': gInput, 'out': gOutput, 'and': gAndGate, 'or': gOrGate, 'xor': gXorGate,
+                            'nand': gNandGate, 'nor': gNorGate, 'xnor': gXnorGate, 'not': gNotGate}
 
-    def generateStaticControls(self):
+    def initUI(self):
+        self.setGeometry(200, 500, 800, 500)
+        self.objectButtons()
+        self.canvas = QLabel(self)
+        self.canvas = QPushButton(self)
+        self.canvas.setText('')
+        self.canvas.setGeometry(60, 10, 740, 450)
+        self.canvas.clicked.connect(self.placeObject)
+        self.updateButton = QPushButton(self)
+        self.updateButton.setText('Update')
+        self.updateButton.setGeometry(730, 470, 60, 20)
+        self.updateButton.clicked.connect(self.update) 
+
+    def objectButtons(self):
         self.newAndButton = QPushButton(self)
         self.newAndButton.setText('and')
         self.newAndButton.setGeometry(10, 10, 40, 20)
@@ -56,11 +74,58 @@ class mainWindow(QMainWindow):
         self.newNotButton.setText('not')
         self.newNotButton.setGeometry(10, 190, 40, 20)
         self.newNotButton.clicked.connect(self.newNotGate)
+        
+    #in, out, and, or, xor, nand, nor, xnor, not
+    def newInput(self):
+        print('new input')
+        self.objectToPlace = 'in'
 
-        self.updateButton = QPushButton(self)
-        self.updateButton.setText('Update')
-        self.updateButton.setGeometry(730, 470, 60, 20)
-        self.updateButton.clicked.connect(self.update)
+    def newOutput(self):
+        print('new output')
+        self.objectToPlace = 'out'
+
+    def newAndGate(self):
+        print("new andGate")
+        self.objectToPlace = 'and'
+
+    def newOrGate(self):
+        print("new orGate")
+        self.objectToPlace = 'or'
+
+    def newXorGate(self):
+        print("new xorGate")
+        self.objectToPlace = 'xor'
+
+    def newNandGate(self):
+        print("new nandGate")
+        self.objectToPlace = 'nand'
+
+    def newNorGate(self):
+        print("new norGate")
+        self.objectToPlace = 'nor'
+
+    def newXnorGate(self):
+        print("new xnorGate")
+        self.objectToPlace = 'xnor'
+
+    def newNotGate(self):
+        print("new notGate")
+        self.objectToPlace = 'not'
+
+    def placeObject(self):
+        if self.objectToPlace != '':
+            print('placing object {}'.format(self.objectToPlace))
+            self.placeLocation = ((QCursor.pos() - self.pos()).x(), (QCursor.pos() - self.pos()).y() - 30)
+            print(self.placeLocation)
+            newObject = self.objectTypes[self.objectToPlace](self)
+            print(newObject)
+            self.objects.append(newObject)
+            print('appended')
+            #print(type(newObject) is gOrGate)
+            newObject.move(self.placeLocation[0], self.placeLocation[1])
+            print('moved')
+            #self.objects[2].move(self.placeLocation[0], self.placeLocation[1])
+            print(self.objects)
 
     def update(self):
         #needsUpdate = True     #Theory for a system that updates as needed instead of a fixed number of times per loop. Potential issues with memory-type circuits.
@@ -68,44 +133,10 @@ class mainWindow(QMainWindow):
         #newstates = []
         #while needsUpdate:
         #    needsUpdate = False
-        for i in range(5):
+        for i in range(self.updateCycles):
             for o in self.objects:
+                print(o)
                 o.update()
-
-    def initUI(self):
-        newAndBtn = QPushButton(self)
-        newOrBtn = QPushButton(self)
-        newXorBtn = QPushButton(self)
-        newInBtn = QPushButton(self)
-        newOutBtn = QPushButton(self)
-
-    def newInput(self):
-        print('new input')
-
-    def newOutput(self):
-        print('new output')
-
-    #and, or, xor, nand, nor, xnor, not
-    def newAndGate(self):
-        print("new andGate")
-
-    def newOrGate(self):
-        print("new orGate")
-
-    def newXorGate(self):
-        print("new xorGate")
-
-    def newNandGate(self):
-        print("new nandGate")
-
-    def newNorGate(self):
-        print("new norGate")
-
-    def newXnorGate(self):
-        print("new xnorGate")
-
-    def newNotGate(self):
-        print("new notGate")
 
     def testGates(self):
         andGate = _andGate()
@@ -151,34 +182,49 @@ class mainWindow(QMainWindow):
         in1 = gInput(self)
         in2 = gInput(self)
         and1 = gAndGate(self)
+        or1 = gOrGate(self)
         out1 = gOutput(self)
-        in1.move(60, 10)
-        in2.move(60, 40)
-        and1.move(90, 10)
-        out1.move(150, 25)
+        out2 = gOutput(self)
+
+        in1.move(70, 20)
+        in2.move(70, 50)
+        and1.move(100, 20)
+        or1.move(100, 80)
+        out1.move(160, 35)
+        out2.move(160, 65)
+
+        and1._in[0].connect(in1._out)
+        and1._in[1].connect(in2._out)
+        or1._in[0].connect(in1._out)
+        or1._in[1].connect(in2._out)
+        out1._in.connect(and1._out)
+        out2._in.connect(or1._out)
+
+        self.objects.append(in1)
+        self.objects.append(in2)
+        self.objects.append(and1)
+        self.objects.append(or1)
+        self.objects.append(out1)
+        self.objects.append(out2)
 
     def loadProgram(self, programPath):
-        programCommands = []
+        commands = []
         with open(programPath, 'r') as programFile:
             loop = True
             while loop:
                 data = programFile.readline()
                 if data:
-                    programCommands.append(data)
+                    commands.append(data)
                 else:
                     print('Finished reading program file.')
                     loop = False
-        return programCommands
-        
-    def runProgram(self, commands: list):
         nameComp = {}
         for c in commands:
             data = c.split()
             if data[0] == 'INPUT':
                 self.newInput()
-
+                
 # Object definitions:
-
 class gInput(QPushButton):
     xSize = 20
     ySize = 20
@@ -237,10 +283,9 @@ class gGate(QAbstractButton):
     def __init__(self, parent, imagePath):
         self.parent = parent
         self.imagePath = imagePath
-        self.loc = (0, 0)
-        super(gGate, self).__init__(self.parent)
+        QAbstractButton.__init__(self, self.parent)
+        self.move(70, 20)
         self.pixMap = QPixmap(imagePath)
-        self.setGeometry(self.loc[0], self.loc[1], 50, 50)
         
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -268,9 +313,37 @@ class gOrGate(_orGate, gGate):
         gGate.__init__(self, self.parent, self.imagePath)
         _andGate.__init__(self)
 
-#class gXorGate(_xorGate, gGate):
- #   def __init__(self, parent):
-  #      self.parent = parent
-   #     self.imagePath = 'images/gates/xorRaw.svg'
-    #    gGate.__init__(self, self.parent, self.imagePath)
-     #   _andGate.__init__(self)
+class gXorGate(_xorGate, gGate):
+    def __init__(self, parent):
+        self.parent = parent
+        self.imagePath = 'images/gates/xorRaw.svg'
+        gGate.__init__(self, self.parent, self.imagePath)
+        _andGate.__init__(self)
+
+class gNandGate(_nandGate, gGate):
+    def __init__(self, parent):
+        self.parent = parent
+        self.imagePath = 'images/gates/andRaw.svg'
+        gGate.__init__(self, self.parent, self.imagePath)
+        _andGate.__init__(self)
+
+class gNorGate(_norGate, gGate):
+    def __init__(self, parent):
+        self.parent = parent
+        self.imagePath = 'images/gates/orRaw.svg'
+        gGate.__init__(self, self.parent, self.imagePath)
+        _andGate.__init__(self)
+
+class gXnorGate(_xnorGate, gGate):
+    def __init__(self, parent):
+        self.parent = parent
+        self.imagePath = 'images/gates/xorRaw.svg'
+        gGate.__init__(self, self.parent, self.imagePath)
+        _andGate.__init__(self)
+
+class gNotGate(_notGate, gGate):
+    def __init__(self, parent):
+        self.parent = parent
+        self.imagePath = 'images/gates/notRaw.svg'
+        gGate.__init__(self, self.parent, self.imagePath)
+        _notGate.__init__(self)

@@ -1,12 +1,52 @@
 gate types: and, or, xor, nand, nor, xnor, not
+finished gates: and, or
 colors:
-  background: rgb(240, 240, 240)
-  fill: rgb(225, 225, 225)
-  border: rgb(173, 173, 173)
-  gate-border: rgb(0, 0, 0)
+    background: rgb(240, 240, 240)
+    fill: rgb(225, 225, 225)
+    border: rgb(173, 173, 173)
+    gate-fill: rgb(200, 200, 200)
+    gate-border: rgb(0, 0, 0)
 
 To do:
-  new gate functions working
-  load project function working
-  GUI object placement working
-  GUI wire placement
+    new gate functions working
+    load project function working
+    truth table support
+    subcircuit support
+    GUI object placement working
+    GUI wire placement
+
+gate behaviors:
+     gate | inA | inB | out
+    ------|-----|-----|-----
+    and   |  0  |  0  |  0
+          |  0  |  1  |  0
+          |  1  |  0  |  0
+          |  1  |  1  |  1
+    ------|-----|-----|-----
+    or    |  0  |  0  |  0
+          |  0  |  1  |  1
+          |  1  |  0  |  1
+          |  1  |  1  |  1
+    ------|-----|-----|-----
+    xor   |  0  |  0  |  0
+          |  0  |  1  |  1
+          |  1  |  0  |  1
+          |  1  |  1  |  0
+    ------|-----|-----|-----
+    nand  |  0  |  0  |  1
+          |  0  |  1  |  1
+          |  1  |  0  |  1
+          |  1  |  1  |  0
+    ------|-----|-----|-----
+    nor   |  0  |  0  |  1
+          |  0  |  1  |  0
+          |  1  |  0  |  0
+          |  1  |  1  |  0
+    ------|-----|-----|-----
+    xnor  |  0  |  0  |  1
+          |  0  |  1  |  0
+          |  1  |  0  |  0
+          |  1  |  1  |  1
+    ------|-----|-----|-----
+    not   |  0  |     |  1
+          |  1  |     |  0
