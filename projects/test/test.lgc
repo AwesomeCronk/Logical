@@ -1,0 +1,9 @@
+# Inputs
+in inA
+in inB
+
+# Outputs
+out outA
+
+# Gates
+and inA inB outA

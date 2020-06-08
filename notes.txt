@@ -1,0 +1,12 @@
+gate types: and, or, xor, nand, nor, xnor, not
+colors:
+  background: rgb(240, 240, 240)
+  fill: rgb(225, 225, 225)
+  border: rgb(173, 173, 173)
+  gate-border: rgb(0, 0, 0)
+
+To do:
+  new gate functions working
+  load project function working
+  GUI object placement working
+  GUI wire placement
