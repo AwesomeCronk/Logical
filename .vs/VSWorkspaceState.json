@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\images",
-    "\\images\\gates",
-    "\\projects",
-    "\\projects\\test"
+    ""
   ],
-  "SelectedNode": "\\images\\gates\\orRaw.svg",
+  "SelectedNode": "\\main.py",
   "PreviewInSolutionExplorer": false
 }

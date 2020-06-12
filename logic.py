@@ -11,7 +11,10 @@ class _input():
         self.reference = target
 
     def fetch(self):
-        self.value = self.reference.value
+        try:
+            self.value = self.reference.value
+        except:
+            self.value = False
         return self.value
 
 class _output():
