@@ -9,21 +9,23 @@ except:
 from logic import (_input, _output, _andGate, _orGate, _xorGate,
                    _nandGate, _norGate, _xnorGate, _notGate)
 
+# PICK UP AT "mousePlaceObject"
+
 class mainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         print('starting...')
         self.initData()
         self.initUI()
-        self.testObjects()
+        self.loadProgram('projects/test/test.lgc')
                 
     def initData(self):
         self.objects = []
         self.updateCycles = 5
         self.projectDir = 'projects/'
         self.gridSize = 10
-        self.gridOffsetX = 0
-        self.gridOffsetY = 0
+        self.gridOffset = (0, 0)
+        self.windowPosOffset = (0, -42)
         self.objectToPlace = ''
         self.placeLocation = ()
         self.objectTypes = {'in': gInput, 'out': gOutput, 'and': gAndGate, 'or': gOrGate, 'xor': gXorGate,
@@ -35,7 +37,7 @@ class mainWindow(QMainWindow):
         self.canvas = QPushButton(self)
         self.canvas.setText('')
         self.canvas.setGeometry(60, 10, 740, 450)
-        self.canvas.clicked.connect(self.placeObject)
+        self.canvas.clicked.connect(self.mousePlaceObject)
         self.updateButton = QPushButton(self)
         self.updateButton.setText('Update')
         self.updateButton.setGeometry(730, 470, 60, 20)
@@ -133,7 +135,7 @@ class mainWindow(QMainWindow):
         print("new notGate")
         self.objectToPlace = 'not'
 
-    #These need to be improved: replace gridByClick with rawToCoord. rawToCoord will take a location realtive to the window and return a canvas coordinate pair.
+    #These need to be improved: replace gridByClick with rawToCoord. rawToCoord will take a location relative to the window and return a canvas coordinate pair.
     def gridByClick(self, x, y):
         smallX = int(x / self.gridSize) + self.gridOffsetX
         smallY = int(y / self.gridSize) + self.gridOffsetY
@@ -143,7 +145,23 @@ class mainWindow(QMainWindow):
         canvasLoc = self.canvas.pos()
         return (canvasLoc.x() + (x * self.gridSize) + 10, canvasLoc.y() + (y * self.gridSize) + 10)
 
-    def placeObject(self):
+    def canvasPlaceObject(self):
+        pass
+
+    def mousePlaceObject(self):
+        if self.objectToPlace != '':
+            print('placing object {}'.format(self.objectToPlace))
+            canvasPos = self.canvas.pos()
+            windowPos = self.pos()
+            mousePos = QCursor.pos()
+            placePos = ((mousePos.x() - windowPos.x()) + self.windowPosOffset[0], (mousePos.y() - windowPos.y()) + self.windowPosOffset[1])
+            #placePos is the position relative to (0,0) for placing widgets.
+            self.testLabel = QLabel(self)
+            self.testLabel.move(placePos[0], placePos[1])
+            self.testLabel.setText('it works if you see this')
+            self.testLabel.show()
+
+    def oldPlaceObject(self):
         if self.objectToPlace != '':
             print('placing object {}'.format(self.objectToPlace))
             self.placeLocation = self.gridByClick((QCursor.pos() - self.pos()).x(), (QCursor.pos() - self.pos()).y() - 30)
@@ -241,8 +259,8 @@ class mainWindow(QMainWindow):
         and1._in[1].connect(in2._out)
         or1._in[0].connect(in1._out)
         or1._in[1].connect(in2._out)
-        out1._in.connect(and1._out)
-        out2._in.connect(or1._out)
+        out1._in[0].connect(and1._out)
+        out2._in[0].connect(or1._out)
 
         self.objects.append(in1)
         self.objects.append(in2)
@@ -262,11 +280,54 @@ class mainWindow(QMainWindow):
                 else:
                     print('Finished reading program file.')
                     loop = False
-        nameComp = {}
-        for c in commands:
+        self.outputNames = {}
+        self.objects = []
+        for c in commands:              #run through the list of commands and create the items
             data = c.split()
-            if data[0] == 'INPUT':
-                self.newInput()
+            newItemType = data[0].lower()
+            comment = False
+            if newItemType == 'in':
+                coordsAt = 2
+                outputLoc = 1
+            elif newItemType == 'out':
+                coordsAt = 2
+                outputLoc = -1
+            elif newItemType in ['and', 'or', 'xor', 'nand', 'nor', 'xnor', 'not']:
+                coordsAt = 4
+                outputLoc = 3
+            else:
+                coordsAt = 0
+                outputLoc = -1
+                comment = True
+            newItem = self.objectTypes[newItemType](self)
+            loc = self.gridByCoord(int(data[coordsAt]), int(data[coordsAt + 1]))
+            newItem.move(loc[0], loc[1])
+            self.objects.append(newItem)
+            if outputLoc != -1:
+                self.outputNames.update({data[outputLoc]: newItem._out})
+
+        print('\n\n\n')
+        print(self.outputNames)
+        ctr = -1
+        for c in commands:              #run through the list of commands and connect the items
+            data = c.split()
+            newItemType = data[0].lower()
+            if newItemType == 'in':
+                inputs = []
+                ctr += 1
+            elif newItemType in ['out', 'not']:
+                inputs = [0]
+                ctr += 1
+            elif newItemType in ['and', 'or', 'xor', 'nand', 'nor', 'xnor']:
+                inputs = [0, 1]
+                ctr += 1
+            else:
+                inputs = []
+            print(newItemType)
+            print(ctr)
+            print(inputs)
+            for i in inputs:                  
+                self.objects[ctr]._in[i].connect(self.outputNames[data[i + 1]])
                 
 # Object definitions:
 class gInput(QPushButton):
@@ -304,7 +365,7 @@ class gOutput(QLabel):
         self.parent = parent
         QLabel.__init__(self, self.parent)
         self.value = False
-        self._in = _input()
+        self._in = [_input()]
         self.setText(str(int(self.value)))
         self.setStyleSheet(self.styleSheet)
 
@@ -317,7 +378,7 @@ class gOutput(QLabel):
         self.setGeometry(self.xPos + 1, self.yPos + 1, self.xSize - 2, self.ySize - 2)
 
     def update(self):
-        self.value = self._in.fetch()
+        self.value = self._in[0].fetch()
         self.setText(str(int(self.value)))
         print('update for {} with value {}'.format(self, self.value))
 

@@ -10,8 +10,8 @@ colors:
 To do:
     new gate functions working
     load project function working
-    truth table support
     subcircuit support
+    truth table support
     GUI object placement working
     GUI wire placement
 

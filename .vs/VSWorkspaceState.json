@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\images",
+    "\\images\\gates",
+    "\\projects",
+    "\\projects\\test"
   ],
-  "SelectedNode": "\\main.py",
   "PreviewInSolutionExplorer": false
 }

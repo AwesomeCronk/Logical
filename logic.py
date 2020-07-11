@@ -1,9 +1,8 @@
 class _input():
-    value = False
-    reference = None
 
     def __init__(self):
-        pass
+        self.value = False
+        self.reference = None
 
     def connect(self, target):
         if type(target) is not _output:
