@@ -1,12 +1,14 @@
 try:
     import PyQt5
-    from PyQt5.QtWidgets import QApplication, QMainWindow, QAbstractButton, QPushButton, QLabel
+    from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QAbstractButton, QPushButton, QLabel
     from PyQt5.QtGui import QPixmap, QPainter, QCursor
 except:
     input('Error importing PyQt5 components. (press enter to close)')
     exit()
 
-from logic import (_input, _output, _andGate, _orGate, _xorGate,
+import os
+
+from coreLogic import (_input, _output, _andGate, _orGate, _xorGate,
                    _nandGate, _norGate, _xnorGate, _notGate)
 
 # PICK UP AT "mousePlaceObject"
@@ -17,15 +19,24 @@ class mainWindow(QMainWindow):
         print('starting...')
         self.initData()
         self.initUI()
-        self.loadProgram('projects/test/test.lgc')
+        #self.loadProgram('projects/test/test.lgc')
                 
     def initData(self):
+        self.settings = {}
+        self.settingsFilePath = os.environ['LOCALAPPDATA'] + '\\Logic\\settings.cfg'
+        with open(self.settingsFilePath, 'r') as settingsFile:
+            settingsRaw = settingsFile.read().splitlines()
+        for i in range(len(settingsRaw)):
+            currentSetting = settingsRaw[i].split(': ')
+            self.settings.update({currentSetting[0]: currentSetting[1]})
+        print(self.settings)
         self.objects = []
         self.updateCycles = 5
-        self.projectDir = 'projects/'
+        self.projectDir = self.settings['projectDir']
         self.gridSize = 10
         self.gridOffset = (0, 0)
-        self.windowPosOffset = (0, -42)
+        self.windowPosOffset = (0, -36)
+        docPos = (0, 0)
         self.objectToPlace = ''
         self.placeLocation = ()
         self.objectTypes = {'in': gInput, 'out': gOutput, 'and': gAndGate, 'or': gOrGate, 'xor': gXorGate,
@@ -38,10 +49,16 @@ class mainWindow(QMainWindow):
         self.canvas.setText('')
         self.canvas.setGeometry(60, 10, 740, 450)
         self.canvas.clicked.connect(self.mousePlaceObject)
+
         self.updateButton = QPushButton(self)
         self.updateButton.setText('Update')
         self.updateButton.setGeometry(730, 470, 60, 20)
-        self.updateButton.clicked.connect(self.update) 
+        self.updateButton.clicked.connect(self.update)
+        
+        self.loadBtn = QPushButton(self)
+        self.loadBtn.setText('Load')
+        self.loadBtn.setGeometry(680, 470, 40, 20)
+        self.loadBtn.clicked.connect(self.openProgram)
 
     def objectButtons(self):
         ctr = 0
@@ -135,60 +152,47 @@ class mainWindow(QMainWindow):
         print("new notGate")
         self.objectToPlace = 'not'
 
-    #These need to be improved: replace gridByClick with rawToCoord. rawToCoord will take a location relative to the window and return a canvas coordinate pair.
-    def gridByClick(self, x, y):
-        smallX = int(x / self.gridSize) + self.gridOffsetX
-        smallY = int(y / self.gridSize) + self.gridOffsetY
-        return (smallX * self.gridSize, smallY * self.gridSize)
+    def windowToCanvas(self, x, y):     #Convert coordinates relative to the window to canvas coordinates.
+        canvasPos = self.canvas.pos()
+        X = int(((x - canvasPos.x()) + self.gridOffset[0]) / self.gridSize)
+        Y = int(((y - canvasPos.y()) + self.gridOffset[1]) / self.gridSize)
+        return (X, Y)
 
-    def gridByCoord(self, x, y):
-        canvasLoc = self.canvas.pos()
-        return (canvasLoc.x() + (x * self.gridSize) + 10, canvasLoc.y() + (y * self.gridSize) + 10)
+    def canvasToWindow(self, x, y):     #Convert canvas coordinates to coordinates relative to the window
+        canvasPos = self.canvas.pos()
+        X = canvasPos.x() + (x * self.gridSize) + self.gridOffset[0]
+        Y = canvasPos.y() + (y * self.gridSize) + self.gridOffset[1]
+        return (X, Y)       #(0, 0)canvas is the canvas's upper left corner.
 
-    def canvasPlaceObject(self):
-        pass
+    def canvasPlaceObject(self, x, y):
+        if self.objectToPlace in self.objectTypes.keys():
+            #print('placing object from canvas {}'.format(self.objectToPlace))
+            newObject = self.objectTypes[self.objectToPlace](self)
+            pos = (x, y)
+            print(pos)
+            pos = self.canvasToWindow(*pos)
+            print(pos, end = '\n\n')
+            newObject.move(pos[0], pos[1])
+            newObject.show()
+            self.objects.append(newObject)
 
     def mousePlaceObject(self):
-        if self.objectToPlace != '':
-            print('placing object {}'.format(self.objectToPlace))
+        if self.objectToPlace in self.objectTypes.keys():
+            #print('placing object from mouse {}'.format(self.objectToPlace))
             canvasPos = self.canvas.pos()
             windowPos = self.pos()
             mousePos = QCursor.pos()
             placePos = ((mousePos.x() - windowPos.x()) + self.windowPosOffset[0], (mousePos.y() - windowPos.y()) + self.windowPosOffset[1])
-            #placePos is the position relative to (0,0) for placing widgets.
-            self.testLabel = QLabel(self)
-            self.testLabel.move(placePos[0], placePos[1])
-            self.testLabel.setText('it works if you see this')
-            self.testLabel.show()
+            print(placePos)
+            self.canvasPlaceObject(*self.windowToCanvas(*placePos))
 
-    def oldPlaceObject(self):
-        if self.objectToPlace != '':
-            print('placing object {}'.format(self.objectToPlace))
-            self.placeLocation = self.gridByClick((QCursor.pos() - self.pos()).x(), (QCursor.pos() - self.pos()).y() - 30)
-            print(self.placeLocation)
-            
-            self.testLabel = QLabel(self)
-            self.testLabel.move(10, 200)
-            self.testLabel.setText('it works if you see this')
-
-            newObject = self.objectTypes[self.objectToPlace](self)
-            print(newObject)
-            
-            self.objects.append(newObject)
-            print('appended')
-            
-            newObject.move(self.placeLocation[0], self.placeLocation[1])
-            print('moved')
-            #self.objects[2].move(self.placeLocation[0], self.placeLocation[1])
-            print(self.objects)
-            newObject.show()
+            #Test object to place
+            #self.testLabel = QLabel(self)
+            #self.testLabel.move(placePos[0], placePos[1])
+            #self.testLabel.setText('it works if you see this')
+            #self.testLabel.show()
 
     def update(self):
-        #needsUpdate = True     #Theory for a system that updates as needed instead of a fixed number of times per loop. Potential issues with memory-type circuits.
-        #states = []
-        #newstates = []
-        #while needsUpdate:
-        #    needsUpdate = False
         for i in range(self.updateCycles):
             for o in self.objects:
                 print(o)
@@ -269,6 +273,14 @@ class mainWindow(QMainWindow):
         self.objects.append(out1)
         self.objects.append(out2)
 
+    def openProgram(self):
+        print('findProgram called')
+        fileName = QFileDialog.getOpenFileName(self, 'Open logic program', self.projectDir)[0]
+        if fileName == '':
+            print('No file selected, canceling')
+            return
+        self.loadProgram(fileName)
+
     def loadProgram(self, programPath):
         commands = []
         with open(programPath, 'r') as programFile:
@@ -299,12 +311,11 @@ class mainWindow(QMainWindow):
                 coordsAt = 0
                 outputLoc = -1
                 comment = True
-            newItem = self.objectTypes[newItemType](self)
-            loc = self.gridByCoord(int(data[coordsAt]), int(data[coordsAt + 1]))
-            newItem.move(loc[0], loc[1])
-            self.objects.append(newItem)
+
+            loc = int(data[coordsAt]), int(data[coordsAt + 1])
+            self.canvasPlaceObject(loc[0], loc[1])
             if outputLoc != -1:
-                self.outputNames.update({data[outputLoc]: newItem._out})
+                self.outputNames.update({data[outputLoc]: self.objects[len(self.objects) -1 ]._out})
 
         print('\n\n\n')
         print(self.outputNames)
