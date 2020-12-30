@@ -24,12 +24,13 @@ class mainWindow(QMainWindow):
     def initData(self):
         self.settings = {}
         self.settingsFilePath = os.environ['LOCALAPPDATA'] + '\\Logic\\settings.cfg'
+        print('Retrieving settings from {}'.format(self.settingsFilePath))
         with open(self.settingsFilePath, 'r') as settingsFile:
             settingsRaw = settingsFile.read().splitlines()
         for i in range(len(settingsRaw)):
             currentSetting = settingsRaw[i].split(': ')
             self.settings.update({currentSetting[0]: currentSetting[1]})
-        print(self.settings)
+        print('Retrieved settings:\n{}'.format(self.settings))
         self.objects = []
         self.updateCycles = 5
         self.projectDir = self.settings['projectDir']
