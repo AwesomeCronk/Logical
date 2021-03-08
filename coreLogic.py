@@ -1,117 +1,42 @@
-class _input():
-
+class pin():    #Basic pin class
     def __init__(self):
-        self.value = False
-        self.reference = None
+        self.name = ''
+        self.target = self
+        self.value = 0
+
+    def rename(self, name):
+        self.name = name
 
     def connect(self, target):
-        if type(target) is not _output:
-            return False
-        self.reference = target
+        self.target = target
 
-    def fetch(self):
-        try:
-            self.value = self.reference.value
-        except:
-            self.value = False
-        return self.value
+    def set(self, value):
+        self.value = value
 
-class _output():
-    value = False
-
-    def __init__(self):
-        pass
-
-    def set(self, newValue):
-        self.value = bool(newValue)
-        
-class _gate():
-    def __init__(self):
-        print('initializing gate {}'.format(self))
-        self._in = [_input(), _input()]
-        self._out = _output()
-
-class _andGate(_gate):
-    def __init__(self):
-        _gate.__init__(self)                #I may decide to switch these in the future
-        #super(_gate, self).__init__(self)
-
+    def toggle(self):
+        self.value = 1 - self.value
+    
     def update(self):
-        if self._in[0].fetch() and self._in[1].fetch():
-            self._out.set(True)
-        else:
-            self._out.set(False)
-            
-class _orGate(_gate):
+        self.value = self.target.value
+
+class element():    #Basic element class
     def __init__(self):
-        _gate.__init__(self)                #I may decide to switch these in the future
-        #super(_gate, self).__init__(self)
+        self.inputs = {}        #dict of inputs by {name: pin}
+        self.outputs = {}       #dict of outputs by {name: pin}
+        self.internalPins = {}  #dict of internal pins by {name: pin} for ease of connecting elements
+        self.elements = []      #list of elements in this element
 
-    def update(self):
-        if self._in[0].fetch() and not self._in[1].fetch():
-            self._out.set(True)
-        elif not self._in[0].fetch() and self._in[1].fetch():
-            self._out.set(True)
-        elif self._in[0].fetch() and self._in[1].fetch():
-            self._out.set(True)
-        else:
-            self._out.set(False)
+    def addInput(self, newPin):
+        #Please note that the pin should be named before adding it to an element
+        self.inputs.update({newPin.name: newPin})
+        self.internalPins.update({newPin.name: newPin})
 
-class _xorGate(_gate):
-    def __init__(self):
-        _gate.__init__(self)                #I may decide to switch these in the future
-        #super(_gate, self).__init__(self)
+    def addOutput(self, newPin):
+        #Please note that the pin should be named before adding it to an element
+        self.outputs.update({newPin.name: newPin})
 
-    def update(self):
-        if self._in[0].fetch() != self._in[1].fetch():
-            self._out.set(False)
-        else:
-            self._out.set(True)
-
-class _nandGate(_gate):
-    def __init__(self):
-        _gate.__init__(self)                #I may decide to switch these in the future
-        #super(_gate, self).__init__(self)
-
-    def update(self):
-        if self._in[0].fetch() and self._in[1].fetch():
-            self._out.set(False)
-        else:
-            self._out.set(True)
-            
-class _norGate(_gate):
-    def __init__(self):
-        _gate.__init__(self)                #I may decide to switch these in the future
-        #super(_gate, self).__init__(self)
-
-    def update(self):
-        if self._in[0].fetch() and not self._in[1].fetch():
-            self._out.set(False)
-        elif not self._in[0].fetch() and self._in[1].fetch():
-            self._out.set(False)
-        elif self._in[0].fetch() and self._in[1].fetch():
-            self._out.set(False)
-        else:
-            self._out.set(True)
-
-class _xnorGate(_gate):
-    def __init__(self):
-        _gate.__init__(self)                #I may decide to switch these in the future
-        #super(_gate, self).__init__(self)
-
-    def update(self):
-        if self._in[0].fetch() != self._in[1].fetch():
-            self._out.set(False)
-        else:
-            self._out.set(True)
-
-class _notGate(_gate):
-    def __init__(self):
-        _gate.__init__(self)
-        self._in = _input()
-
-    def update(self):
-        if self._in.fetch():
-            self._out.set(False)
-        else:
-            self._out.set(True)
+    def addElement(self, newElement):
+        self.elements.append(newElement)
+        for o in newElement.outputs.values():
+            self.internalPins.update({o.name: o})
+        return self.elements.index(newElement)

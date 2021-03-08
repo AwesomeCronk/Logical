@@ -1,4 +1,0 @@
-in inA 0 0
-in inB 0 2
-out outA 9 0
-and inA inB outA 3 0
