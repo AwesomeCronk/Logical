@@ -1,6 +1,6 @@
 class pin():    #Basic pin class
-    def __init__(self):
-        self.name = ''
+    def __init__(self, name):
+        self.name = name
         self.target = self
         self.value = 0
 
@@ -39,4 +39,12 @@ class element():    #Basic element class
         self.elements.append(newElement)
         for o in newElement.outputs.values():
             self.internalPins.update({o.name: o})
-        return self.elements.index(newElement)
+        return self.elements.index(newElement)  #Return the index of the new element in self.elements
+
+    def update(self):
+        for i in self.inputs.values():
+            i.update()
+        for e in self.elements:
+            e.update()
+        for o in self.outputs.values():
+            o.update()
