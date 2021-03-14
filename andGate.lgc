@@ -1,0 +1,6 @@
+in inputA
+in inputB
+
+and inputA inputB outputAnd
+
+out outputAnd outputY
