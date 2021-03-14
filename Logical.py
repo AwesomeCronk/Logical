@@ -118,7 +118,7 @@ if __name__ == '__main__':
         print('Outputs====================')
         for o in mainElement.outputs.keys():
             print('{} {}'.format(o, mainElement.outputs[o].value))
-        runCommand = input('\nlogic> ').split(' ')
+        runCommand = input('\nLogical> ').split(' ')
         
         if runCommand[0] == 'q':
             runFlag = False

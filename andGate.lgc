@@ -1,6 +1,6 @@
-in inputA
-in inputB
+in iA
+in iB
 
-and inputA inputB outputAnd
+and iA iB oA
 
-out outputAnd outputY
+out oA oY
