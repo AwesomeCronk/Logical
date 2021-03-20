@@ -110,3 +110,21 @@ class xnorGate(element):
         else:
             list(self.outputs.values())[0].set(1)
             #print('xnor gate set high')
+
+class truthTable(element):
+    def __init__(self):
+        element.__init__(self)
+        self.table = {}
+
+    def append(self, match, result):     #match and result should be tuples
+        self.table.update({match: result})
+
+    def update(self):
+        element.update(self)
+        match = []
+        for i in range(len(self.inputs)):       #Get value of each pin and append it to the match dict
+            match.append(list(self.inputs.values())[i].value)
+        match = tuple(match)
+        result = self.table[match]      #Get match as tuple so that it can be used as a dict index
+        for o in range(len(result)):
+            list(self.outputs.values())[o].set(result[o])

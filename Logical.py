@@ -8,7 +8,7 @@ includeSequence = ''
 def parseCommands(lines):
     commands = []
     for r in lines:
-        c = r.split(commentSequence)[0].split(' ')  #Split at the # to remove comments
+        c = r.lower().split(commentSequence)[0].split(' ')  #Split at the # to remove comments
         while '' in c:
             c.remove('')
         
@@ -17,7 +17,38 @@ def parseCommands(lines):
     return commands
 
 def loadTable(filePath):
-    print('Truth tables are not yet implemented.')
+    with open(filePath, 'r') as file:
+        commands = parseCommands(file.read().split('\n'))
+    table = truthTable()
+    readingTable = False
+
+    for command in commands:
+        if command[0] == 'in':
+            table.addInput(pin(command[1]))
+            
+        elif command[0] == 'out':
+            table.addOutput(pin(command[1]))
+
+        elif command[0] == 'begintable':
+            readingTable = True
+
+        elif command[0] == 'endtable':
+            readingTable = False
+
+        else:
+            if readingTable:
+                match = command[0:len(table.inputs)]
+                for m in range(len(match)):
+                    match[m] = int(match[m])
+                match = tuple(match)
+                result = command[len(table.inputs):]
+                for r in range(len(result)):
+                    result[r] = int(result[r])
+                result = tuple(result)
+                table.append(match, result)
+            else:
+                raise Exception('command {} not recognized'.format(command[0]))
+    return table
 
 def loadElement(filePath):
     print('=====loading element from {}====='.format(filePath))
@@ -115,7 +146,7 @@ if __name__ == '__main__':
         print('Inputs ====================')
         for i in mainElement.inputs.keys():
             print('{} {}'.format(i, mainElement.inputs[i].value))
-        print('Outputs====================')
+        print('Outputs ===================')
         for o in mainElement.outputs.keys():
             print('{} {}'.format(o, mainElement.outputs[o].value))
         runCommand = input('\nLogical> ').split(' ')
