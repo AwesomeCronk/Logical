@@ -3,7 +3,7 @@ from logicGates import *
 import sys, time, os
 
 commentSequence = '//'
-includeSequence = ''
+includeSequence = '$include'
 
 def parseCommands(lines):
     commands = []
@@ -64,7 +64,7 @@ def loadElement(filePath):
 
     for command in commands:
         if command[0] == includeSequence:
-            reregisteredElements.update({command[1]: command[2]})
+            registeredElements.update({command[1]: command[2]})
         
         elif command[0] == 'in':
             mainElement.addInput(pin(command[1]))
@@ -84,7 +84,8 @@ def loadElement(filePath):
             newElement = orGate()
             newElement.outputs['y'].rename(command[-1])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: command[1:-1]})
+            newDict = {newElement: command[1:-1]}
+            needsConnected.update(newDict)
 
         elif command[0] == 'xor':
             newElement = xorGate()
@@ -120,7 +121,28 @@ def loadElement(filePath):
 
         #elif command[0] == 'tristate':
 
-        #elif command[0] in registeredElements.keys()
+        elif command[0] in registeredElements.keys():
+            newElement = loadElement(registeredElements[command[0]])
+            
+            #Rename the outputs to the names specified in the .lgc script
+            commandOffset = len(newElement.inputs)
+            oldNames = list(newElement.outputs.keys())
+            for o in oldNames:
+                commandOffset += 1
+                newElement.outputs[o].rename(command[commandOffset])
+                
+            #Add newElement to mainElement
+            mainElement.addElement(newElement)
+            
+            #Add inputs to needsConnected
+            pins = []
+            for i in range(len(newElement.inputs)):
+                pins.append(command[i + 1])
+            needsConnected.update({newElement: pins})
+            
+            #for i in range(len(newElement.inputs)):
+            #    newDict = {list(newElement.inputs.values())[i]: command[i+1]}
+            #    needsConnected.update(newDict)
 
         else:
             raise Exception('Command {} not recognized.'.format(command[0]))
