@@ -1,3 +1,3 @@
-This program is meant to be a full-fledged logic gate simulator. This application will support reading and writing of text files for project storage, graphical editing of projects, and full graphical simulation.
+### Logical
 
-NOTE: Getting the simulation working takes higher priority than the GUI and will be finished first.
+This program is a logic gate simulator for Windows. It supports all the basic gates and the ability to create sub-circuits. Some ideas I hope to implement eventually are multi-core processing and network multi-machine processing.
