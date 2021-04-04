@@ -1,5 +1,5 @@
-from logicCore import *
-from logicGates import *
+from logicCore import element, pin
+from logicGates import andGate, orGate, xorGate, notGate, nandGate, norGate, xnorGate, truthTable
 import sys, time, os
 
 commentSequence = '//'
@@ -7,9 +7,9 @@ includeSequence = '$include'
 
 def parseCommands(lines):
     commands = []
-    for r in lines:
-        c = r.lower().split(commentSequence)[0].split(' ')  #Split at the # to remove comments
-        while '' in c:
+    for l in lines:
+        c = l.lower().split(commentSequence)[0].split(' ')  # Split to remove comments and spaces.
+        while '' in c:  # Remove artifacting from double spaces.
             c.remove('')
         
         if not c == []:
@@ -53,10 +53,10 @@ def loadTable(filePath):
 def loadElement(filePath):
     print('=====loading element from {}====='.format(filePath))
 
-    if filePath.split('.')[-1] == 'ttb':    #If the file is a truth table file
-        return loadTable(filePath)          #Load it as a truth table
-    with open(filePath, 'r') as file:       #Otherwise open the file
-        commands = parseCommands(file.read().split('\n'))   #And parse the commands from it
+    if filePath.split('.')[-1] == 'ttb':    # If the file is a truth table file
+        return loadTable(filePath)          # Load it as a truth table
+    with open(filePath, 'r') as file:       # Otherwise open the file
+        commands = parseCommands(file.read().split('\n'))   # And parse the commands from it
     
     needsConnected = {}
     registeredElements = {}
@@ -117,32 +117,28 @@ def loadElement(filePath):
             mainElement.addElement(newElement)
             needsConnected.update({newElement: command[1:-1]})
 
-        #elif command[0] == 'bus':
+        # elif command[0] == 'bus':
 
-        #elif command[0] == 'tristate':
+        # elif command[0] == 'tristate':
 
         elif command[0] in registeredElements.keys():
             newElement = loadElement(registeredElements[command[0]])
-            
-            #Rename the outputs to the names specified in the .lgc script
+
+            # Rename the outputs to the names specified in the .lgc script
             commandOffset = len(newElement.inputs)
             oldNames = list(newElement.outputs.keys())
             for o in oldNames:
                 commandOffset += 1
                 newElement.outputs[o].rename(command[commandOffset])
                 
-            #Add newElement to mainElement
+            # Add newElement to mainElement
             mainElement.addElement(newElement)
             
-            #Add inputs to needsConnected
+            # Add inputs to needsConnected
             pins = []
             for i in range(len(newElement.inputs)):
                 pins.append(command[i + 1])
             needsConnected.update({newElement: pins})
-            
-            #for i in range(len(newElement.inputs)):
-            #    newDict = {list(newElement.inputs.values())[i]: command[i+1]}
-            #    needsConnected.update(newDict)
 
         else:
             raise Exception('Command {} not recognized.'.format(command[0]))
