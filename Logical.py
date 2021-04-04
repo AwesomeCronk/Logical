@@ -1,19 +1,30 @@
+import sys, time, os
 from logicCore import element, pin
 from logicGates import andGate, orGate, xorGate, notGate, nandGate, norGate, xnorGate, truthTable
-import sys, time, os
 
 commentSequence = '//'
 includeSequence = '$include'
 
+class command():
+    def __init__(self, line, text = "", listing = []):
+        self.line = line
+        self.text = text
+        self.listing = listing
+        
+    def __repr__(self):
+        return("Command '{}' on line {} with listing {}".format(self.text, self.line, self.listing))
+
 def parseCommands(lines):
     commands = []
-    for l in lines:
-        c = l.lower().split(commentSequence)[0].split(' ')  # Split to remove comments and spaces.
-        while '' in c:  # Remove artifacting from double spaces.
-            c.remove('')
-        
-        if not c == []:
-            commands.append(c)
+    for l in range(len(lines)):
+        listing = lines[l].split(commentSequence)[0].split(' ')  # Split to remove comments and spaces.
+        while '' in listing:  # Remove artifacting from double spaces and comment spacing.
+            listing.remove('')
+            
+        if len(listing):
+            c = command(l + 1, lines[l], listing)
+        commands.append(c)
+        #print(c)
     return commands
 
 def loadTable(filePath):
@@ -22,32 +33,32 @@ def loadTable(filePath):
     table = truthTable()
     readingTable = False
 
-    for command in commands:
-        if command[0] == 'in':
-            table.addInput(pin(command[1]))
+    for comm in commands:
+        if comm.listing[0] == 'in':
+            table.addInput(pin(comm.listing[1]))
             
-        elif command[0] == 'out':
-            table.addOutput(pin(command[1]))
+        elif comm.listing[0] == 'out':
+            table.addOutput(pin(comm.listing[1]))
 
-        elif command[0] == 'begintable':
+        elif comm.listing[0] == 'beginTable':
             readingTable = True
 
-        elif command[0] == 'endtable':
+        elif comm.listing[0] == 'endTable':
             readingTable = False
 
         else:
             if readingTable:
-                match = command[0:len(table.inputs)]
+                match = comm.listing[0:len(table.inputs)]
                 for m in range(len(match)):
                     match[m] = int(match[m])
                 match = tuple(match)
-                result = command[len(table.inputs):]
+                result = comm.listing[len(table.inputs):]
                 for r in range(len(result)):
                     result[r] = int(result[r])
                 result = tuple(result)
                 table.append(match, result)
             else:
-                raise Exception('command {} not recognized'.format(command[0]))
+                raise Exception('Command {} not recognized'.format(comm.text))
     return table
 
 def loadElement(filePath):
@@ -62,74 +73,74 @@ def loadElement(filePath):
     registeredElements = {}
     mainElement = element()
 
-    for command in commands:
-        if command[0] == includeSequence:
-            registeredElements.update({command[1]: command[2]})
+    for comm in commands:
+        if comm.listing[0] == includeSequence:
+            registeredElements.update({comm.listing[1]: comm.listing[2]})
         
-        elif command[0] == 'in':
-            mainElement.addInput(pin(command[1]))
+        elif comm.listing[0] == 'in':
+            mainElement.addInput(pin(comm.listing[1]))
 
-        elif command[0] == 'out':
-            newPin = pin(command[2])
-            needsConnected.update({newPin: command[1]})
+        elif comm.listing[0] == 'out':
+            newPin = pin(comm.listing[2])
+            needsConnected.update({newPin: comm.listing[1]})
             mainElement.addOutput(newPin)
 
-        elif command[0] == 'and':
+        elif comm.listing[0] == 'and':
             newElement = andGate()
-            newElement.outputs['y'].rename(command[-1])
+            newElement.outputs['y'].rename(comm.listing[-1])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: command[1:-1]})
+            needsConnected.update({newElement: comm.listing[1:-1]})
 
-        elif command[0] == 'or':
+        elif comm.listing[0] == 'or':
             newElement = orGate()
-            newElement.outputs['y'].rename(command[-1])
+            newElement.outputs['y'].rename(comm.listing[-1])
             mainElement.addElement(newElement)
-            newDict = {newElement: command[1:-1]}
+            newDict = {newElement: comm.listing[1:-1]}
             needsConnected.update(newDict)
 
-        elif command[0] == 'xor':
+        elif comm.listing[0] == 'xor':
             newElement = xorGate()
-            newElement.outputs['y'].rename(command[-1])
+            newElement.outputs['y'].rename(comm.listing[-1])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: command[1:-1]})
+            needsConnected.update({newElement: comm.listing[1:-1]})
 
-        elif command[0] == 'not':
+        elif comm.listing[0] == 'not':
             newElement = notGate()
-            newElement.outputs['y'].rename(command[-1])
+            newElement.outputs['y'].rename(comm.listing[-1])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: command[1:-1]})
+            needsConnected.update({newElement: comm.listing[1:-1]})
 
-        elif command[0] == 'nand':
+        elif comm.listing[0] == 'nand':
             newElement = nandGate()
-            newElement.outputs['y'].rename(command[-1])
+            newElement.outputs['y'].rename(comm.listing[-1])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: command[1:-1]})
+            needsConnected.update({newElement: comm.listing[1:-1]})
 
-        elif command[0] == 'nor':
+        elif comm.listing[0] == 'nor':
             newElement = norGate()
-            newElement.outputs['y'].rename(command[-1])
+            newElement.outputs['y'].rename(comm.listing[-1])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: command[1:-1]})
+            needsConnected.update({newElement: comm.listing[1:-1]})
 
-        elif command[0] == 'xnor':
+        elif comm.listing[0] == 'xnor':
             newElement = xnorGate()
-            newElement.outputs['y'].rename(command[-1])
+            newElement.outputs['y'].rename(comm.listing[-1])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: command[1:-1]})
+            needsConnected.update({newElement: comm.listing[1:-1]})
 
-        # elif command[0] == 'bus':
+        # elif comm.listing[0] == 'bus':
 
-        # elif command[0] == 'tristate':
+        # elif comm.listing[0] == 'tristate':
 
-        elif command[0] in registeredElements.keys():
-            newElement = loadElement(registeredElements[command[0]])
+        elif comm.listing[0] in registeredElements.keys():
+            newElement = loadElement(registeredElements[comm.listing[0]])
 
             # Rename the outputs to the names specified in the .lgc script
             commandOffset = len(newElement.inputs)
             oldNames = list(newElement.outputs.keys())
             for o in oldNames:
                 commandOffset += 1
-                newElement.outputs[o].rename(command[commandOffset])
+                newElement.outputs[o].rename(comm.listing[commandOffset])
                 
             # Add newElement to mainElement
             mainElement.addElement(newElement)
@@ -137,11 +148,11 @@ def loadElement(filePath):
             # Add inputs to needsConnected
             pins = []
             for i in range(len(newElement.inputs)):
-                pins.append(command[i + 1])
+                pins.append(comm.listing[i + 1])
             needsConnected.update({newElement: pins})
 
         else:
-            raise Exception('Command {} not recognized.'.format(command[0]))
+            raise Exception('Command {} not recognized.'.format(comm.text))
 
         for e in needsConnected.keys():
             if type(e) is pin:
