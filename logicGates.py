@@ -1,5 +1,9 @@
 from logicCore import element, pin
 
+# Error raised by bus elements
+class busError(Exception):
+    pass
+
 class andGate(element):
     def __init__(self):
         element.__init__(self)
@@ -128,3 +132,36 @@ class truthTable(element):
         result = self.table[match]      #Get match as tuple so that it can be used as a dict index
         for o in range(len(result)):
             list(self.outputs.values())[o].set(result[o])
+
+class tristate(element):
+    def __init__(self):
+        element.__init__(self)
+        self.addInput(pin('a'))
+        self.addInput(pin('e'))
+        # tristate has no output.
+        self.enabled = 0
+        
+    def update(self):   # All the actual logic is done in the bus element.
+        pass
+
+class bus(element):
+    def __init__(self):
+        element.__init__(self)
+        self.addOutput(pin('y'))
+        self.tristates = []
+        
+    def addTristate(self, tristate):
+        self.tristates.append(tristate)
+        
+    def update(self):
+        activeTristate = None
+        for t in self.tristates:
+            if t.enabled:
+                if not activeTristate is None:  # Quick check to see if multiple tristates are enabled.
+                    activeTristate = t
+                else:
+                    raise busError('Multiple tristates enabled.')
+                
+        # If we got here, everything is ok. Set the ouptut of the bus to the value of the tristate's input pin.
+        if not activeTristate is None:
+            self.outputs['y'].set(activeTristate.inputs['a'].value)

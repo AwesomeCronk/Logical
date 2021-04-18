@@ -1,19 +1,21 @@
 import sys, time, os
 from logicCore import element, pin
-from logicGates import andGate, orGate, xorGate, notGate, nandGate, norGate, xnorGate, truthTable
+from logicGates import andGate, orGate, xorGate, notGate, nandGate, norGate, xnorGate, truthTable, tristate, bus
 
 commentSequence = '//'
 includeSequence = '$include'
 
+# Class to represent commands in .lgc or .ttb source
 class command():
     def __init__(self, line, text = "", listing = []):
-        self.line = line
-        self.text = text
-        self.listing = listing
+        self.line = line        # Line number in the source, begins with 1.
+        self.text = text        # Original source.
+        self.listing = listing  # Listing of the code.
         
     def __repr__(self):
         return("Command '{}' on line {} with listing {}".format(self.text, self.line, self.listing))
 
+# Function to parse source code and return a list of commands.
 def parseCommands(lines):
     commands = []
     for l in range(len(lines)):
@@ -27,6 +29,7 @@ def parseCommands(lines):
         #print(c)
     return commands
 
+# Function to load a truth table from parsed .lgc source code.
 def loadTable(filePath):
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
@@ -61,6 +64,7 @@ def loadTable(filePath):
                 raise Exception('Command {} not recognized'.format(comm.text))
     return table
 
+# Function to load an element from parsed .ttb source and return that element.
 def loadElement(filePath):
     print('=====loading element from {}====='.format(filePath))
 
@@ -69,9 +73,10 @@ def loadElement(filePath):
     with open(filePath, 'r') as file:       # Otherwise open the file
         commands = parseCommands(file.read().split('\n'))   # And parse the commands from it
     
-    needsConnected = {}
-    registeredElements = {}
-    mainElement = element()
+    needsConnected = {}     # Elements and pins needing connected
+    registeredElements = {} # Elements registered as subcircuits
+    mainElement = element() # The main element
+    busses = {}             # Busses in the main element
 
     for comm in commands:
         if comm.listing[0] == includeSequence:
@@ -128,9 +133,16 @@ def loadElement(filePath):
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.listing[1:-1]})
 
-        # elif comm.listing[0] == 'bus':
+        elif comm.listing[0] == 'tristate':
+            newElement = tristate()
+            mainElement.addElement(newElement)
+            needsConnected.update({newElement: comm.listing[1:]})
 
-        # elif comm.listing[0] == 'tristate':
+        elif comm.listing[0] == 'bus':
+            newElement = bus()
+            newElement.outputs['y'].rename(comm.listing[1])
+            mainElement.addElement(newElement)
+            busses.update({comm.listing[1]: newElement})
 
         elif comm.listing[0] in registeredElements.keys():
             newElement = loadElement(registeredElements[comm.listing[0]])
@@ -154,16 +166,21 @@ def loadElement(filePath):
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))
 
+        # needsConnected is a dict of {element: targetNames} or {pin: targetName}
         for e in needsConnected.keys():
-            if type(e) is pin:
+            if isinstance(e, pin):
                 targetName = needsConnected[e]
                 a = mainElement.internalPins[targetName]
                 e.connect(a)
             else:
+                print(needsConnected[e])
                 ctr = 0
                 for i in e.inputs.keys():
                     e.inputs[i].connect(mainElement.internalPins[needsConnected[e][ctr]])
                     ctr += 1
+                    print(ctr)
+                if isinstance(e, tristate):
+                    busses[needsConnected[e][ctr]].addTristate(e)
     return mainElement
 
 if __name__ == '__main__':

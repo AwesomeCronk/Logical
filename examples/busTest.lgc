@@ -1,0 +1,14 @@
+in a0
+in e0
+in a1
+in e1
+in a2
+in e2
+
+bus mainBus
+
+tristate a0 e0 mainBus
+tristate a1 e1 mainBus
+tristate a2 e2 mainBus
+
+out mainBus bus

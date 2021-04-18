@@ -1,6 +1,6 @@
 import os, shutil, sys
 
-applicationName = 'generic'
+applicationName = 'Logical'
 installerVersion = '1.1.1'
 downloadDir = os.path.dirname(os.path.realpath(__file__))
 
