@@ -17,16 +17,17 @@ class command():
 
 # Function to parse source code and return a list of commands.
 def parseCommands(lines):
+    #print(len(lines))
     commands = []
     for l in range(len(lines)):
         listing = lines[l].split(commentSequence)[0].split(' ')  # Split to remove comments and spaces.
         while '' in listing:  # Remove artifacting from double spaces and comment spacing.
             listing.remove('')
-            
+        print(listing)
         if len(listing):
             c = command(l + 1, lines[l], listing)
-        commands.append(c)
-        #print(c)
+            commands.append(c)
+            print(c)
     return commands
 
 # Function to load a truth table from parsed .lgc source code.
@@ -79,6 +80,7 @@ def loadElement(filePath):
     busses = {}             # Busses in the main element
 
     for comm in commands:
+        print('processing {}'.format(comm))
         if comm.listing[0] == includeSequence:
             registeredElements.update({comm.listing[1]: comm.listing[2]})
         
@@ -167,27 +169,31 @@ def loadElement(filePath):
             raise Exception('Command {} not recognized.'.format(comm.text))
 
         # needsConnected is a dict of {element: targetNames} or {pin: targetName}
-        for e in needsConnected.keys():
-            if isinstance(e, pin):
-                targetName = needsConnected[e]
-                a = mainElement.internalPins[targetName]
-                e.connect(a)
-            else:
-                print(needsConnected[e])
-                ctr = 0
-                for i in e.inputs.keys():
-                    e.inputs[i].connect(mainElement.internalPins[needsConnected[e][ctr]])
-                    ctr += 1
-                    print(ctr)
-                if isinstance(e, tristate):
-                    busses[needsConnected[e][ctr]].addTristate(e)
+    print(needsConnected)
+    for e in needsConnected.keys():
+        if isinstance(e, pin):
+            targetName = needsConnected[e]
+            a = mainElement.internalPins[targetName]
+            e.connect(a)
+        else:
+            print('connecting {}'.format(needsConnected[e]))
+            ctr = 0
+            for i in e.inputs.keys():
+                e.inputs[i].connect(mainElement.internalPins[needsConnected[e][ctr]])
+                ctr += 1
+            #print(e.inputs['a'].target)
+            #print(e.inputs['e'].target)
+            if isinstance(e, tristate):
+                busses[needsConnected[e][ctr]].addTristate(e)
     return mainElement
 
 if __name__ == '__main__':
     mainElement = loadElement(sys.argv[1])
+    input('press enter to continue...')
     runFlag = True
     while(runFlag):
         mainElement.update()
+        time.sleep(2)
         os.system('cls')
         print('Inputs ====================')
         for i in mainElement.inputs.keys():

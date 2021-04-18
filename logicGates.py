@@ -142,7 +142,7 @@ class tristate(element):
         self.enabled = 0
         
     def update(self):   # All the actual logic is done in the bus element.
-        pass
+        print('tristate values are {} {}'.format(self.inputs['a'].value, self.inputs['e'].value))
 
 class bus(element):
     def __init__(self):
