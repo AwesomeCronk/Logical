@@ -140,9 +140,6 @@ class tristate(element):
         self.addInput(pin('e'))
         # tristate has no output.
         self.enabled = 0
-        
-    def update(self):   # All the actual logic is done in the bus element.
-        print('tristate values are {} {}'.format(self.inputs['a'].value, self.inputs['e'].value))
 
 class bus(element):
     def __init__(self):
@@ -154,14 +151,21 @@ class bus(element):
         self.tristates.append(tristate)
         
     def update(self):
+        #breakpoint()
         activeTristate = None
         for t in self.tristates:
-            if t.enabled:
-                if not activeTristate is None:  # Quick check to see if multiple tristates are enabled.
-                    activeTristate = t
+            print('tristate values are {} {}'.format(t.inputs['a'].value, t.inputs['e'].value))
+            if t.inputs['e'].value:
+                if activeTristate is None:  # If there is not already an active tristate,
+                    activeTristate = t          # Select the current one as active.
                 else:
-                    raise busError('Multiple tristates enabled.')
+                    raise busError('Multiple tristates enabled.')   # Otherwise raise a busError.
+                print(activeTristate)
+        input('press enter to continue...')
                 
         # If we got here, everything is ok. Set the ouptut of the bus to the value of the tristate's input pin.
         if not activeTristate is None:
             self.outputs['y'].set(activeTristate.inputs['a'].value)
+        else:
+            self.outputs['y'].set(0)
+            

@@ -13,7 +13,7 @@ class command():
         self.listing = listing  # Listing of the code.
         
     def __repr__(self):
-        return("Command '{}' on line {} with listing {}".format(self.text, self.line, self.listing))
+        return "Command '{}' on line {} with listing {}".format(self.text, self.line, self.listing)
 
 # Function to parse source code and return a list of commands.
 def parseCommands(lines):
@@ -192,8 +192,11 @@ if __name__ == '__main__':
     input('press enter to continue...')
     runFlag = True
     while(runFlag):
-        mainElement.update()
-        time.sleep(2)
+        try:
+            mainElement.update()
+        except Exception as e:
+            print(e)
+            time.sleep(2)
         os.system('cls')
         print('Inputs ====================')
         for i in mainElement.inputs.keys():
@@ -216,3 +219,4 @@ if __name__ == '__main__':
         else:
             print('command {} not recognized'.format(runCommand[0]))
             time.sleep(1)
+        #breakpoint()
