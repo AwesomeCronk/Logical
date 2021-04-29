@@ -1,5 +1,4 @@
-in a
-in b
+in a; in b
 
 beginTable
 0 0   1 0 0 0
@@ -8,7 +7,4 @@ beginTable
 1 1   0 0 0 1
 endTable
 
-out 0
-out 1
-out 2
-out 3
+out 0;out 1;out 2;out 3

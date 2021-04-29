@@ -4,6 +4,7 @@ from logicGates import andGate, orGate, xorGate, notGate, nandGate, norGate, xno
 
 commentSequence = '//'
 includeSequence = '$include'
+version = '0.1.0'
 
 # Class to represent commands in .lgc or .ttb source
 class command():
@@ -19,21 +20,34 @@ class command():
 def parseCommands(lines):
     #print(len(lines))
     commands = []
-    for l in range(len(lines)):
-        listing = lines[l].split(commentSequence)[0].split(' ')  # Split to remove comments and spaces.
-        while '' in listing:  # Remove artifacting from double spaces and comment spacing.
-            listing.remove('')
-        print(listing)
-        if len(listing):
-            c = command(l + 1, lines[l], listing)
-            commands.append(c)
-            print(c)
+    for i in range(len(lines)):
+        print('Processing line {}'.format(i + 1))
+        entries = lines[i].split(commentSequence)[0].split(';')  # Split to remove comments and spaces
+        while '' in entries:    # Remove artifacting from
+            entries.remove('')
+        print("entries: {}".format(entries))
+        listing = []
+        for e in entries:
+            listing.append(e.split(' '))
+        for l in listing:
+            while '' in l:    # Remove artifacting from spaces
+                l.remove('')
+        print('listing: {}'.format(listing))
+        for l in listing:
+            print('l: {}'.format(l))
+            if len(l):
+                c = command(i + 1, lines[i], l)
+                commands.append(c)
+                print('c: {}'.format(c))
     return commands
 
 # Function to load a truth table from parsed .lgc source code.
 def loadTable(filePath):
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
+    print('commands:')
+    for comm in commands:
+        print(comm)
     table = truthTable()
     readingTable = False
 
@@ -73,7 +87,9 @@ def loadElement(filePath):
         return loadTable(filePath)          # Load it as a truth table
     with open(filePath, 'r') as file:       # Otherwise open the file
         commands = parseCommands(file.read().split('\n'))   # And parse the commands from it
-    
+    print('commands:')
+    for comm in commands:
+        print(comm)
     needsConnected = {}     # Elements and pins needing connected
     registeredElements = {} # Elements registered as subcircuits
     mainElement = element() # The main element
@@ -198,6 +214,7 @@ if __name__ == '__main__':
             print(e)
             time.sleep(2)
         os.system('cls')
+        print('Logical v{}'.format(version))
         print('Inputs ====================')
         for i in mainElement.inputs.keys():
             print('{} {}'.format(i, mainElement.inputs[i].value))
