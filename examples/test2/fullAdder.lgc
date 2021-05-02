@@ -1,0 +1,12 @@
+$include halfAdder ../test1/halfAdder.lgc
+
+in a
+in b
+in cIn
+
+halfAdder a b c1 y1
+halfAdder cIn y1 c2 y2
+or c1 c2 c3
+
+out c3 cOut
+out y2 y

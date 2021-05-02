@@ -20,33 +20,33 @@ def parseCommands(lines):
     #print(len(lines))
     commands = []
     for i in range(len(lines)):
-        print('Processing line {}'.format(i + 1))
+        #print('Processing line {}'.format(i + 1))
         entries = lines[i].split(commentSequence)[0].split(';')  # Split to remove comments and spaces
         while '' in entries:    # Remove artifacting from
             entries.remove('')
-        print("entries: {}".format(entries))
+        #print("entries: {}".format(entries))
         listing = []
         for e in entries:
             listing.append(e.split(' '))
         for l in listing:
             while '' in l:    # Remove artifacting from spaces
                 l.remove('')
-        print('listing: {}'.format(listing))
+        #print('listing: {}'.format(listing))
         for l in listing:
-            print('l: {}'.format(l))
+            #print('l: {}'.format(l))
             if len(l):
                 c = command(i + 1, lines[i], l)
                 commands.append(c)
-                print('c: {}'.format(c))
+                #print('c: {}'.format(c))
     return commands
 
 # Function to load a truth table from parsed .lgc source code.
 def loadTable(filePath):
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
-    print('commands:')
-    for comm in commands:
-        print(comm)
+    #print('commands:')
+    #for comm in commands:
+    #    print(comm)
     table = truthTable()
     readingTable = False
 
@@ -78,26 +78,35 @@ def loadTable(filePath):
                 raise Exception('Command {} not recognized'.format(comm.text))
     return table
 
-# Function to load an element from parsed .ttb source and return that element.
-def loadElement(filePath):
-    print('=====loading element from {}====='.format(filePath))
+# Function to load an element from parsed .ttb source and return that element. cwd is used internally.
+def loadElement(filePath, cwd = None):
+    # Some shenanigans to get the paths right
+    print('New Element\nold filePath: {}\nold cwd: {}'.format(filePath, cwd))
+    if cwd is None:
+        filePath = os.path.abspath(filePath)
+    else:
+        filePath = os.path.join(cwd, filePath)
+    cwd = os.path.split(filePath)[0]
+    #print('=====loading element from {}====='.format(filePath))
+    print('new filePath: {}\nnew cwd: {}\n'.format(filePath, cwd))
 
     if filePath.split('.')[-1] == 'ttb':    # If the file is a truth table file
         return loadTable(filePath)          # Load it as a truth table
     with open(filePath, 'r') as file:       # Otherwise open the file
         commands = parseCommands(file.read().split('\n'))   # And parse the commands from it
-    print('commands:')
-    for comm in commands:
-        print(comm)
+    #print('commands:')
+    #for comm in commands:
+    #    print(comm)
     needsConnected = {}     # Elements and pins needing connected
     registeredElements = {} # Elements registered as subcircuits
     mainElement = element() # The main element
     busses = {}             # Busses in the main element
 
     for comm in commands:
-        print('processing {}'.format(comm))
+        #print('processing {}'.format(comm))
         if comm.listing[0] == includeSequence:
-            registeredElements.update({comm.listing[1]: comm.listing[2]})
+            # Add a note of where to find this element that has been included
+            registeredElements.update({comm.listing[1]: comm.listing[2].replace('/','\\')})
         
         elif comm.listing[0] == 'in':
             mainElement.addInput(pin(comm.listing[1]))
@@ -162,7 +171,7 @@ def loadElement(filePath):
             busses.update({comm.listing[1]: newElement})
 
         elif comm.listing[0] in registeredElements.keys():
-            newElement = loadElement(registeredElements[comm.listing[0]])
+            newElement = loadElement(registeredElements[comm.listing[0]], cwd = cwd)
 
             # Rename the outputs to the names specified in the .lgc script
             commandOffset = len(newElement.inputs)
@@ -184,14 +193,14 @@ def loadElement(filePath):
             raise Exception('Command {} not recognized.'.format(comm.text))
 
         # needsConnected is a dict of {element: targetNames} or {pin: targetName}
-    print(needsConnected)
+    #print(needsConnected)
     for e in needsConnected.keys():
         if isinstance(e, pin):
             targetName = needsConnected[e]
             a = mainElement.internalPins[targetName]
             e.connect(a)
         else:
-            print('connecting {}'.format(needsConnected[e]))
+            #print('connecting {}'.format(needsConnected[e]))
             ctr = 0
             for i in e.inputs.keys():
                 e.inputs[i].connect(mainElement.internalPins[needsConnected[e][ctr]])

@@ -1,0 +1,9 @@
+$include halfAdder test1/halfAdder.lgc
+$include fullAdder test2/fullAdder.lgc
+
+in a0; in a1; in b0; in b1
+
+halfAdder a0 b0 c0 y0
+fullAdder a1 b1 c0 c1 y1
+
+out y0 y0; out y1 y1; out c1 c

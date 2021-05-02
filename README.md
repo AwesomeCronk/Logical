@@ -4,7 +4,7 @@ This program is a logic gate simulator for Windows. It supports all the basic ga
 
 ## To Do:
 * ~~Fix tristates and busses~~
-* Improve/fix includes
+* ~~Improve/fix includes~~~
 * Automatic circuit updates
 * Documentation
 * Improve the UI
