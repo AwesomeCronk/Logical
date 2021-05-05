@@ -2,11 +2,15 @@
 
 This program is a logic gate simulator for Windows. It supports all the basic gates and the ability to create sub-circuits. Some ideas I hope to implement eventually are multi-core processing and network multi-machine processing.
 
-## To Do:
+## To Do
 * ~~Fix tristates and busses~~
-* ~~Improve/fix includes~~~
+* ~~Improve/fix includes~~
 * Automatic circuit updates
 * Documentation
 * Improve the UI
 * Multiprocessing
 * Multi-PC processing via sockets?
+
+## Release Notes
+* 0.1.0 - Added version tracking
+* 0.2.0 - Fixed includes

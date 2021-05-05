@@ -14,11 +14,12 @@ if __name__ == '__main__':
             print(e)
             time.sleep(2)
         os.system('cls')
+        termWidth = os.get_terminal_size()[0]
         print('Logical v{}'.format(version))
-        print('Inputs ====================')
+        print('Inputs '+ ('=' * (termWidth - 7)))
         for i in mainElement.inputs.keys():
             print('{} {}'.format(i, mainElement.inputs[i].value))
-        print('Outputs ===================')
+        print('Outputs '+ ('=' * (termWidth - 8)))
         for o in mainElement.outputs.keys():
             print('{} {}'.format(o, mainElement.outputs[o].value))
         runCommand = input('\nLogical> ').split(' ')
