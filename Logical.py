@@ -7,7 +7,7 @@ if __name__ == '__main__':
     mainElement = loadElement(sys.argv[1])
     input('press enter to continue...')
     runFlag = True
-    while(runFlag):
+    while runFlag:
         try:
             mainElement.update()
         except Exception as e:
@@ -38,3 +38,4 @@ if __name__ == '__main__':
             print('command {} not recognized'.format(runCommand[0]))
             time.sleep(1)
         #breakpoint()
+        
