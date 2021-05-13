@@ -54,8 +54,8 @@ class display():
         # print(self.size[0])
         
     def update(self):
-        print(ansi.cursor.Home(), end = '')
-        print(ansi.cursor.MoveTo(*self.pos), end = '')
+        print(ansi.cursor.home(), end = '')
+        print(ansi.cursor.moveTo(*self.pos), end = '')
         textToPrint = []
         # print(self.size[0])
         
@@ -75,10 +75,10 @@ class display():
         # print('\nPrinting contents now.\n')
         
         for i in range(self.size[1]):
-        #     print(i)
+            # print(i)
             print(textToPrint[i], end = '')
             self.moveTo(self.pos + vec2(0, 1))
-            print(ansi.cursor.MoveTo(*(self.pos)), end = '')
+            print(ansi.cursor.moveTo(*(self.pos)), end = '')
     
     def setText(self, text):
         self.text = text
@@ -87,17 +87,17 @@ class display():
         self.pos = pos
         
 def testUI():
-    print(ansi.clear.EntireScreen(), end = '')
-    print(ansi.cursor.Home(), end = '')
+    print(ansi.clear.entireScreen(), end = '')
+    print(ansi.cursor.home(), end = '')
     
-    d1 = display(vec2(16, 2), vec2(1, 1), 1)
-    # d2 = display(vec2(10, 3), vec2(1, 4), 1)
+    d1 = display(vec2(16, 2), vec2(2, 2), 1)
+    d2 = display(vec2(10, 3), vec2(15, 4), 1)
     
-    d1.setText('Hello world!\nThis is the size of an LCD!')
-    # d2.setText('This text should wrap around a time or two.')
+    d1.setText('Hello world!\nThis text cuts off.')
+    d2.setText('This text should wrap around several times.')
     
     d1.update()
-    # d2.update()
+    d2.update()
     
 if __name__ == '__main__':
     ansi.conhostEnableANSI()
