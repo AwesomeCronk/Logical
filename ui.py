@@ -43,7 +43,7 @@ class vec2():
         else:
             raise IndexError('invalid index for vec2: {}'.format(key))
 
-class display():
+class widget():
     def __init__(self, size: vec2 = vec2(1,1), pos: vec2 = vec2(0,0), wrapping = 0):
         self.size = size
         self.pos = pos
@@ -90,10 +90,10 @@ def testUI():
     print(ansi.clear.entireScreen(), end = '')
     print(ansi.cursor.home(), end = '')
     
-    d1 = display(vec2(16, 2), vec2(2, 2), 1)
-    d2 = display(vec2(10, 3), vec2(15, 4), 1)
+    d1 = widget(vec2(22, 2), vec2(2, 2), 1)
+    d2 = widget(vec2(10, 5), vec2(15, 5), 1)
     
-    d1.setText('Hello world!\nThis text cuts off.')
+    d1.setText('Hello world!\nThis text cuts off soon.')
     d2.setText('This text should wrap around several times.')
     
     d1.update()
