@@ -169,3 +169,7 @@ class bus(element):
         else:
             self.outputs['y'].set(0)
             
+class switch(element):
+    def __init__(self, keyBind):
+        element.__init__(self)
+        self.addOutput(pin('y'))
