@@ -31,6 +31,9 @@ def parseCommands(lines):
     # listing
     # listing & args
 
+    # Each listing has an element followed by inputs and outputs
+    # element in in > out
+
     #print(len(lines))
     commands = []
     for i in range(len(lines)):
