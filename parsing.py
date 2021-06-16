@@ -1,3 +1,5 @@
+import sys
+
 commentSequence = '//'
 includeSequence = '$include'
 entrySeparatorSequence = ';'
@@ -20,13 +22,24 @@ class command():
         self.line = line        # Line number
         self.entry = entry      # Entry number
         self.text = text        # Entry source code
-        self.element = element
-        self.inputs = inputs
-        self.outputs = outputs
-        self.args = args        # Arguments supplied after argumentSequence
+        self.element = element  # Element type
+        self.inputs = inputs    # List of inputs
+        self.outputs = outputs  # List of outputs
+        self.args = args        # List of arguments
         
     def __repr__(self):
-        return "command '{}' on line {}".format(self.text, self.line)
+        return 'command "{}" on line {}'.format(self.text, self.line)
+
+    def info(self):
+        infoStr = self.__repr__()
+        infoStr += '\nself.line: {}'.format(self.line)
+        infoStr += '\nself.entry: {}'.format(self.entry)
+        infoStr += '\nself.text: {}'.format(self.text)
+        infoStr += '\nself.element: {}'.format(self.element)
+        infoStr += '\nself.inputs: {}'.format(self.inputs)
+        infoStr += '\nself.outputs: {}'.format(self.outputs)
+        infoStr += '\nself.args: {}'.format(self.args)
+        return infoStr
 
 # Function to parse .lgc and .ttb source code and return a list of commands.
 def parseCommands(lines):
@@ -34,10 +47,17 @@ def parseCommands(lines):
     for l in range(len(lines)):
         line = lines[l].split(commentSequence)[0]       # Take out comments
         entries = line.split(entrySeparatorSequence)    # Get individual entries
-        
+        # Remove artifacting
+        while '' in entries:
+            entries.remove('')
+
         for e in range(len(entries)):
             entry = entries[e]      # Iterate through each entry on the line
-            element = entry.split(' ')[0]
+            # Remove artifacting
+            while entry[0] == ' ':
+                entry = entry[1:]
+
+        element = entry.split(' ')[0]       # The element being called
             other = ' '.join(entry.split(' ')[1:])
             
             # Split at the argument separator and subsequently at spaces
@@ -80,3 +100,11 @@ def parseCommands(lines):
             ))
 
     return commands
+
+if __name__ == '__main__':
+    with open(sys.argv[1], 'r') as file:
+        lines = file.read().split('\n')
+        print('Parsing file "{}" ({} lines)'.format(sys.argv[1], len(lines)))
+        commands = parseCommands(lines)
+    for comm in commands:
+        print(comm.info())
