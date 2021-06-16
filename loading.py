@@ -1,69 +1,7 @@
 import os
 from logicCore import element, pin
 from logicElements import *
-
-commentSequence = '//'
-includeSequence = '$include'
-argumentSequence = '&'
-
-# Class to represent commands in .lgc or .ttb source
-class command():
-    def __init__(self, line, text = "", listing = [], args = []):
-        self.line = line        # Line number in the source, begins with 1.
-        self.text = text        # Original source.
-        self.listing = listing  # Listing of the code.
-        self.args = args        # Arguments supplied after argumentSequence
-        
-    def __repr__(self):
-        return "Command '{}' on line {} with listing {}".format(self.text, self.line, self.listing)
-
-# Function to parse .lgc and .ttb source code and return a list of commands.
-def parseCommands(lines):
-    # Structure of commands:
-    
-    # One line per line
-    # line
-
-    # Multiple entries per line are separated by a ;
-    # entry; entry
-    
-    # Each entry has a listing and optionally args, separated by the &
-    # listing
-    # listing & args
-
-    # Each listing has an element followed by inputs and outputs
-    # element in in > out
-
-    #print(len(lines))
-    commands = []
-    for i in range(len(lines)):
-        #print('Processing line {}'.format(i + 1))
-        entries = lines[i].split(commentSequence)[0].split(';')  # Split to remove comments and spaces
-        while '' in entries:    # Remove artifacting from spaces
-            entries.remove('')
-        #print("entries: {}".format(entries))
-        listing = []
-        args = []
-
-        # From here on to the return needs reworked to generate the command objects in one fell swoop
-        for e in entries:
-            commands, arguments = e.split('&')
-            listing.append(commands.split(' '))
-            args.append(arguments.split(' '))
-        for l in listing:
-            while '' in l:      # Remove artifacting from spaces
-                l.remove('')
-        for a in args:
-            while '' in a:
-                a.remove('')    # Remove artifacting from spaces
-        #print('listing: {}'.format(listing))
-        for l in listing:
-            #print('l: {}'.format(l))
-            if len(l):
-                c = command(i + 1, lines[i], l)
-                commands.append(c)
-                #print('c: {}'.format(c))
-    return commands
+from parsing import parseCommands
 
 # Function to load a truth table from parsed .lgc source code.
 def loadTable(filePath):
