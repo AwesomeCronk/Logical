@@ -57,8 +57,8 @@ def parseCommands(lines):
             while entry[0] == ' ':
                 entry = entry[1:]
 
-        element = entry.split(' ')[0]       # The element being called
-            other = ' '.join(entry.split(' ')[1:])
+            element = entry.split(' ')[0]   # The element being called
+            other = ' '.join(entry.split(' ')[1:])  # Everything else, to be consumed bit by bit
             
             # Split at the argument separator and subsequently at spaces
             if other.count(argumentSequence) > 1:
