@@ -89,6 +89,10 @@ def parseCommands(lines):
             while '' in outputs:
                 outputs.remove('')
 
+            if element == includeSequence:
+                if len(inputs) != 1 or len(outputs) != 1:
+                    raise ParseError('{} must have file name and element name separated by {}'.format(includeSequence, pinSeparatorSequence))
+
             commands.append(command(
                 l + lineNumberOffset,
                 e + entryNumberOffset,
