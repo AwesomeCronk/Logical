@@ -5,6 +5,7 @@ from parsing import parseCommands
 
 # Function to load a truth table from parsed .lgc source code.
 def loadTable(filePath):
+    raise NotImplementedError('Truth table are not yet implemented for the updated version of Logical.')
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
     #print('commands:')
@@ -67,81 +68,80 @@ def loadElement(filePath, cwd = None):
 
     for comm in commands:
         #print('processing {}'.format(comm))
-        if comm.listing[0] == includeSequence:
+        if comm.element == '$include':
             # Add a note of where to find this element that has been included
-            registeredElements.update({comm.listing[1]: comm.listing[2].replace('/','\\')})
+            registeredElements.update({comm.outputs[0]: comm.inputs[0].replace('/','\\')})
         
-        elif comm.listing[0] == 'in':
+        elif comm.element == 'in':
             mainElement.addInput(pin(comm.listing[1]))
 
-        elif comm.listing[0] == 'out':
+        elif comm.element == 'out':
             newPin = pin(comm.listing[2])
             needsConnected.update({newPin: comm.listing[1]})
             mainElement.addOutput(newPin)
 
-        elif comm.listing[0] == 'and':
+        elif comm.element == 'and':
             newElement = andGate()
-            newElement.outputs['y'].rename(comm.listing[-1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.listing[1:-1]})
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'or':
+        elif comm.element == 'or':
             newElement = orGate()
-            newElement.outputs['y'].rename(comm.listing[-1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            newDict = {newElement: comm.listing[1:-1]}
-            needsConnected.update(newDict)
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'xor':
+        elif comm.element == 'xor':
             newElement = xorGate()
-            newElement.outputs['y'].rename(comm.listing[-1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.listing[1:-1]})
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'not':
+        elif comm.element == 'not':
             newElement = notGate()
-            newElement.outputs['y'].rename(comm.listing[-1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.listing[1:-1]})
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'nand':
+        elif comm.element == 'nand':
             newElement = nandGate()
-            newElement.outputs['y'].rename(comm.listing[-1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.listing[1:-1]})
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'nor':
+        elif comm.element == 'nor':
             newElement = norGate()
-            newElement.outputs['y'].rename(comm.listing[-1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.listing[1:-1]})
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'xnor':
+        elif comm.element == 'xnor':
             newElement = xnorGate()
-            newElement.outputs['y'].rename(comm.listing[-1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.listing[1:-1]})
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'tristate':
+        elif comm.element == 'tristate':
             newElement = tristate()
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.listing[1:]})
+            needsConnected.update({newElement: comm.inputs})
 
-        elif comm.listing[0] == 'bus':
+        elif comm.element == 'bus':
             newElement = bus()
-            newElement.outputs['y'].rename(comm.listing[1])
+            newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
-            busses.update({comm.listing[1]: newElement})
+            busses.update({comm.inputs[0]: newElement})
 
-        elif comm.listing[0] in registeredElements.keys():
-            newElement = loadElement(registeredElements[comm.listing[0]], cwd = cwd)
+        elif comm.element in registeredElements.keys():
+            newElement = loadElement(registeredElements[comm.element], cwd = cwd)
 
             # Rename the outputs to the names specified in the .lgc script
-            commandOffset = len(newElement.inputs)
+            commandOffset = 0
             oldNames = list(newElement.outputs.keys())
             for o in oldNames:
+                newElement.outputs[o].rename(comm.outputs[commandOffset])
                 commandOffset += 1
-                newElement.outputs[o].rename(comm.listing[commandOffset])
                 
             # Add newElement to mainElement
             mainElement.addElement(newElement)
@@ -149,7 +149,7 @@ def loadElement(filePath, cwd = None):
             # Add inputs to needsConnected
             pins = []
             for i in range(len(newElement.inputs)):
-                pins.append(comm.listing[i + 1])
+                pins.append(comm.inputs[i])
             needsConnected.update({newElement: pins})
 
         else:

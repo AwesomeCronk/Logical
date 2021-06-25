@@ -22,6 +22,8 @@ This program is a logic gate simulator for Windows. It supports all the basic ga
 * Improve the UI
 * Multiprocessing
 * Multi-PC processing via sockets?
+* Actual command line args with `argparse`
+* Error logging with `logging`
 
 ## Release Notes
 * 0.1.0 - Added version tracking

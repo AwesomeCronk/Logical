@@ -92,6 +92,9 @@ def parseCommands(lines):
             if element == includeSequence:
                 if len(inputs) != 1 or len(outputs) != 1:
                     raise ParseError('{} must have file name and element name separated by {}'.format(includeSequence, pinSeparatorSequence))
+                
+                # Allows me to change the sequences without breaking loading.py
+                element = '$include'
 
             commands.append(command(
                 l + lineNumberOffset,
