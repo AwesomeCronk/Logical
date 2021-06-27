@@ -49,7 +49,9 @@ class simulation():
         # Clear the screen
         print(ANSI.clear.entireScreen(), end = '')
 
-        self.title = widget(vec2(terminalSize[0],1), vec2(1,1), 0)
+        self.title = widget()
+        self.title.resize(vec2(terminalSize[0],1))
+        self.title.moveTo(vec2(1,1))
         self.title.setText('Logical {} (Python {} on {} {})'.format(version, pythonVersion, architecture, platform))
         self.title.update()
 

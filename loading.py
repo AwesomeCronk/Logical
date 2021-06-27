@@ -1,6 +1,7 @@
 import os
 from logicCore import element, pin
 from logicElements import *
+from ui import *
 from parsing import parseCommands
 
 # Function to load a truth table from parsed .lgc source code.
@@ -54,32 +55,37 @@ def loadElement(filePath, cwd = None):
     #print('=====loading element from {}====='.format(filePath))
     print('new filePath: {}\nnew cwd: {}\n'.format(filePath, cwd))
 
-    if filePath.split('.')[-1] == 'ttb':    # If the file is a truth table file
-        return loadTable(filePath)          # Load it as a truth table
-    with open(filePath, 'r') as file:       # Otherwise open the file
-        commands = parseCommands(file.read().split('\n'))   # And parse the commands from it
-    #print('commands:')
-    #for comm in commands:
-    #    print(comm)
-    needsConnected = {}     # Elements and pins needing connected
-    registeredElements = {} # Elements registered as subcircuits
-    mainElement = element() # The main element
-    busses = {}             # Busses in the main element
+    # Load as truth table if .ttb file
+    if filePath.split('.')[-1] == 'ttb':
+        return loadTable(filePath)
+    with open(filePath, 'r') as file:
+        commands = parseCommands(file.read().split('\n'))
+
+    # Variables for loading things
+    needsConnected = {}
+    registeredElements = {} # Sort by name: filepath
+    mainElement = element()
+    mainWidget = widget()
+    busses = {}
+
+    # Main widget setup
+    mainWidget.setMode(widget.containerMode)
 
     for comm in commands:
-        #print('processing {}'.format(comm))
+        # Element config
         if comm.element == '$include':
             # Add a note of where to find this element that has been included
             registeredElements.update({comm.outputs[0]: comm.inputs[0].replace('/','\\')})
         
-        elif comm.element == 'in':
-            mainElement.addInput(pin(comm.listing[1]))
+        elif comm.element == '$pins':
+            for i in comm.inputs:
+                mainElement.addInput(pin(i))
+            for o in comm.outputs:
+                newPin = pin(o)
+                needsConnected.update({newPin: o})
+                mainElement.addOutput(newPin)
 
-        elif comm.element == 'out':
-            newPin = pin(comm.listing[2])
-            needsConnected.update({newPin: comm.listing[1]})
-            mainElement.addOutput(newPin)
-
+        # Basic gates
         elif comm.element == 'and':
             newElement = andGate()
             newElement.outputs['y'].rename(comm.outputs[0])
@@ -122,6 +128,7 @@ def loadElement(filePath, cwd = None):
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
+        # Bus elements
         elif comm.element == 'tristate':
             newElement = tristate()
             mainElement.addElement(newElement)
@@ -132,6 +139,12 @@ def loadElement(filePath, cwd = None):
             newElement.outputs['y'].rename(comm.outputs[0])
             mainElement.addElement(newElement)
             busses.update({comm.inputs[0]: newElement})
+
+        # Control elements
+        elif comm.element == 'led':
+            newElement = led(*comm.args)
+            mainElement.addElement(newElement)
+            mainWidget.addWidget(newElement.widget)
 
         elif comm.element in registeredElements.keys():
             newElement = loadElement(registeredElements[comm.element], cwd = cwd)
@@ -160,8 +173,13 @@ def loadElement(filePath, cwd = None):
     for e in needsConnected.keys():
         if isinstance(e, pin):
             targetName = needsConnected[e]
-            a = mainElement.internalPins[targetName]
-            e.connect(a)
+            if targetName == '$high':
+                e.set(1)
+            elif targetName == '$low':
+                e.set(0)
+            else:
+                a = mainElement.internalPins[targetName]
+                e.connect(a)
         else:
             #print('connecting {}'.format(needsConnected[e]))
             ctr = 0

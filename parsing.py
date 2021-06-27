@@ -2,6 +2,7 @@ import sys
 
 commentSequence = '//'
 includeSequence = '$include'
+pinsSequence = '$pins'
 entrySeparatorSequence = ';'
 argumentSequence = '&'
 pinSeparatorSequence = '>'
@@ -95,6 +96,8 @@ def parseCommands(lines):
                 
                 # Allows me to change the sequences without breaking loading.py
                 element = '$include'
+            elif element == pinsSequence:
+                element = '$pins'
 
             commands.append(command(
                 l + lineNumberOffset,

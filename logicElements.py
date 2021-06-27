@@ -1,4 +1,5 @@
 from logicCore import element, pin
+from ui import widget, vec2
 
 # Error raised by bus elements
 class busError(Exception):
@@ -169,7 +170,24 @@ class bus(element):
         else:
             self.outputs['y'].set(0)
             
+class led(element):
+    def __init__(self, colorR, colorG, colorB, posX, posY):
+        element.__init__(self)
+        self.color = (colorR, colorG, colorB)
+        self.pos = vec2(int(posX), int(posY))
+        self.addInput(pin('a'))
+
+        self.widget = widget()
+        self.widget.moveTo(self.pos)
+        self.widget.resize(vec2(1,1))
+        self.widget.setFGColor((self.color))
+
+    def update(self):
+        element.update(self)
+        self.widget.setText('#')
+
 class switch(element):
     def __init__(self, keyBind):
         element.__init__(self)
+        self.keyBind = keyBind
         self.addOutput(pin('y'))
