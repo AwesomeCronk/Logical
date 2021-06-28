@@ -178,8 +178,9 @@ class led(element):
         self.addInput(pin('a'))
 
         self.widget = widget()
-        self.widget.moveTo(self.pos)
         self.widget.resize(vec2(1,1))
+        self.widget.moveTo(self.pos)
+        self.widget.setMode(widget.textMode)
         self.widget.setFGColor((self.color))
 
     def update(self):

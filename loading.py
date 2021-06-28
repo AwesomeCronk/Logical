@@ -168,8 +168,7 @@ def loadElement(filePath, cwd = None):
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))
 
-        # needsConnected is a dict of {element: targetNames} or {pin: targetName}
-    #print(needsConnected)
+    # needsConnected is a dict of {element: targetNames} or {pin: targetName}
     for e in needsConnected.keys():
         if isinstance(e, pin):
             targetName = needsConnected[e]
