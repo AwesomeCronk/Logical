@@ -55,7 +55,7 @@ class widget():
         self.parent = None
         self.size = vec2(10,1)
         self.pos = vec2(0,0)
-        self.mode = 'container'
+        self.mode = self.containerMode
         self.wrapping = 0
         self.fgColor = (255, 255, 255)
         self.bgColor = (0, 0, 0)
@@ -67,10 +67,6 @@ class widget():
     def update(self):
         # Parent check and cursor homing
         # print(ansi.cursor.home(), end = '')
-        if self.parent is None:
-            print(ansi.cursor.moveTo(*(self.pos + self.consolePosOffset)), end = '')
-        elif self.parent is widget:
-            print(ansi.cursor.moveTo(*(self.pos + self.parent.pos + self.consolePosOffset)), end = '')
         
         print(ansi.graphics.setGraphicsMode(
             ansi.graphics.fgColor,
@@ -106,8 +102,15 @@ class widget():
             
             # Print the list of lines
             for i in range(self.size[1]):
-                print(textToPrint[i], end = '')
-                print(ansi.cursor.moveTo(*(self.pos + vec2(0, i + 1))), end = '')
+                if self.parent is None:
+                    newPos = self.pos + self.consolePosOffset + vec2(0, i)
+                elif self.parent is widget:
+                    newPos = self.pos + self.parent.pos + self.consolePosOffset + vec2(0, i)
+                print(ansi.cursor.moveTo(*newPos), end = '')
+                try:
+                    print(textToPrint[i], end = '')
+                except IndexError:
+                    pass
     
     def setparent(self, newParent):
         self.parent = newParent
@@ -148,32 +151,43 @@ class ansiManager():
         if sys.platform == 'win32':
             print(ansi.conhostEnableANSI(), end = '')
         print(ansi.clear.entireScreen(), end = '')
-        print('\x1b[?25l', end = '') # Hide cursor
+        print('\x1b[?25l', end = '')    # Hide cursor
 
     def __exit__(self, *args):
-        print('\x1b[25h', end = '') # Show cursor
+        print('\x1b[25h', end = '')     # Show cursor
+        print('\x1b[39m')               # Reset colors
 
 def testUI():
     print(ansi.clear.entireScreen(), end = '')
     print(ansi.cursor.home(), end = '')
     
-    d1 = widget()
-    d1.moveTo(vec2(1, 1))
-    d1.resize(vec2(22, 2))
-    d1.setMode(widget.textMode)
-    d1.setFGColor((255, 0, 0))
-    d1.setText('Hello world!\nThis text cuts off soon.')
-    
-    # d2 = widget()
-    # d2.moveTo(vec2(15, 5))
-    # d2.resize(vec2(10, 5))
-    # d2.setWrapping(1)
-    # d2.setText('This text should wrap around several times.')
-    
-    d1.update()
-    # d2.update()
-    # d2.update()
+    w1 = widget()
+    w1.moveTo(vec2(1, 0))
+    w1.resize(vec2(22, 2))
+    w1.setMode(widget.textMode)
+    w1.setText('Hello world!\nThis text cuts off soon.')
+
+    w2 = widget()
+    w2.moveTo(vec2(25, 2))
+    w2.resize(vec2(20, 1))
+    w2.setMode(widget.textMode)
+    w2.setWrapping(1)
+    w2.setFGColor((255, 0, 0))
+    w2.setText('We have colors!!!')
+
+    w3 = widget()
+    w3.moveTo(vec2(15, 5))
+    w3.resize(vec2(11, 5))
+    w3.setMode(widget.textMode)
+    w3.setWrapping(1)
+    w3.setText('This text should wrap around several times.')
+
+    w1.update()
+    w2.update()
+    w3.update()
     
 if __name__ == '__main__':
     ansi.conhostEnableANSI()
-    testUI()
+    with ansiManager():
+        testUI()
+        print(ansi.cursor.moveTo(0, 20))

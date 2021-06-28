@@ -1,7 +1,7 @@
 import sys, time, os, ctypes
 from pynput import keyboard
 from loading import loadElement
-from ui import vec2, widget
+from ui import vec2, widget, ansiManager
 import simpleANSI as ANSI
 
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
@@ -100,5 +100,6 @@ class simulation():
         self.runFlag = False
             
 if __name__ == '__main__':
-    sim = simulation()
-    sim.main()
+    with ansiManager():
+        sim = simulation()
+        sim.main()
