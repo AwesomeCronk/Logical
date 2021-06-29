@@ -64,11 +64,17 @@ def loadElement(filePath, cwd = None):
     # Variables for loading things
     needsConnected = {}
     registeredElements = {} # Sort by name: filepath
-    mainElement = element()
-    mainWidget = widget()
     busses = {}
 
+    # Main element setup
+    mainElement = element()
+    mainElement.addInput(pin('\\high'))
+    mainElement.internalPins['\\high'].set(1)
+    mainElement.addInput(pin('\\low'))
+    mainElement.internalPins['\\low'].set(0)
+
     # Main widget setup
+    mainWidget = widget()
     mainWidget.setMode(widget.containerMode)
 
     for comm in commands:
@@ -145,6 +151,7 @@ def loadElement(filePath, cwd = None):
             newElement = led(*comm.args)
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
+            needsConnected.update({newElement: comm.inputs})
 
         elif comm.element in registeredElements.keys():
             newElement = loadElement(registeredElements[comm.element], cwd = cwd)
@@ -172,15 +179,10 @@ def loadElement(filePath, cwd = None):
     for e in needsConnected.keys():
         if isinstance(e, pin):
             targetName = needsConnected[e]
-            if targetName == '$high':
-                e.set(1)
-            elif targetName == '$low':
-                e.set(0)
-            else:
-                a = mainElement.internalPins[targetName]
-                e.connect(a)
+            a = mainElement.internalPins[targetName]
+            e.connect(a)
         else:
-            #print('connecting {}'.format(needsConnected[e]))
+            print('connecting {}'.format(needsConnected[e]))
             ctr = 0
             for i in e.inputs.keys():
                 e.inputs[i].connect(mainElement.internalPins[needsConnected[e][ctr]])
@@ -189,4 +191,4 @@ def loadElement(filePath, cwd = None):
             #print(e.inputs['e'].target)
             if isinstance(e, tristate):
                 busses[needsConnected[e][ctr]].addTristate(e)
-    return mainElement
+    return mainElement, mainWidget

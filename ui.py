@@ -155,7 +155,7 @@ class ansiManager():
 
     def __exit__(self, *args):
         print('\x1b[25h', end = '')     # Show cursor
-        print('\x1b[39m')               # Reset colors
+        print('\x1b[39;49m')            # Reset colors
 
 def testUI():
     print(ansi.clear.entireScreen(), end = '')

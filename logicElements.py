@@ -173,7 +173,7 @@ class bus(element):
 class led(element):
     def __init__(self, colorR, colorG, colorB, posX, posY):
         element.__init__(self)
-        self.color = (colorR, colorG, colorB)
+        self.color = (int(colorR), int(colorG), int(colorB))
         self.pos = vec2(int(posX), int(posY))
         self.addInput(pin('a'))
 
@@ -181,11 +181,14 @@ class led(element):
         self.widget.resize(vec2(1,1))
         self.widget.moveTo(self.pos)
         self.widget.setMode(widget.textMode)
-        self.widget.setFGColor((self.color))
+        self.widget.setFGColor(self.color)
 
     def update(self):
         element.update(self)
-        self.widget.setText('#')
+        if self.inputs['a'].value:
+            self.widget.setText('1')
+        else:
+            self.widget.setText('0')
 
 class switch(element):
     def __init__(self, keyBind):

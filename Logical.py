@@ -27,21 +27,21 @@ class simulation():
             keyboard.Key.alt_r
         ]
 
-        # self.mainElement = loadElement(sys.argv[1])
+        self.mainElement, self.mainWidget = loadElement(sys.argv[1])
         input('press enter to continue...')
         self.initUI()
 
         # Start the keyboard listener
-        self.exitHotKey = keyboard.HotKey(
-            keyboard.HotKey.parse('<alt>+<esc>'),
-            self.exit
-        )
+        # self.exitHotKey = keyboard.HotKey(
+        #     keyboard.HotKey.parse('<alt>+<esc>'),
+        #     self.exit
+        # )
+        
         self.keyListener = keyboard.Listener(
             on_press=self.keyPress,
             on_release=self.keyRelease
         )
         self.keyListener.start()
-        
 
     def initUI(self):
         # Activate ANSI escapes because conhost ¯\_(ツ)_/¯
@@ -81,16 +81,14 @@ class simulation():
         if key in self.keyBinds.keys():     # Ironic
             self.keyBinds[key](False)
 
+    def hotKeyExit(self):
+        self.exit()
+
     def main(self):
         while self.runFlag:
             if self.simRunFlag:
-                try:
-                    # self.mainElement.update()
-                    # runFlag = False
-                    pass
-                except Exception as e:
-                    print(e)
-                    time.sleep(2)
+                self.mainElement.update()
+                self.mainWidget.update()
             else:
                 time.sleep(0.1) # Chillax for a split second, saves the CPU
         
