@@ -1,6 +1,6 @@
 import sys, time, os, ctypes
 from pynput import keyboard
-from loading import loadElement
+from loading.loading import loadElement
 from ui import vec2, widget, ansiManager
 import simpleANSI as ANSI
 
