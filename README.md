@@ -8,9 +8,9 @@ The best way to get started is by reading through the docs. They are written in 
 ## To Do
 * ~~Fix tristates and busses~~
 * ~~Improve/fix includes~~
-* Automatic circuit updates
+* ~~Automatic circuit updates~~
 * ~~Documentation~~ Started - needs more actual language work done to continue.
-* ~~Improve the UI~~
+* ~~Improve the UI~~ Started - needs some controls and more outputs.
 * Multiprocessing
 * Multi-PC processing via sockets?
 * Actual command line args with `argparse`
@@ -19,3 +19,4 @@ The best way to get started is by reading through the docs. They are written in 
 ## Release Notes
 * 0.1.0 - Added version tracking
 * 0.2.0 - Fixed includes
+* 0.3.0 - Reworked syntax, started documentation, started the UI overhaul
