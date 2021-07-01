@@ -20,9 +20,31 @@ In this example, `led` is the element, `y` is the input, and `255`, `0`, `0`, `1
 led y & 255 0 0 1 1
 ```
 
-The outputs and arguments are not required by all elements, but the arguments must follow the outputs, which must in turn follow the inputs.
+Inputs, outputs, and arguments are not required by all elements, but the arguments must follow the outputs, which must in turn follow the inputs.
 
 ## Config
-A file may have one or more config entries. These entries tell the interpreter which files to include within the current file, what name to alias them under, what pins the file has, and more. Config entries follow the format of normal entries, except that the element component is prefixed with a dolalr sign (`$`).
+A file may have one or more config entries. These entries tell the interpreter which files to include within the current file, what name to alias them under, what pins the file has, and more. Config entries follow the format of normal entries, except that the element component is prefixed with a dollar sign (`$`).
 
 There are two config statements: `$pins` and `$include`. `$pins` tells the interpreter what pins to attach to the element that file represents and whether they are inputs or outputs.
+
+For `$pins`, list the inputs and outputs just as you would a normal element. In this example `a` and `b` are inputs, while `y` is an output.
+```logical
+$pins a b > y
+```
+
+For `$include`, give the path to the file (relative to the current file) as the input and the name to include it under as the output. This example includes the file `halfAdder.lgc` and give it the name `hAdder`.
+```logical
+$include halfAdder.lgc > hAdder
+```
+
+## Comments
+Anything to the right of the comment separator (`//`) is completely ignored by the interpreter. This includes any entries there.
+```logical
+and a b > y     // This is a comment
+```
+
+## Readability
+Personally, I prefer camelCase for a naming scheme. However, I cannot make rules on how you write your code. Write it how you feel it is the most readable. If it works it works.
+
+## Truth Tables
+Not implemented... yet.
