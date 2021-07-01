@@ -173,7 +173,8 @@ class bus(element):
 class led(element):
     def __init__(self, colorR, colorG, colorB, posX, posY):
         element.__init__(self)
-        self.color = (int(colorR), int(colorG), int(colorB))
+        self.litColor = (int(colorR), int(colorG), int(colorB))
+        self.dimColor = (int(self.litColor[0] / 2), int(self.litColor[1] / 2), int(self.litColor[2] / 2))
         self.pos = vec2(int(posX), int(posY))
         self.addInput(pin('a'))
 
@@ -181,17 +182,33 @@ class led(element):
         self.widget.resize(vec2(1,1))
         self.widget.moveTo(self.pos)
         self.widget.setMode(widget.textMode)
-        self.widget.setFGColor(self.color)
+        self.widget.setText(' ')
+        self.widget.setBGColor(self.dimColor)
 
     def update(self):
         element.update(self)
         if self.inputs['a'].value:
-            self.widget.setText('1')
+            self.widget.setBGColor(self.litColor)
         else:
-            self.widget.setText('0')
+            self.widget.setBGColor(self.dimColor)
+
+class button(element):
+    def __init__(self, keyBind):
+        element.__init__(self)
+        self.keyBinds = {keyBind: self.keyEvent}
+        self.addOutput(pin('y'))
+
+    def keyEvent(self, state):
+        if state:
+            self.outputs['y'].set(1)
+        else:
+            self.outputs['y'].set(0)
 
 class switch(element):
     def __init__(self, keyBind):
         element.__init__(self)
-        self.keyBind = keyBind
+        self.keyBinds = {keyBind: self.keyEvent}
         self.addOutput(pin('y'))
+
+    def keyEvent(self, state):
+        self.outputs['y'].set(1 - self.outputs['y'].value)  # Invert the value

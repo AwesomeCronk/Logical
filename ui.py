@@ -55,7 +55,7 @@ class widget():
         self.parent = None
         self.size = vec2(10,1)
         self.pos = vec2(0,0)
-        self.mode = self.containerMode
+        self.mode = self.textMode
         self.wrapping = 0
         self.fgColor = (255, 255, 255)
         self.bgColor = (0, 0, 0)
@@ -65,8 +65,11 @@ class widget():
         # print(self.size[0])
         
     def update(self):
-        # Parent check and cursor homing
-        # print(ansi.cursor.home(), end = '')
+        # Parent check and cursor homing (to prevent colored bars at the bottom of the console)
+        if self.parent is None:
+            print(ansi.cursor.moveTo(*(self.pos + self.consolePosOffset)))
+        elif isinstance(self.parent, widget):
+            print(ansi.cursor.moveTo(*(self.pos + self.parent.pos + self.consolePosOffset)))
         
         print(ansi.graphics.setGraphicsMode(
             ansi.graphics.fgColor,
@@ -104,7 +107,7 @@ class widget():
             for i in range(self.size[1]):
                 if self.parent is None:
                     newPos = self.pos + self.consolePosOffset + vec2(0, i)
-                elif self.parent is widget:
+                elif isinstance(self.parent, widget):
                     newPos = self.pos + self.parent.pos + self.consolePosOffset + vec2(0, i)
                 print(ansi.cursor.moveTo(*newPos), end = '')
                 try:

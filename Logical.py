@@ -3,10 +3,11 @@ from pynput import keyboard
 from loading.loading import loadElement
 from ui import vec2, widget, ansiManager
 import simpleANSI as ANSI
+import pdb
 
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
 
-version = '0.3.0'
+version = '0.3.1'
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
 platform = 'win32'
@@ -30,6 +31,7 @@ class simulation():
         self.mainElement, self.mainWidget = loadElement(sys.argv[1])
         input('press enter to continue...')
         self.initUI()
+        # pdb.set_trace()
 
         # Start the keyboard listener
         # self.exitHotKey = keyboard.HotKey(
@@ -50,36 +52,45 @@ class simulation():
         print(ANSI.clear.entireScreen(), end = '')
 
         self.title = widget()
-        self.title.resize(vec2(terminalSize[0],1))
-        self.title.moveTo(vec2(1,1))
+        self.title.resize(vec2(terminalSize[0], 1))
+        self.title.moveTo(vec2(0, 0))
         self.title.setText('Logical {} (Python {} on {} {})'.format(version, pythonVersion, architecture, platform))
-        self.title.update()
+        self.mainWidget.addWidget(self.title)
+
+        self.keyListenerDebug = widget()
+        self.keyListenerDebug.resize(vec2(terminalSize[0], 1))
+        self.keyListenerDebug.moveTo(vec2(0, 2))
+        self.keyListenerDebug.setText('debug point for keyboard listener')
+        self.mainWidget.addWidget(self.keyListenerDebug)
 
     def keyPress(self, key):
         # If this console is not the active window then return
         if user32.GetForegroundWindow() != kernel32.GetConsoleWindow():
             return
         
-        print(key)
+        # self.keyListenerDebug.setText(str(key))
+        self.keyListenerDebug.setText(str(self.keyBinds.keys()))
 
         # Backspace to toggle simulation
         if key == keyboard.Key.backspace:
             self.simRunFlag = not self.simRunFlag
-            print(self.simRunFlag)
+            # print(self.simRunFlag)
 
         # Escape to exit
-        if key == keyboard.Key.esc:
+        elif key == keyboard.Key.esc:
             self.runFlag = False
             return False
 
         # Set the appropriate keybinds
-        if key in self.keyBinds.keys():     # Ironic
-            self.keyBinds[key](True)
+        elif str(key) in self.keyBinds.keys():
+            for f in self.keyBinds[key]:
+                f(True)
 
     def keyRelease(self, key):
         # Set the appropriate keybinds
-        if key in self.keyBinds.keys():     # Ironic
-            self.keyBinds[key](False)
+        if str(key) in self.keyBinds.keys():
+            for f in self.keyBinds[key]:
+                f(False)
 
     def hotKeyExit(self):
         self.exit()

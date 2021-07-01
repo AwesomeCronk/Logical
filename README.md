@@ -20,3 +20,4 @@ The best way to get started is by reading through the docs. They are written in 
 * 0.1.0 - Added version tracking
 * 0.2.0 - Fixed includes
 * 0.3.0 - Reworked syntax, started documentation, started the UI overhaul
+* 0.3.1 - Added missing controls, fixed elements not connecting, fixed some ANSI bugs

@@ -3,6 +3,7 @@ from logic.logicCore import element, pin
 from logic.logicElements import *
 from ui import *
 from loading.parsing import parseCommands
+import pdb
 
 # Function to load a truth table from parsed .lgc source code.
 def loadTable(filePath):
@@ -65,6 +66,7 @@ def loadElement(filePath, cwd = None):
     needsConnected = {}
     registeredElements = {} # Sort by name: filepath
     busses = {}
+    keyBinds = {}
 
     # Main element setup
     mainElement = element()
@@ -94,43 +96,43 @@ def loadElement(filePath, cwd = None):
         # Basic gates
         elif comm.element == 'and':
             newElement = andGate()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'or':
             newElement = orGate()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'xor':
             newElement = xorGate()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'not':
             newElement = notGate()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'nand':
             newElement = nandGate()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'nor':
             newElement = norGate()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'xnor':
             newElement = xnorGate()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
@@ -142,7 +144,7 @@ def loadElement(filePath, cwd = None):
 
         elif comm.element == 'bus':
             newElement = bus()
-            newElement.outputs['y'].rename(comm.outputs[0])
+            newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             busses.update({comm.inputs[0]: newElement})
 
@@ -152,6 +154,14 @@ def loadElement(filePath, cwd = None):
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
             needsConnected.update({newElement: comm.inputs})
+
+        elif comm.element == 'button':
+            newElement = button(*comm.args)
+            newElement.outputs['y'].realias(comm.outputs[0])
+            mainElement.addElement(newElement)
+            for k in newElement.keyBinds.keys():
+                if k in keyBinds.keys():
+                    keyBinds[k].append(newElement.keyBinds[k])
 
         elif comm.element in registeredElements.keys():
             newElement = loadElement(registeredElements[comm.element], cwd = cwd)
@@ -179,13 +189,14 @@ def loadElement(filePath, cwd = None):
     for e in needsConnected.keys():
         if isinstance(e, pin):
             targetName = needsConnected[e]
-            a = mainElement.internalPins[targetName]
+            a = mainElement.aliasInternalPins[targetName]
             e.connect(a)
         else:
             print('connecting {}'.format(needsConnected[e]))
             ctr = 0
             for i in e.inputs.keys():
-                e.inputs[i].connect(mainElement.internalPins[needsConnected[e][ctr]])
+                # pdb.set_trace()
+                e.inputs[i].connect(mainElement.aliasInternalPins[needsConnected[e][ctr]])
                 ctr += 1
             #print(e.inputs['a'].target)
             #print(e.inputs['e'].target)

@@ -1,1 +1,2 @@
-led \high & 255 0 0 1 1
+button > data & k
+led data & 255 0 0 20 10
