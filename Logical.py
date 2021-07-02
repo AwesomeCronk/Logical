@@ -1,5 +1,5 @@
 import sys, time, os, ctypes
-from pynput import keyboard
+from pynput import keyboard     # MUST USE pynput 1.6.8!!
 from loading.loading import loadElement
 from ui import vec2, widget, ansiManager
 import simpleANSI as ANSI
@@ -7,7 +7,7 @@ import pdb
 
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
 
-version = '0.3.1'
+version = '0.3.2'
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
 platform = 'win32'

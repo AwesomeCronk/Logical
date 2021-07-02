@@ -21,3 +21,4 @@ The best way to get started is by reading through the docs. They are written in 
 * 0.2.0 - Fixed includes
 * 0.3.0 - Reworked syntax, started documentation, started the UI overhaul
 * 0.3.1 - Added missing controls, fixed elements not connecting, fixed some ANSI bugs
+* 0.3.2 - Fixed the issue with PyInstaller by rolling pynput back to version 1.6.8
