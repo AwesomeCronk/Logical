@@ -15,10 +15,19 @@ terminalSize = vec2(*os.get_terminal_size())
 user32 = ctypes.windll.user32
 kernel32 = ctypes.windll.kernel32
 
+class keyBoardListenerManager():
+    def __init__(self, simulation):
+        self.simulation = simulation
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, *args):
+        self.simulation.simRunFlag = False
+        self.simulation.runFlag = False
+
 class simulation():
     def __init__(self):
-        self.keyBinds = {}  # Dict of functions, called with True when pressed
-                            # and False when released
         self.runFlag = True
         self.simRunFlag = True
         self.altHeld = False
@@ -60,36 +69,43 @@ class simulation():
         self.keyListenerDebug = widget()
         self.keyListenerDebug.resize(vec2(terminalSize[0], 1))
         self.keyListenerDebug.moveTo(vec2(0, 2))
-        self.keyListenerDebug.setText('debug point for keyboard listener')
         self.mainWidget.addWidget(self.keyListenerDebug)
 
     def keyPress(self, key):
-        # If this console is not the active window then return
-        if user32.GetForegroundWindow() != kernel32.GetConsoleWindow():
-            return
-        
-        # self.keyListenerDebug.setText(str(key))
-        self.keyListenerDebug.setText(str(self.keyBinds.keys()))
+        with keyBoardListenerManager(self):     # Prevent hanging threads
+            # If this console is not the active window then return
+            if user32.GetForegroundWindow() != kernel32.GetConsoleWindow():
+                return
+            
+            # self.keyListenerDebug.setText(str(key))
+            self.keyListenerDebug.setText(str(key) + ' - ' + str(self.mainElement.keyBinds))
 
-        # Backspace to toggle simulation
-        if key == keyboard.Key.backspace:
-            self.simRunFlag = not self.simRunFlag
-            # print(self.simRunFlag)
+            # Backspace to toggle simulation
+            if key == keyboard.Key.backspace:
+                self.keyListenerDebug.setText('backspace pressed                  ')
+                self.simRunFlag = not self.simRunFlag
+                # print(self.simRunFlag)
 
-        # Escape to exit
-        elif key == keyboard.Key.esc:
-            self.runFlag = False
-            return False
+            # Escape to exit
+            elif key == keyboard.Key.esc:
+                self.keyListenerDebug.setText('escape pressed                     ')
+                self.mainWidget.update()    # One last update to see if it died right
+                self.runFlag = False
+                return False
 
-        # Set the appropriate keybinds
-        elif str(key) in self.keyBinds.keys():
-            for f in self.keyBinds[key]:
-                f(True)
+            # Set the appropriate keybinds
+            elif str(key) in self.mainElement.keyBinds.keys():
+                self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
+                for f in self.mainElement.keyBinds[str(key)]:
+                    f(True)
+
+            else:
+                self.keyListenerDebug.setText('{} not found in {}'.format(repr(key), repr(self.mainElement.keyBinds)))
 
     def keyRelease(self, key):
         # Set the appropriate keybinds
-        if str(key) in self.keyBinds.keys():
-            for f in self.keyBinds[key]:
+        if str(key) in self.mainElement.keyBinds.keys():
+            for f in self.mainElement.keyBinds[key]:
                 f(False)
 
     def hotKeyExit(self):
@@ -101,6 +117,7 @@ class simulation():
                 self.mainElement.update()
                 self.mainWidget.update()
             else:
+                self.mainWidget.update()
                 time.sleep(0.1) # Chillax for a split second, saves the CPU
         
         self.keyListener.join()

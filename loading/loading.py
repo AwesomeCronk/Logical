@@ -148,20 +148,19 @@ def loadElement(filePath, cwd = None):
             mainElement.addElement(newElement)
             busses.update({comm.inputs[0]: newElement})
 
-        # Control elements
+        # UI elements
         elif comm.element == 'led':
             newElement = led(*comm.args)
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
             needsConnected.update({newElement: comm.inputs})
 
+        # Control elements
         elif comm.element == 'button':
             newElement = button(*comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
-            for k in newElement.keyBinds.keys():
-                if k in keyBinds.keys():
-                    keyBinds[k].append(newElement.keyBinds[k])
+            mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
             newElement = loadElement(registeredElements[comm.element], cwd = cwd)
@@ -181,6 +180,8 @@ def loadElement(filePath, cwd = None):
             for i in range(len(newElement.inputs)):
                 pins.append(comm.inputs[i])
             needsConnected.update({newElement: pins})
+
+            mainElement.addKeyBinds(newElement.keyBinds)
 
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))

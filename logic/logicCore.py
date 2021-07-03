@@ -54,6 +54,17 @@ class element():    # Basic element class
             self.aliasInternalPins.update({o.alias: o})
         return self.elements.index(newElement)  # Return the index of the new element in self.elements
 
+    def addKeyBinds(self, keyBinds):
+        # Basically this function takes a dict of lists, iterates through the dict keys,
+        # and ensures that self.keyBinds has each function in its list for that dict key.
+        for key in keyBinds.keys():
+            if key in self.keyBinds.keys():
+                for f in keyBinds[key]:
+                    if not f in self.keyBinds[key]:
+                        self.keyBinds[key].append(f)
+            else:
+                self.keyBinds[key] = keyBinds[key]
+
     def update(self):
         for i in self.inputs.values():
             i.update()
