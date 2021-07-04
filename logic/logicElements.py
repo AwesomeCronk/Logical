@@ -195,7 +195,7 @@ class led(element):
 class button(element):
     def __init__(self, keyBind):
         element.__init__(self)
-        self.keyBinds = {keyBind: self.keyEvent}
+        self.keyBinds = {keyBind: [self.keyEvent]}
         self.addOutput(pin('y'))
 
     def keyEvent(self, state):
@@ -207,7 +207,7 @@ class button(element):
 class switch(element):
     def __init__(self, keyBind):
         element.__init__(self)
-        self.keyBinds = {keyBind: self.keyEvent}
+        self.keyBinds = {keyBind: [self.keyEvent]}
         self.addOutput(pin('y'))
 
     def keyEvent(self, state):
