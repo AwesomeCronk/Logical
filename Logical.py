@@ -7,7 +7,7 @@ import pdb
 
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
 
-version = '0.3.2'
+version = '0.3.3'
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
 platform = 'win32'
@@ -23,8 +23,10 @@ class keyBoardListenerManager():
         pass
 
     def __exit__(self, *args):
-        self.simulation.simRunFlag = False
-        self.simulation.runFlag = False
+        # Take action only if there was an exception
+        if not args[0] is None:
+            self.simulation.simRunFlag = False
+            self.simulation.runFlag = False
 
 class simulation():
     def __init__(self):
@@ -103,10 +105,11 @@ class simulation():
                 self.keyListenerDebug.setText('{} not found in {}'.format(repr(key), repr(self.mainElement.keyBinds)))
 
     def keyRelease(self, key):
-        # Set the appropriate keybinds
-        if str(key) in self.mainElement.keyBinds.keys():
-            for f in self.mainElement.keyBinds[key]:
-                f(False)
+        with keyBoardListenerManager(self):
+            # Set the appropriate keybinds
+            if str(key) in self.mainElement.keyBinds.keys():
+                for f in self.mainElement.keyBinds[str(key)]:
+                    f(False)
 
     def hotKeyExit(self):
         self.exit()

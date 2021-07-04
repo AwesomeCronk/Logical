@@ -1,7 +1,7 @@
 import os, shutil, sys
 
 applicationName = 'Logical'
-installerVersion = '1.1.1'
+installerVersion = '1.2.0'
 downloadDir = os.path.dirname(os.path.realpath(__file__))
 
 class directory():
@@ -18,7 +18,7 @@ class directory():
 directories = {
     'install': directory(
         os.path.expandvars('%USERPROFILE%\\AppData\\Local\\Programs\\Logical'),
-        ['LICENSE', 'README.md', 'Logical.exe', 'install.exe'],
+        ['LICENSE', 'README.md', 'Logical.exe', 'keys.exe', 'install.exe'],
         True
         )
     }
