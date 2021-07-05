@@ -1,12 +1,13 @@
-$include halfAdder halfAdder.lgc
+$include halfAdder.ttb > hAdder
 
-in a
-in b
-in cIn
+button > inA & 'a'
+button > inB & 's'
+button > inC & 'd'
 
-halfAdder a b c1 y1
-halfAdder cIn y1 c2 y2
-or c1 c2 c3
+hAdder inA inB > c0 y0
+hAdder inC y0 > c1 sumOut
 
-out c3 cOut
-out y2 y
+or c0 c1 > carryOut
+
+led carryOut & 255 0 0   10 10
+led sumOut & 255 0 0   11 10

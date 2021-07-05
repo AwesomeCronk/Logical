@@ -7,7 +7,7 @@ import pdb
 
 # Function to load a truth table from parsed .lgc source code.
 def loadTable(filePath):
-    raise NotImplementedError('Truth table are not yet implemented for the updated version of Logical.')
+    print('Loading truth table...\nfilePath: {}'.format(filePath))
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
     #print('commands:')
@@ -17,32 +17,35 @@ def loadTable(filePath):
     readingTable = False
 
     for comm in commands:
-        if comm.listing[0] == 'in':
-            table.addInput(pin(comm.listing[1]))
-            
-        elif comm.listing[0] == 'out':
-            table.addOutput(pin(comm.listing[1]))
+        print(comm.info(), end = '\n\n')
+        if comm.element == '$pins':
+            for i in comm.inputs:
+                table.addInput(pin(i))
+            for o in comm.outputs:
+                table.addOutput(pin(o))
+        
+        elif comm.element == 'match':
+            try:
+                for i in comm.inputs:
+                    assert int(i) in [0, 1]
+                for o in comm.inputs:
+                    assert int(o) in [0, 1]
+            except:
+                raise Exception('Truth table matches must be 0 or 1.')
 
-        elif comm.listing[0] == 'beginTable':
-            readingTable = True
-
-        elif comm.listing[0] == 'endTable':
-            readingTable = False
+            if len(comm.inputs) == len(table.inputs) and len(comm.outputs) == len(table.outputs):
+                inputs = [int(i) for i in comm.inputs]
+                outputs = [int(o) for o in comm.outputs]
+                print('Adding match for {} and {}'.format(tuple(inputs), tuple(outputs)))
+                table.addMatch(tuple(inputs), tuple(outputs))
+            else:
+                raise Exception('Truth table matches must have same number of inputs and outputs as $pins declarations')
 
         else:
-            if readingTable:
-                match = comm.listing[0:len(table.inputs)]
-                for m in range(len(match)):
-                    match[m] = int(match[m])
-                match = tuple(match)
-                result = comm.listing[len(table.inputs):]
-                for r in range(len(result)):
-                    result[r] = int(result[r])
-                result = tuple(result)
-                table.append(match, result)
-            else:
-                raise Exception('Command {} not recognized'.format(comm.text))
-    return table
+            raise Exception('Command {} not recognized.'.format(comm.text))
+
+    print('Finished loading truth table.')
+    return table, None  # No widget for truth tables
 
 # Function to load an element from parsed .ttb source and return that element. cwd is used internally.
 def loadElement(filePath, cwd = None):
@@ -180,7 +183,8 @@ def loadElement(filePath, cwd = None):
                 commandOffset += 1
                 
             mainElement.addElement(newElement)  # Add newElement to mainElement
-            mainWidget.addWidget(newWidget)     # Add newWidget to mainWidget
+            if not newWidget is None:
+                mainWidget.addWidget(newWidget)     # Add newWidget to mainWidget
             
             # Add inputs to needsConnected
             pins = []

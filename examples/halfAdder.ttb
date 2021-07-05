@@ -1,0 +1,6 @@
+$pins a b > c y
+
+match 0 0 > 0 0
+match 0 1 > 0 1
+match 1 0 > 0 1
+match 1 1 > 1 0

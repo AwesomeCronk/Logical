@@ -121,17 +121,17 @@ class truthTable(element):
         element.__init__(self)
         self.table = {}
 
-    def append(self, match, result):     #match and result should be tuples
+    def addMatch(self, match, result):     # match and result should be tuples
         self.table.update({match: result})
 
     def update(self):
         element.update(self)
         match = []
-        for i in range(len(self.inputs)):       #Get value of each pin and append it to the match dict
+        for i in range(len(self.inputs)):       # Get value of each pin and append it to the match dict
             match.append(list(self.inputs.values())[i].value)
-        match = tuple(match)
-        result = self.table[match]      #Get match as tuple so that it can be used as a dict index
-        for o in range(len(result)):
+        match = tuple(match)        # Get match as tuple so that it can be used as a dict index
+        result = self.table[match]
+        for o in range(len(self.outputs)):
             list(self.outputs.values())[o].set(result[o])
 
 class tristate(element):
