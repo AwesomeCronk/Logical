@@ -47,7 +47,7 @@ def loadTable(filePath):
 # Function to load an element from parsed .ttb source and return that element. cwd is used internally.
 def loadElement(filePath, cwd = None):
     # Some shenanigans to get the paths right
-    print('New Element\nold filePath: {}\nold cwd: {}'.format(filePath, cwd))
+    print('Loading element...\nold filePath: {}\nold cwd: {}'.format(filePath, cwd))
     if cwd is None:
         filePath = os.path.abspath(filePath)
     else:
@@ -70,9 +70,15 @@ def loadElement(filePath, cwd = None):
 
     # Main element setup
     mainElement = element()
-    mainElement.addInput(pin('\\high'))
+
+    highPin = pin('\\high')
+    mainElement.internalPins.update({highPin.name: highPin})
+    mainElement.aliasInternalPins.update({highPin.alias: highPin})
     mainElement.internalPins['\\high'].set(1)
-    mainElement.addInput(pin('\\low'))
+
+    lowPin = pin('\\low')
+    mainElement.internalPins.update({lowPin.name: lowPin})
+    mainElement.aliasInternalPins.update({lowPin.alias: lowPin})
     mainElement.internalPins['\\low'].set(0)
 
     # Main widget setup
@@ -80,6 +86,7 @@ def loadElement(filePath, cwd = None):
     mainWidget.setMode(widget.containerMode)
 
     for comm in commands:
+        print(comm.info(), end = '\n\n')
         # Element config
         if comm.element == '$include':
             # Add a note of where to find this element that has been included
@@ -163,21 +170,23 @@ def loadElement(filePath, cwd = None):
             mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
-            newElement = loadElement(registeredElements[comm.element], cwd = cwd)
+            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd)
 
             # Rename the outputs to the names specified in the .lgc script
             commandOffset = 0
             oldNames = list(newElement.outputs.keys())
             for o in oldNames:
-                newElement.outputs[o].rename(comm.outputs[commandOffset])
+                newElement.outputs[o].realias(comm.outputs[commandOffset])
                 commandOffset += 1
                 
-            # Add newElement to mainElement
-            mainElement.addElement(newElement)
+            mainElement.addElement(newElement)  # Add newElement to mainElement
+            mainWidget.addWidget(newWidget)     # Add newWidget to mainWidget
             
             # Add inputs to needsConnected
             pins = []
+            print(newElement.inputs)
             for i in range(len(newElement.inputs)):
+                print(i)
                 pins.append(comm.inputs[i])
             needsConnected.update({newElement: pins})
 
@@ -187,15 +196,16 @@ def loadElement(filePath, cwd = None):
             raise Exception('Command {} not recognized.'.format(comm.text))
 
     # needsConnected is a dict of {element: targetNames} or {pin: targetName}
+    print('Establishing connections.')
     for e in needsConnected.keys():
+        print('connecting {} to {}'.format(e, needsConnected[e]))
         if isinstance(e, pin):
             targetName = needsConnected[e]
             a = mainElement.aliasInternalPins[targetName]
             e.connect(a)
         else:
-            print('connecting {}'.format(needsConnected[e]))
             ctr = 0
-            for i in e.inputs.keys():
+            for i in list(e.inputs.keys()):
                 # pdb.set_trace()
                 e.inputs[i].connect(mainElement.aliasInternalPins[needsConnected[e][ctr]])
                 ctr += 1
@@ -203,4 +213,6 @@ def loadElement(filePath, cwd = None):
             #print(e.inputs['e'].target)
             if isinstance(e, tristate):
                 busses[needsConnected[e][ctr]].addTristate(e)
+
+    print('Element loaded. Returning.')
     return mainElement, mainWidget
