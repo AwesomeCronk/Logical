@@ -5,7 +5,7 @@ from ui import *
 from loading.parsing import parseCommands
 import pdb
 
-# Function to load a truth table from parsed .lgc source code.
+# Function to load a truth table from parsed .lgc source code
 def loadTable(filePath):
     print('Loading truth table...\nfilePath: {}'.format(filePath))
     with open(filePath, 'r') as file:
@@ -44,11 +44,38 @@ def loadTable(filePath):
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))
 
-    print('Finished loading truth table.')
+    print('Truth table loaded.')
     return table, None  # No widget for truth tables
 
-# Function to load an element from parsed .ttb source and return that element. cwd is used internally.
-def loadElement(filePath, cwd = None):
+# Function to load an elemen from Python source
+def loadPyElement(filePath, args = []):
+    print('Loading Python element...\n filePath: {}'.format(filePath))
+
+    globalVars = {
+        'element': element,
+        'pin': pin,
+        'widget': widget,
+        'vec2': vec2
+    }
+    localVars = {}
+    with open(filePath, 'r') as file:
+        exec(file.read(), globalVars, localVars)
+    
+    if 'pyElement' in localVars.keys():
+        pyElement = localVars['pyElement']
+        pyElement = pyElement(*args)
+        try:
+            pyWidget = pyElement.widget
+        except AttributeError:
+            pyWidget = None
+    else:
+        raise Exception('Python file contained no class named "pyElement".')
+
+    print('Python element loaded.')
+    return pyElement, pyWidget
+
+# Function to load an element from parsed .ttb source and return that element. cwd is used internally
+def loadElement(filePath, cwd = None, args = []):
     # Some shenanigans to get the paths right
     print('Loading element...\nold filePath: {}\nold cwd: {}'.format(filePath, cwd))
     if cwd is None:
@@ -59,9 +86,11 @@ def loadElement(filePath, cwd = None):
     #print('=====loading element from {}====='.format(filePath))
     print('new filePath: {}\nnew cwd: {}\n'.format(filePath, cwd))
 
-    # Load as truth table if .ttb file
-    if filePath.split('.')[-1] == 'ttb':
+    if filePath.split('.')[-1] == 'ttb':    # Load as truth table if .ttb file
         return loadTable(filePath)
+    elif filePath.split('.')[-1] == 'py':   # Load as Python element if .py file
+        return loadPyElement(filePath, args = args)
+
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
 
@@ -173,7 +202,7 @@ def loadElement(filePath, cwd = None):
             mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
-            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd)
+            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args)
 
             # Rename the outputs to the names specified in the .lgc script
             commandOffset = 0
@@ -218,5 +247,5 @@ def loadElement(filePath, cwd = None):
             if isinstance(e, tristate):
                 busses[needsConnected[e][ctr]].addTristate(e)
 
-    print('Element loaded. Returning.')
+    print('Element loaded.')
     return mainElement, mainWidget
