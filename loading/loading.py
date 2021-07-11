@@ -47,7 +47,7 @@ def loadTable(filePath):
     print('Truth table loaded.')
     return table, None  # No widget for truth tables
 
-# Function to load an elemen from Python source
+# Function to load an element from Python source
 def loadPyElement(filePath, args = []):
     print('Loading Python element...\n filePath: {}'.format(filePath))
 

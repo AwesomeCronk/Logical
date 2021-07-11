@@ -15,6 +15,7 @@ The best way to get started is by reading through the docs. They are written in 
 * Multi-PC processing via sockets?
 * Actual command line args with `argparse`
 * Error logging with `logging`
+* Error handling
 
 ## Release Notes
 * 0.1.0 - Added version tracking

@@ -45,6 +45,3 @@ and a b > y     // This is a comment
 
 ## Readability
 Personally, I prefer camelCase for a naming scheme. However, I cannot make rules on how you write your code. Write it how you feel it is the most readable. If it works it works.
-
-## Truth Tables
-Not implemented... yet.
