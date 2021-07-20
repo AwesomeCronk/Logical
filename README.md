@@ -27,3 +27,4 @@ The best way to get started is by reading through the docs. They are written in 
 * 0.3.4 - Fixed included elements not connecting properly
 * 0.4.0 - Added truth tables
 * 0.5.0 - Added Python elements
+* 0.5.1 - Added a check for input, output, and arg count.

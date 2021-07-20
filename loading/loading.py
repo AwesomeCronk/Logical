@@ -1,13 +1,13 @@
 import os
-from logic.logicCore import element, pin
-from logic.logicElements import *
+from logic.core import element, pin
+from logic.elements import *
 from ui import *
 from loading.parsing import parseCommands
 import pdb
 
-# Function to load a truth table from parsed .lgc source code
+# Load a truth table from parsed .lgc source code
 def loadTable(filePath):
-    print('Loading truth table...\nfilePath: {}'.format(filePath))
+    print('Loading as truth table...')
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
     #print('commands:')
@@ -47,9 +47,9 @@ def loadTable(filePath):
     print('Truth table loaded.')
     return table, None  # No widget for truth tables
 
-# Function to load an element from Python source
+# Load an element from Python source
 def loadPyElement(filePath, args = []):
-    print('Loading Python element...\n filePath: {}'.format(filePath))
+    print('Loading as Python element...')
 
     globalVars = {
         'element': element,
@@ -59,7 +59,7 @@ def loadPyElement(filePath, args = []):
     }
     localVars = {}
     with open(filePath, 'r') as file:
-        exec(file.read(), globalVars, localVars)
+        exec(compile(file.read(), filePath, 'exec'), globalVars, localVars)
     
     if 'pyElement' in localVars.keys():
         pyElement = localVars['pyElement']
@@ -74,7 +74,7 @@ def loadPyElement(filePath, args = []):
     print('Python element loaded.')
     return pyElement, pyWidget
 
-# Function to load an element from parsed .ttb source and return that element. cwd is used internally
+# Load an element from parsed .ttb source and return that element
 def loadElement(filePath, cwd = None, args = []):
     # Some shenanigans to get the paths right
     print('Loading element...\nold filePath: {}\nold cwd: {}'.format(filePath, cwd))
@@ -216,6 +216,12 @@ def loadElement(filePath, cwd = None, args = []):
                 mainWidget.addWidget(newWidget)     # Add newWidget to mainWidget
             
             # Add inputs to needsConnected
+            if not len(newElement.inputs) == len(comm.inputs):
+                raise Exception('Invalid number of inputs: {}'.format(len(comm.inputs)))
+            if not len(newElement.outputs) == len(comm.outputs):
+                raise Exception('Invalid number of outputs: {}'.format(len(comm.outputs)))
+            if not len(newElement.args) == len(comm.args):
+                raise Exception('Invalid number of args: {}'.format(len(comm.args)))
             pins = []
             print(newElement.inputs)
             for i in range(len(newElement.inputs)):

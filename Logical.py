@@ -7,7 +7,7 @@ import pdb
 
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
 
-version = '0.5.0'
+version = '0.5.1'
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
 platform = 'win32'

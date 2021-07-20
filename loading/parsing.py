@@ -63,7 +63,7 @@ def parseCommands(lines):
             
             # Split at the argument separator and subsequently at spaces
             if other.count(argumentSequence) > 1:
-                raise ParseError('only one instance of "{}" per entry allowed.'.format(argumentSequence))
+                raise ParseError('Only one instance of "{}" per entry allowed.'.format(argumentSequence))
             
             if other.count(argumentSequence) == 1:
                 other, args = other.split(argumentSequence)
@@ -75,7 +75,7 @@ def parseCommands(lines):
             # Split at the pin separator and subsequently at spaces
             # inputs and outputs should both be lists of strings
             if other.count(pinSeparatorSequence) > 1:
-                raise ParseError('only one instance of "{}" per entry allowed.'.format(pinSeparatorSequence))
+                raise ParseError('Only one instance of "{}" per entry allowed.'.format(pinSeparatorSequence))
             
             elif other.count(pinSeparatorSequence) == 1:
                 inputs, outputs = [o.split(' ') for o in other.split(pinSeparatorSequence)]

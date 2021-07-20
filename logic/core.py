@@ -31,6 +31,7 @@ class element():    # Basic element class
         self.aliasOutputs = {}  # dict of outputs by {alias: pin}
         self.internalPins = {}  # dict of internal pins by {name: pin} for ease of connecting elements
         self.aliasInternalPins = {} # dict of internal pins by {alias: pin} for ease of connecting elements
+        self.args = []          # list of arguments
         self.elements = []      # list of elements in this element
         self.keyBinds = {}      # dict of key bindings by {key: [function, function]}
 

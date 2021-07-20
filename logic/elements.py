@@ -1,4 +1,4 @@
-from logic.logicCore import element, pin
+from logic.core import element, pin
 from ui import widget, vec2
 
 # Error raised by bus elements
