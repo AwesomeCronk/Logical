@@ -1,0 +1,78 @@
+[2021-07-20T21:10:49.799981 1420 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) base_dir = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) cache_dir_levels = 2
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) compiler = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) compiler_check = mtime
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) compression = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) compression_level = 6
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) cpp_extension = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) debug = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) depend_mode = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) direct_mode = true
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) disable = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) extra_files_to_hash = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) hard_link = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) hash_dir = true
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) keep_comments_cpp = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) limit_multiple = 0.8
+[2021-07-20T21:10:49.799981 1420 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\Logical.onefile-build\ccache-11604.txt
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) max_files = 0
+[2021-07-20T21:10:49.799981 1420 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) path = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) pch_external_checksum = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) prefix_command = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) prefix_command_cpp = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) read_only = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) read_only_direct = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) recache = false
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) run_second_cpp = true
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) sloppiness = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) stats = true
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) temporary_dir = 
+[2021-07-20T21:10:49.799981 1420 ] Config: (default) umask = 
+[2021-07-20T21:10:49.799981 1420 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\OnefileBootstrap.o -c -std=c11 -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\inline_copy\zstd static_src\OnefileBootstrap.c
+[2021-07-20T21:10:49.799981 1420 ] Hostname: COMPUTERTRON760
+[2021-07-20T21:10:49.799981 1420 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\Logical.onefile-build
+[2021-07-20T21:10:49.799981 1420 ] Source file: static_src\OnefileBootstrap.c
+[2021-07-20T21:10:49.799981 1420 ] Object file: static_src\OnefileBootstrap.o
+[2021-07-20T21:10:49.799981 1420 ] Trying direct lookup
+[2021-07-20T21:10:49.799981 1420 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/9/3a084627b8236886030e31b9ff2878-22291.manifest
+[2021-07-20T21:10:49.799981 1420 ] No such manifest file
+[2021-07-20T21:10:49.799981 1420 ] Did not find object file hash in manifest
+[2021-07-20T21:10:49.799981 1420 ] Running preprocessor
+[2021-07-20T21:10:50.713475 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.713475 1420 ] Disabling direct mode
+[2021-07-20T21:10:50.713475 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.713475 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.716468 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.716468 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.717468 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.720468 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.724499 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.725470 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.727499 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:50.727499 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.013535 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.013535 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019539 1420 ] Include file ./onefile_definitions.h too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.019617 1420 ] Include file static_src\\OnefileBootstrap.c too new
+[2021-07-20T21:10:51.024622 1420 ] Got object file hash from preprocessor
+[2021-07-20T21:10:51.024622 1420 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/0/f85a85ceb79b89fc94d6bd864eec54-4237260.o to static_src\OnefileBootstrap.o (uncompressed)
+[2021-07-20T21:10:51.024622 1420 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/0/f85a85ceb79b89fc94d6bd864eec54-4237260.o -> static_src\OnefileBootstrap.o
+[2021-07-20T21:10:51.024622 1420 ] Succeeded getting cached result
+[2021-07-20T21:10:51.024622 1420 ] Result: cache hit (preprocessed)
+[2021-07-20T21:10:51.024622 1420 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/stats.lock
+[2021-07-20T21:10:51.024622 1420 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/stats.lock
