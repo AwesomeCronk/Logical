@@ -1,0 +1,632 @@
+[2021-07-28T14:44:47.730455 3600 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) base_dir = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) compiler = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) compression = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) debug = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) disable = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) hard_link = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.730455 3600 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) max_files = 0
+[2021-07-28T14:44:47.730455 3600 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) path = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) read_only = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) recache = false
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) stats = true
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.730455 3600 ] Config: (default) umask = 
+[2021-07-28T14:44:47.730455 3600 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o __constants.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src __constants.c
+[2021-07-28T14:44:47.730455 3600 ] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.730455 3600 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.730455 3600 ] Source file: __constants.c
+[2021-07-28T14:44:47.730455 3600 ] Object file: __constants.o
+[2021-07-28T14:44:47.730455 3600 ] Trying direct lookup
+[2021-07-28T14:44:47.730455 3600 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/1/7439af0ce8032d7b3e5f457a53b048-5329.manifest
+[2021-07-28T14:44:47.740488 4932 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) base_dir = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) compiler = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) compression = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) debug = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) disable = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) hard_link = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.740488 4932 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) max_files = 0
+[2021-07-28T14:44:47.740488 4932 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) path = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) read_only = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) recache = false
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) stats = true
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.740488 4932 ] Config: (default) umask = 
+[2021-07-28T14:44:47.745495 4932 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o __helpers.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src __helpers.c
+[2021-07-28T14:44:47.745495 4932 ] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.745495 4932 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.745495 4932 ] Source file: __helpers.c
+[2021-07-28T14:44:47.745495 4932 ] Object file: __helpers.o
+[2021-07-28T14:44:47.745495 4932 ] Trying direct lookup
+[2021-07-28T14:44:47.745495 4932 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/f/fbc2a4a27c200d0aa8a50b0e4f7c68-61993.manifest
+[2021-07-28T14:44:47.755540 11956] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.755540 11956] Config: (default) base_dir = 
+[2021-07-28T14:44:47.755540 11956] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.755540 11956] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.755540 11956] Config: (default) compiler = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.755540 11956] Config: (default) compression = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.755540 11956] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) debug = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.755540 11956] Config: (default) disable = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) hard_link = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.755540 11956] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.755540 11956] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.755540 11956] Config: (default) max_files = 0
+[2021-07-28T14:44:47.755540 11956] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.755540 11956] Config: (default) path = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) read_only = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) recache = false
+[2021-07-28T14:44:47.755540 11956] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.755540 11956] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) stats = true
+[2021-07-28T14:44:47.755540 11956] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.755540 11956] Config: (default) umask = 
+[2021-07-28T14:44:47.755540 11956] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o __loader.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src __loader.c
+[2021-07-28T14:44:47.755540 11956] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.755540 11956] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.755540 11956] Source file: __loader.c
+[2021-07-28T14:44:47.755540 11956] Object file: __loader.o
+[2021-07-28T14:44:47.755540 11956] Trying direct lookup
+[2021-07-28T14:44:47.755540 11956] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/3/d1cd68acd0b21c45bcfe9c01726687-120726.manifest
+[2021-07-28T14:44:47.770596 11404] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.770596 11404] Config: (default) base_dir = 
+[2021-07-28T14:44:47.770596 11404] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.770596 11404] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.770596 11404] Config: (default) compiler = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.770596 11404] Config: (default) compression = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.770596 11404] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) debug = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.770596 11404] Config: (default) disable = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) hard_link = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.770596 11404] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.770596 11404] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.770596 11404] Config: (default) max_files = 0
+[2021-07-28T14:44:47.770596 11404] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.770596 11404] Config: (default) path = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) read_only = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) recache = false
+[2021-07-28T14:44:47.770596 11404] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.770596 11404] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) stats = true
+[2021-07-28T14:44:47.770596 11404] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.770596 11404] Config: (default) umask = 
+[2021-07-28T14:44:47.770596 11404] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o module.__main__.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src module.__main__.c
+[2021-07-28T14:44:47.770596 11404] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.770596 11404] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.770596 11404] Source file: module.__main__.c
+[2021-07-28T14:44:47.770596 11404] Object file: module.__main__.o
+[2021-07-28T14:44:47.770596 11404] Trying direct lookup
+[2021-07-28T14:44:47.770596 11404] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/c/3f8c9192349b907daecec7822ebfd0-160617.manifest
+[2021-07-28T14:44:47.770596 11404] No such manifest file
+[2021-07-28T14:44:47.770596 11404] Did not find object file hash in manifest
+[2021-07-28T14:44:47.770596 11404] Running preprocessor
+[2021-07-28T14:44:47.785137 11956] Got object file hash from manifest
+[2021-07-28T14:44:47.785137 11956] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/2/b741b9f771d7b754516aa91776ef01-485557.o to __loader.o (uncompressed)
+[2021-07-28T14:44:47.790171 11956] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/2/b741b9f771d7b754516aa91776ef01-485557.o -> __loader.o
+[2021-07-28T14:44:47.795187 11956] Succeeded getting cached result
+[2021-07-28T14:44:47.795187 11956] Result: cache hit (direct)
+[2021-07-28T14:44:47.795187 11956] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/stats.lock
+[2021-07-28T14:44:47.795187 11956] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/stats.lock
+[2021-07-28T14:44:47.825280 3600 ] Got object file hash from manifest
+[2021-07-28T14:44:47.825280 3600 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/1427998c897e3fc6d9ee7aa48bbf62-2848922.o to __constants.o (uncompressed)
+[2021-07-28T14:44:47.825280 3600 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/1427998c897e3fc6d9ee7aa48bbf62-2848922.o -> __constants.o
+[2021-07-28T14:44:47.825280 3600 ] Succeeded getting cached result
+[2021-07-28T14:44:47.825280 3600 ] Result: cache hit (direct)
+[2021-07-28T14:44:47.825280 3600 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/stats.lock
+[2021-07-28T14:44:47.830307 3600 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/stats.lock
+[2021-07-28T14:44:47.840340 4932 ] Got object file hash from manifest
+[2021-07-28T14:44:47.840340 4932 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/3/d83b8ae4cecfa87c6c8482e9735485-2885446.o to __helpers.o (uncompressed)
+[2021-07-28T14:44:47.840340 4932 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/3/d83b8ae4cecfa87c6c8482e9735485-2885446.o -> __helpers.o
+[2021-07-28T14:44:47.846385 4932 ] Succeeded getting cached result
+[2021-07-28T14:44:47.846385 4932 ] Result: cache hit (direct)
+[2021-07-28T14:44:47.846385 4932 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/stats.lock
+[2021-07-28T14:44:47.846385 3888 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) base_dir = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) compiler = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) compression = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) debug = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) disable = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) hard_link = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.846385 3888 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) max_files = 0
+[2021-07-28T14:44:47.846385 3888 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) path = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) read_only = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) recache = false
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) stats = true
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.846385 3888 ] Config: (default) umask = 
+[2021-07-28T14:44:47.846385 3888 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o module.pywin32_bootstrap.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src module.pywin32_bootstrap.c
+[2021-07-28T14:44:47.846385 3888 ] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.846385 3888 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.846385 4932 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/stats.lock
+[2021-07-28T14:44:47.846385 3888 ] Object file: module.pywin32_bootstrap.o
+[2021-07-28T14:44:47.855414 3888 ] Trying direct lookup
+[2021-07-28T14:44:47.855414 3888 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/a/99d13b4b3d4e71c3d24b5481db0f80-51889.manifest
+[2021-07-28T14:44:47.875603 2752 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) base_dir = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) compiler = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) compression = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) debug = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) disable = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) hard_link = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.875603 2752 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) max_files = 0
+[2021-07-28T14:44:47.875603 2752 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) path = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) read_only = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) recache = false
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) stats = true
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.875603 2752 ] Config: (default) umask = 
+[2021-07-28T14:44:47.875603 2752 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o module.pywin32_system32.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src module.pywin32_system32.c
+[2021-07-28T14:44:47.875603 2752 ] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.875603 2752 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.875603 2752 ] Source file: module.pywin32_system32.c
+[2021-07-28T14:44:47.875603 2752 ] Object file: module.pywin32_system32.o
+[2021-07-28T14:44:47.875603 2752 ] Trying direct lookup
+[2021-07-28T14:44:47.875603 2752 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/9/70732cea53a02a51263072ddbff0ad-17499.manifest
+[2021-07-28T14:44:47.890170 11156] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.890170 11156] Config: (default) base_dir = 
+[2021-07-28T14:44:47.890170 11156] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.890170 11156] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.890170 11156] Config: (default) compiler = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.890170 11156] Config: (default) compression = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.890170 11156] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) debug = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.890170 11156] Config: (default) disable = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) hard_link = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.890170 11156] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.890170 11156] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.890170 11156] Config: (default) max_files = 0
+[2021-07-28T14:44:47.890170 11156] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.890170 11156] Config: (default) path = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) read_only = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) recache = false
+[2021-07-28T14:44:47.890170 11156] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.890170 11156] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) stats = true
+[2021-07-28T14:44:47.890170 11156] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.890170 11156] Config: (default) umask = 
+[2021-07-28T14:44:47.890170 11156] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\MainProgram.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src static_src\MainProgram.c
+[2021-07-28T14:44:47.890170 11156] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.895184 11156] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.895184 11156] Source file: static_src\MainProgram.c
+[2021-07-28T14:44:47.895184 11156] Object file: static_src\MainProgram.o
+[2021-07-28T14:44:47.895184 11156] Trying direct lookup
+[2021-07-28T14:44:47.895184 11156] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/4/d36160f136291a72d689ad69fb6f8d-26785.manifest
+[2021-07-28T14:44:47.950454 3888 ] Got object file hash from manifest
+[2021-07-28T14:44:47.950454 3888 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/b/45b5b0be7f626eb8c2458e6ed92cb6-2889412.o to module.pywin32_bootstrap.o (uncompressed)
+[2021-07-28T14:44:47.950454 3888 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/b/45b5b0be7f626eb8c2458e6ed92cb6-2889412.o -> module.pywin32_bootstrap.o
+[2021-07-28T14:44:47.950454 3888 ] Succeeded getting cached result
+[2021-07-28T14:44:47.950454 3888 ] Result: cache hit (direct)
+[2021-07-28T14:44:47.950454 3888 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/stats.lock
+[2021-07-28T14:44:47.950454 3888 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/stats.lock
+[2021-07-28T14:44:47.968595 2752 ] Got object file hash from manifest
+[2021-07-28T14:44:47.968595 2752 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/e/c1f34807ca819de528ad24d9c72a1a-2853613.o to module.pywin32_system32.o (uncompressed)
+[2021-07-28T14:44:47.968595 2752 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/e/c1f34807ca819de528ad24d9c72a1a-2853613.o -> module.pywin32_system32.o
+[2021-07-28T14:44:47.968595 2752 ] Succeeded getting cached result
+[2021-07-28T14:44:47.968595 2752 ] Result: cache hit (direct)
+[2021-07-28T14:44:47.968595 2752 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/stats.lock
+[2021-07-28T14:44:47.970113 2752 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/stats.lock
+[2021-07-28T14:44:47.996849 10792] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:47.996849 10792] Config: (default) base_dir = 
+[2021-07-28T14:44:47.996849 10792] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:47.996849 10792] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:47.996849 10792] Config: (default) compiler = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:47.996849 10792] Config: (default) compression = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) compression_level = 6
+[2021-07-28T14:44:47.996849 10792] Config: (default) cpp_extension = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) debug = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) depend_mode = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) direct_mode = true
+[2021-07-28T14:44:47.996849 10792] Config: (default) disable = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) hard_link = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) hash_dir = true
+[2021-07-28T14:44:47.996849 10792] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:47.996849 10792] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:47.996849 10792] Config: (default) max_files = 0
+[2021-07-28T14:44:47.996849 10792] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:47.996849 10792] Config: (default) path = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) prefix_command = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) read_only = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) read_only_direct = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) recache = false
+[2021-07-28T14:44:47.996849 10792] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:47.996849 10792] Config: (default) sloppiness = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) stats = true
+[2021-07-28T14:44:47.996849 10792] Config: (default) temporary_dir = 
+[2021-07-28T14:44:47.996849 10792] Config: (default) umask = 
+[2021-07-28T14:44:47.998876 10792] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\CompiledCellType.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src static_src\CompiledCellType.c
+[2021-07-28T14:44:47.998876 10792] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:47.998876 10792] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:47.998876 10792] Source file: static_src\CompiledCellType.c
+[2021-07-28T14:44:47.998876 10792] Object file: static_src\CompiledCellType.o
+[2021-07-28T14:44:47.998876 10792] Trying direct lookup
+[2021-07-28T14:44:47.998876 10792] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/8/8/6efaea5ab64d9eaf2730f0ee008a3f-8088.manifest
+[2021-07-28T14:44:48.000400 11156] Got object file hash from manifest
+[2021-07-28T14:44:48.000400 11156] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/0/9d3b1f2ff37563e701ebf7c23bc3b4-3949566.o to static_src\MainProgram.o (uncompressed)
+[2021-07-28T14:44:48.000400 11156] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/0/9d3b1f2ff37563e701ebf7c23bc3b4-3949566.o -> static_src\MainProgram.o
+[2021-07-28T14:44:48.000400 11156] Succeeded getting cached result
+[2021-07-28T14:44:48.000400 11156] Result: cache hit (direct)
+[2021-07-28T14:44:48.000400 11156] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/stats.lock
+[2021-07-28T14:44:48.000400 11156] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/stats.lock
+[2021-07-28T14:44:48.020567 11344] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:48.020567 11344] Config: (default) base_dir = 
+[2021-07-28T14:44:48.020567 11344] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:48.020567 11344] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:48.020567 11344] Config: (default) compiler = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:48.020567 11344] Config: (default) compression = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) compression_level = 6
+[2021-07-28T14:44:48.020567 11344] Config: (default) cpp_extension = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) debug = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) depend_mode = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) direct_mode = true
+[2021-07-28T14:44:48.020567 11344] Config: (default) disable = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) hard_link = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) hash_dir = true
+[2021-07-28T14:44:48.020567 11344] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:48.020567 11344] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:48.020567 11344] Config: (default) max_files = 0
+[2021-07-28T14:44:48.020567 11344] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:48.020567 11344] Config: (default) path = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) prefix_command = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) read_only = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) read_only_direct = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) recache = false
+[2021-07-28T14:44:48.020567 11344] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:48.020567 11344] Config: (default) sloppiness = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) stats = true
+[2021-07-28T14:44:48.020567 11344] Config: (default) temporary_dir = 
+[2021-07-28T14:44:48.020567 11344] Config: (default) umask = 
+[2021-07-28T14:44:48.020567 11344] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\CompiledFunctionType.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src static_src\CompiledFunctionType.c
+[2021-07-28T14:44:48.020567 11344] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:48.020567 11344] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:48.027103 11344] Source file: static_src\CompiledFunctionType.c
+[2021-07-28T14:44:48.027103 11344] Object file: static_src\CompiledFunctionType.o
+[2021-07-28T14:44:48.027103 11344] Trying direct lookup
+[2021-07-28T14:44:48.027103 11344] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/a/a/d5ef1d020ce7c1178cc7b143ebfc59-79069.manifest
+[2021-07-28T14:44:48.047268 9324 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) base_dir = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) compiler = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) compression = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) compression_level = 6
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) cpp_extension = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) debug = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) depend_mode = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) direct_mode = true
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) disable = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) hard_link = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) hash_dir = true
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:48.047268 9324 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) max_files = 0
+[2021-07-28T14:44:48.047268 9324 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) path = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) prefix_command = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) read_only = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) read_only_direct = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) recache = false
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) sloppiness = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) stats = true
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) temporary_dir = 
+[2021-07-28T14:44:48.047268 9324 ] Config: (default) umask = 
+[2021-07-28T14:44:48.049292 9324 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\CompiledGeneratorType.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src static_src\CompiledGeneratorType.c
+[2021-07-28T14:44:48.049292 9324 ] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:48.049292 9324 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:48.049292 9324 ] Source file: static_src\CompiledGeneratorType.c
+[2021-07-28T14:44:48.049292 9324 ] Object file: static_src\CompiledGeneratorType.o
+[2021-07-28T14:44:48.049292 9324 ] Trying direct lookup
+[2021-07-28T14:44:48.050309 9324 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/c/22471db99ee9af89c802c64d91034a-57518.manifest
+[2021-07-28T14:44:48.080518 10792] Got object file hash from manifest
+[2021-07-28T14:44:48.080518 10792] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/d/ddb46f005de9b07bb7d58011019a4b-2852359.o to static_src\CompiledCellType.o (uncompressed)
+[2021-07-28T14:44:48.080518 10792] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/d/ddb46f005de9b07bb7d58011019a4b-2852359.o -> static_src\CompiledCellType.o
+[2021-07-28T14:44:48.080518 10792] Succeeded getting cached result
+[2021-07-28T14:44:48.080518 10792] Result: cache hit (direct)
+[2021-07-28T14:44:48.080518 10792] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/stats.lock
+[2021-07-28T14:44:48.080518 10792] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/stats.lock
+[2021-07-28T14:44:48.115283 11344] Got object file hash from manifest
+[2021-07-28T14:44:48.115283 11344] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/e/4ef675031bea28c5da1ea2f3392d13-2932189.o to static_src\CompiledFunctionType.o (uncompressed)
+[2021-07-28T14:44:48.115283 11344] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/e/4ef675031bea28c5da1ea2f3392d13-2932189.o -> static_src\CompiledFunctionType.o
+[2021-07-28T14:44:48.115283 11344] Succeeded getting cached result
+[2021-07-28T14:44:48.115283 11344] Result: cache hit (direct)
+[2021-07-28T14:44:48.115283 11344] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/stats.lock
+[2021-07-28T14:44:48.115283 11344] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/stats.lock
+[2021-07-28T14:44:48.140028 9324 ] Got object file hash from manifest
+[2021-07-28T14:44:48.140545 9324 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/6/6cf05f6e14f9067cac47375c5d7c5a-3035120.o to static_src\CompiledGeneratorType.o (uncompressed)
+[2021-07-28T14:44:48.140545 9324 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/6/6cf05f6e14f9067cac47375c5d7c5a-3035120.o -> static_src\CompiledGeneratorType.o
+[2021-07-28T14:44:48.140545 9324 ] Succeeded getting cached result
+[2021-07-28T14:44:48.140545 9324 ] Result: cache hit (direct)
+[2021-07-28T14:44:48.140545 9324 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/stats.lock
+[2021-07-28T14:44:48.140545 9324 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/stats.lock
+[2021-07-28T14:44:48.236340 5640 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) base_dir = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) compiler = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) compression = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) compression_level = 6
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) cpp_extension = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) debug = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) depend_mode = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) direct_mode = true
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) disable = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) hard_link = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) hash_dir = true
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:48.236340 5640 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) max_files = 0
+[2021-07-28T14:44:48.236340 5640 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) path = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) prefix_command = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) read_only = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) read_only_direct = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) recache = false
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) sloppiness = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) stats = true
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) temporary_dir = 
+[2021-07-28T14:44:48.236340 5640 ] Config: (default) umask = 
+[2021-07-28T14:44:48.237341 5640 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\CompiledCodeHelpers.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src static_src\CompiledCodeHelpers.c
+[2021-07-28T14:44:48.237341 5640 ] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:48.237341 5640 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:48.237341 5640 ] Source file: static_src\CompiledCodeHelpers.c
+[2021-07-28T14:44:48.237341 5640 ] Object file: static_src\CompiledCodeHelpers.o
+[2021-07-28T14:44:48.237341 5640 ] Trying direct lookup
+[2021-07-28T14:44:48.237341 5640 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/4/0/4e4feda20963187cd64f1a546c77f9-55636.manifest
+[2021-07-28T14:44:48.260510 11536] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:48.260510 11536] Config: (default) base_dir = 
+[2021-07-28T14:44:48.260510 11536] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:48.260510 11536] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:48.260510 11536] Config: (default) compiler = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:48.260510 11536] Config: (default) compression = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) compression_level = 6
+[2021-07-28T14:44:48.260510 11536] Config: (default) cpp_extension = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) debug = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) depend_mode = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) direct_mode = true
+[2021-07-28T14:44:48.260510 11536] Config: (default) disable = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) hard_link = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) hash_dir = true
+[2021-07-28T14:44:48.260510 11536] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:48.260510 11536] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:48.260510 11536] Config: (default) max_files = 0
+[2021-07-28T14:44:48.260510 11536] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:48.260510 11536] Config: (default) path = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) prefix_command = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) read_only = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) read_only_direct = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) recache = false
+[2021-07-28T14:44:48.260510 11536] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:48.260510 11536] Config: (default) sloppiness = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) stats = true
+[2021-07-28T14:44:48.260510 11536] Config: (default) temporary_dir = 
+[2021-07-28T14:44:48.260510 11536] Config: (default) umask = 
+[2021-07-28T14:44:48.261617 11536] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\InspectPatcher.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src static_src\InspectPatcher.c
+[2021-07-28T14:44:48.261617 11536] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:48.261617 11536] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:48.261617 11536] Source file: static_src\InspectPatcher.c
+[2021-07-28T14:44:48.261617 11536] Object file: static_src\InspectPatcher.o
+[2021-07-28T14:44:48.261617 11536] Trying direct lookup
+[2021-07-28T14:44:48.261617 11404] Got object file hash from preprocessor
+[2021-07-28T14:44:48.261617 11404] Object file C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/1/19b946ff7f5638d24dc44be4e342f7-2995544.o not in cache
+[2021-07-28T14:44:48.261617 11404] Running real compiler
+[2021-07-28T14:44:48.261617 11536] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/3/11db98c24e57db6af92dd40e8c8d42-13752.manifest
+[2021-07-28T14:44:48.261617 6508 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) base_dir = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (environment) cache_dir = C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) cache_dir_levels = 2
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) compiler = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) compiler_check = mtime
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) compression = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) compression_level = 6
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) cpp_extension = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) debug = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) depend_mode = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) direct_mode = true
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) disable = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) extra_files_to_hash = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) hard_link = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) hash_dir = true
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) ignore_headers_in_manifest = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) keep_comments_cpp = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) limit_multiple = 0.8
+[2021-07-28T14:44:48.261617 6508 ] Config: (environment) log_file = C:\Users\aweso\Documents\Source\Python\Logical\install.build\ccache-5260.txt
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) max_files = 0
+[2021-07-28T14:44:48.261617 6508 ] Config: (C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) path = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) pch_external_checksum = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) prefix_command = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) prefix_command_cpp = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) read_only = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) read_only_direct = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) recache = false
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) run_second_cpp = true
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) sloppiness = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) stats = true
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) temporary_dir = 
+[2021-07-28T14:44:48.261617 6508 ] Config: (default) umask = 
+[2021-07-28T14:44:48.261617 6508 ] Command line: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\aweso\scoop\apps\gcc\current\bin\gcc.exe -o static_src\MetaPathBasedLoader.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D_NUITKA_STANDALONE -D_NUITKA_ONEFILE -D_NUITKA_ONEFILE_TEMP -D__NUITKA_NO_ASSERT__ -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=166 -D_NUITKA_EXE -IC:\ProgramData\scoop\apps\python\3.9.5\include -I. -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\include -IC:\PROGRA~3\scoop\apps\python\current\lib\SITE-P~1\nuitka\build\static_src static_src\MetaPathBasedLoader.c
+[2021-07-28T14:44:48.261617 6508 ] Hostname: COMPUTERTRON760
+[2021-07-28T14:44:48.261617 6508 ] Working directory: C:\Users\aweso\Documents\Source\Python\Logical\install.build
+[2021-07-28T14:44:48.261617 6508 ] Source file: static_src\MetaPathBasedLoader.c
+[2021-07-28T14:44:48.261617 6508 ] Object file: static_src\MetaPathBasedLoader.o
+[2021-07-28T14:44:48.261617 6508 ] Trying direct lookup
+[2021-07-28T14:44:48.261617 6508 ] Looking for object file hash in C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/d/00d08c477e1368df32b49b4477fcf8-54011.manifest
+[2021-07-28T14:44:48.350269 11536] Got object file hash from manifest
+[2021-07-28T14:44:48.352290 11536] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/8/df69c79d22f2eea3514aafa9b7678a-2858044.o to static_src\InspectPatcher.o (uncompressed)
+[2021-07-28T14:44:48.352290 11536] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/8/df69c79d22f2eea3514aafa9b7678a-2858044.o -> static_src\InspectPatcher.o
+[2021-07-28T14:44:48.352290 11536] Succeeded getting cached result
+[2021-07-28T14:44:48.352290 11536] Result: cache hit (direct)
+[2021-07-28T14:44:48.352290 11536] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/stats.lock
+[2021-07-28T14:44:48.352290 11536] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/stats.lock
+[2021-07-28T14:44:48.355296 6508 ] Got object file hash from manifest
+[2021-07-28T14:44:48.355296 6508 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/9/bb950b408834e14f7af0a2d089b915-2878297.o to static_src\MetaPathBasedLoader.o (uncompressed)
+[2021-07-28T14:44:48.355296 6508 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/9/bb950b408834e14f7af0a2d089b915-2878297.o -> static_src\MetaPathBasedLoader.o
+[2021-07-28T14:44:48.355296 6508 ] Succeeded getting cached result
+[2021-07-28T14:44:48.355296 6508 ] Result: cache hit (direct)
+[2021-07-28T14:44:48.355296 6508 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/stats.lock
+[2021-07-28T14:44:48.355296 6508 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/stats.lock
+[2021-07-28T14:44:48.365374 5640 ] Got object file hash from manifest
+[2021-07-28T14:44:48.365374 5640 ] Copying C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/3/7209fb2f20f93ccf600b295369f093-5328088.o to static_src\CompiledCodeHelpers.o (uncompressed)
+[2021-07-28T14:44:48.365374 5640 ] Created from cache: C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/3/7209fb2f20f93ccf600b295369f093-5328088.o -> static_src\CompiledCodeHelpers.o
+[2021-07-28T14:44:48.365374 5640 ] Succeeded getting cached result
+[2021-07-28T14:44:48.365374 5640 ] Result: cache hit (direct)
+[2021-07-28T14:44:48.370407 5640 ] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2021-07-28T14:44:48.370407 5640 ] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2021-07-28T14:44:49.580315 11404] Unlink C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/1/19b946ff7f5638d24dc44be4e342f7-2995544.o.tmp.stdout.COMPUTERTRON760.11404.1QBI6D
+[2021-07-28T14:44:49.580315 11404] Unlink C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/1/19b946ff7f5638d24dc44be4e342f7-2995544.o.tmp.stderr.COMPUTERTRON760.11404.SS92c3
+[2021-07-28T14:44:49.580315 11404] Copying module.__main__.o to C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/1/19b946ff7f5638d24dc44be4e342f7-2995544.o via C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/1/19b946ff7f5638d24dc44be4e342f7-2995544.o.COMPUTERTRON760.11404.1Apgjk (uncompressed)
+[2021-07-28T14:44:49.580315 11404] Stored in cache: module.__main__.o -> C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/1/19b946ff7f5638d24dc44be4e342f7-2995544.o (copied)
+[2021-07-28T14:44:49.580315 11404] Added object file hash to C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/c/3f8c9192349b907daecec7822ebfd0-160617.manifest
+[2021-07-28T14:44:49.580315 11404] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2021-07-28T14:44:49.580315 11404] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2021-07-28T14:44:49.580315 11404] Result: cache miss
+[2021-07-28T14:44:49.580315 11404] Acquired lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/stats.lock
+[2021-07-28T14:44:49.580315 11404] Releasing lock C:\Users\aweso\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/stats.lock

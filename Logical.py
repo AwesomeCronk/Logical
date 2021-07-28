@@ -6,7 +6,7 @@ import simpleANSI as ANSI
 
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
 
-with open('Logical.version.txt', 'r') as file:
+with open(os.path.join(os.path.dirname(__file__), 'Logical.version.txt'), 'r') as file:
     version = file.read()
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
@@ -41,6 +41,8 @@ class simulation():
 
         self.mainElement, self.mainWidget = loadElement(sys.argv[1])
         input('press enter to continue...')
+
+        self.titleString = 'Logical {} (Python {} on {} {})'.format(version, pythonVersion, architecture, platform)
         self.initUI()
         # pdb.set_trace()
 
@@ -65,7 +67,7 @@ class simulation():
         self.title = widget()
         self.title.resize(vec2(terminalSize[0], 1))
         self.title.moveTo(vec2(0, 0))
-        self.title.setText('Logical {} (Python {} on {} {})'.format(version, pythonVersion, architecture, platform))
+        self.title.setText(self.titleString)
         self.mainWidget.addWidget(self.title)
 
         self.keyListenerDebug = widget()
@@ -86,6 +88,10 @@ class simulation():
             if key == keyboard.Key.backspace:
                 self.keyListenerDebug.setText('backspace pressed                  ')
                 self.simRunFlag = not self.simRunFlag
+                if self.simRunFlag:
+                    self.title.setText(self.titleString + '         ')
+                else:
+                    self.title.setText(self.titleString + ' (paused)')
                 # print(self.simRunFlag)
 
             # Escape to exit
@@ -121,7 +127,7 @@ class simulation():
                 self.mainWidget.update()
             else:
                 self.mainWidget.update()
-                time.sleep(0.1) # Chillax for a split second, saves the CPU
+                time.sleep(0.2) # Chillax for a split second, saves the CPU
         
         self.keyListener.join()
 
