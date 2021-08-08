@@ -3,27 +3,40 @@ from logic.core import element, pin
 from logic.elements import *
 from ui import *
 from loading.parsing import parseCommands
-import pdb
+# import pdb
+
+def debug(text, level, end='\n'):
+    lines = str(text).split('\n')
+    for line in lines[:-1]:
+        print('  ' * level + line)
+    print('  ' * level + lines[-1], end=end)
 
 # Load a truth table from parsed .lgc source code
-def loadTable(filePath):
-    print('Loading as truth table...')
+def loadTable(filePath, debugLevel=0):
+    debug('Loading as truth table...', debugLevel)
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
-    #print('commands:')
-    #for comm in commands:
-    #    print(comm)
     table = truthTable()
     readingTable = False
 
-    for comm in commands:
-        print(comm.info(), end = '\n\n')
+    for ctr, comm in enumerate(commands):
+        debug('\n' + comm.info().replace('self.', ''), debugLevel)
         if comm.element == '$pins':
             for i in comm.inputs:
                 table.addInput(pin(i))
             for o in comm.outputs:
                 table.addOutput(pin(o))
         
+        elif comm.element == 'match':
+            break
+    
+    table.setupTable()
+
+    for comm in commands[ctr:]:
+        debug('\n' + comm.info().replace('self.', ''), debugLevel)
+        if comm.element == '$pins':
+            raise Exception('Cannot add pins after matches have been declared.')
+            
         elif comm.element == 'match':
             try:
                 for i in comm.inputs:
@@ -33,23 +46,27 @@ def loadTable(filePath):
             except:
                 raise Exception('Truth table matches must be 0 or 1.')
 
-            if len(comm.inputs) == len(table.inputs) and len(comm.outputs) == len(table.outputs):
-                inputs = [int(i) for i in comm.inputs]
-                outputs = [int(o) for o in comm.outputs]
-                print('Adding match for {} and {}'.format(tuple(inputs), tuple(outputs)))
-                table.addMatch(tuple(inputs), tuple(outputs))
+            if len(comm.inputs) != len(table.inputs):
+                raise Exception('Input length mismatch.')
+
+            elif len(comm.outputs) != len(table.outputs):
+                raise Exception('Output length mismatch.')
+            
             else:
-                raise Exception('Truth table matches must have same number of inputs and outputs as $pins declarations')
+                match = int('0b' + ''.join([i for i in comm.inputs]), base=2)
+                result = ''.join([o for o in comm.outputs])
+                debug('Adding match for {} and {}'.format(match, result), debugLevel)
+                table.addMatch(match, result)
 
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))
 
-    print('Truth table loaded.')
+    debug('Truth table loaded.', debugLevel, end = '\n\n')
     return table, None  # No widget for truth tables
 
 # Load an element from Python source
-def loadPyElement(filePath, args = []):
-    print('Loading as Python element...')
+def loadPyElement(filePath, args=[], debugLevel=0):
+    debug('Loading as Python element...', debugLevel)
 
     globalVars = {
         'element': element,
@@ -71,25 +88,25 @@ def loadPyElement(filePath, args = []):
     else:
         raise Exception('Python file contained no class named "pyElement".')
 
-    print('Python element loaded.')
+    debug('Python element loaded.', debugLevel, end = '\n\n')
     return pyElement, pyWidget
 
 # Load an element from parsed .ttb source and return that element
-def loadElement(filePath, cwd = None, args = []):
+def loadElement(filePath, cwd=None, args=[], debugLevel=0):
     # Some shenanigans to get the paths right
-    print('Loading element...\nold filePath: {}\nold cwd: {}'.format(filePath, cwd))
+    debug('Loading element...\nold filePath: {}\nold cwd: {}'.format(filePath, cwd), debugLevel)
     if cwd is None:
         filePath = os.path.abspath(filePath)
     else:
         filePath = os.path.join(cwd, filePath)
     cwd = os.path.split(filePath)[0]
-    #print('=====loading element from {}====='.format(filePath))
-    print('new filePath: {}\nnew cwd: {}\n'.format(filePath, cwd))
+    #debug('=====loading element from {}====='.format(filePath), debugLevel)
+    debug('new filePath: {}\nnew cwd: {}\n'.format(filePath, cwd), debugLevel)
 
     if filePath.split('.')[-1] == 'ttb':    # Load as truth table if .ttb file
-        return loadTable(filePath)
+        return loadTable(filePath, debugLevel=debugLevel)
     elif filePath.split('.')[-1] == 'py':   # Load as Python element if .py file
-        return loadPyElement(filePath, args = args)
+        return loadPyElement(filePath, args = args, debugLevel=debugLevel)
 
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
@@ -118,7 +135,7 @@ def loadElement(filePath, cwd = None, args = []):
     mainWidget.setMode(widget.containerMode)
 
     for comm in commands:
-        print(comm.info(), end = '\n\n')
+        debug('\n' + comm.info().replace('self.', ''), debugLevel, )
         # Element config
         if comm.element == '$include':
             # Add a note of where to find this element that has been included
@@ -200,10 +217,18 @@ def loadElement(filePath, cwd = None, args = []):
             newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
             mainElement.addKeyBinds(newElement.keyBinds)
+        
+        elif comm.element == 'switch':
+            newElement = switch(*comm.args)
+            newElement.outputs['y'].realias(comm.outputs[0])
+            mainElement.addElement(newElement)
+            mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
-            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args)
-
+            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args, debugLevel=debugLevel + 1)
+            
+            debug(newElement.inputs, debugLevel)
+            debug(newElement.outputs, debugLevel)
             # Rename the outputs to the names specified in the .lgc script
             commandOffset = 0
             oldNames = list(newElement.outputs.keys())
@@ -222,10 +247,10 @@ def loadElement(filePath, cwd = None, args = []):
                 raise Exception('Invalid number of outputs: {}'.format(len(comm.outputs)))
             if not len(newElement.args) == len(comm.args):
                 raise Exception('Invalid number of args: {}'.format(len(comm.args)))
+            
             pins = []
-            print(newElement.inputs)
             for i in range(len(newElement.inputs)):
-                print(i)
+                debug(i, debugLevel)
                 pins.append(comm.inputs[i])
             needsConnected.update({newElement: pins})
 
@@ -235,9 +260,9 @@ def loadElement(filePath, cwd = None, args = []):
             raise Exception('Command {} not recognized.'.format(comm.text))
 
     # needsConnected is a dict of {element: targetNames} or {pin: targetName}
-    print('Establishing connections.')
+    debug('\nEstablishing connections.', debugLevel)
     for e in needsConnected.keys():
-        print('connecting {} to {}'.format(e, needsConnected[e]))
+        debug('connecting {} to {}'.format(e, needsConnected[e]), debugLevel)
         if isinstance(e, pin):
             targetName = needsConnected[e]
             a = mainElement.aliasInternalPins[targetName]
@@ -248,10 +273,10 @@ def loadElement(filePath, cwd = None, args = []):
                 # pdb.set_trace()
                 e.inputs[i].connect(mainElement.aliasInternalPins[needsConnected[e][ctr]])
                 ctr += 1
-            #print(e.inputs['a'].target)
-            #print(e.inputs['e'].target)
+            #debug(e.inputs['a'].target, debugLevel)
+            #debug(e.inputs['e'].target, debugLevel)
             if isinstance(e, tristate):
                 busses[needsConnected[e][ctr]].addTristate(e)
 
-    print('Element loaded.')
+    debug('Element loaded.', debugLevel, end = '\n\n')
     return mainElement, mainWidget

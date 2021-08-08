@@ -119,20 +119,23 @@ class xnorGate(element):
 class truthTable(element):
     def __init__(self):
         element.__init__(self)
-        self.table = {}
+        self.table = None
 
-    def addMatch(self, match, result):     # match and result should be tuples
-        self.table.update({match: result})
+    def setupTable(self):
+        self.table = ['0' * (2 ** len(self.outputs))] * (2 ** len(self.inputs))
+
+    def addMatch(self, match, result):     # match and result should be lists
+        if self.table is None:
+            raise Exception('Must call setupTable first.')
+        else:
+            self.table[match] = result
 
     def update(self):
         element.update(self)
-        match = []
-        for i in range(len(self.inputs)):       # Get value of each pin and append it to the match dict
-            match.append(list(self.inputs.values())[i].value)
-        match = tuple(match)        # Get match as tuple so that it can be used as a dict index
+        match = int('0b' + ''.join([str(self.inputs[pinName].value) for pinName in list(self.inputs.keys())]), base=2)
         result = self.table[match]
-        for o in range(len(self.outputs)):
-            list(self.outputs.values())[o].set(result[o])
+        for o, outputPin in enumerate(self.outputs.values()):
+            outputPin.set(result[o])
 
 class tristate(element):
     def __init__(self):
@@ -207,8 +210,40 @@ class button(element):
 class switch(element):
     def __init__(self, keyBind):
         element.__init__(self)
+        self.writeable = True
         self.keyBinds = {keyBind: [self.keyEvent]}
         self.addOutput(pin('y'))
 
     def keyEvent(self, state):
-        self.outputs['y'].set(1 - self.outputs['y'].value)  # Invert the value
+        if state:
+            if self.writeable:
+                self.outputs['y'].set(1 - self.outputs['y'].value)
+                self.writeable = False
+        else:
+            self.writeable = True
+
+class label(element):
+    def __init__(self, colorR, colorG, colorB, posX, posY, text):
+        element.__init__(self)
+        
+        width, height = 0, 0
+        self.text = text.replace('\\n', '\n')
+        for line in self.text.split('\n'):
+            if len(line) > width:
+                width = len(line)
+            height += 1
+        self.blankText = (' ' * width + '\n') * self.height
+        
+        self.addInput(pin('a'))
+        self.widget = widget()
+        self.widget.setText(self.text)
+        self.widget.moveTo(vec2(posX, posY))
+        self.widget.resize(vec2(width, height))
+        self.widget.setFGColor((colorR, colorG, colorB))
+
+    def update(self):
+        element.update(self)
+        if self.inputs['a'].value:
+            self.widget.setText(self.text)
+        else:
+            self.widget.setText(self.blankText)

@@ -1,0 +1,12 @@
+$include halfAdder.ttb > halfAdder
+
+button > a & 'o'
+button > b & 'p'
+
+halfAdder a b > c s
+
+led a & 0 255 0 10 9
+led b & 0 255 0 11 9
+
+led c & 255 0 0 10 10
+led s & 255 0 0 11 10

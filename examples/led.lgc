@@ -1,2 +1,5 @@
-button > data & 'k'
-led data & 255 0 0 20 10
+button > k & 'k'
+switch > l & 'l'
+
+led k & 255 0 0 20 10
+led l & 0 255 0 21 10
