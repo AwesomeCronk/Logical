@@ -122,20 +122,21 @@ class truthTable(element):
         self.table = None
 
     def setupTable(self):
-        self.table = ['0' * (2 ** len(self.outputs))] * (2 ** len(self.inputs))
+        self.table = ['0' * len(self.outputs)] * (2 ** len(self.inputs))
 
     def addMatch(self, match, result):     # match and result should be lists
         if self.table is None:
             raise Exception('Must call setupTable first.')
         else:
             self.table[match] = result
+        print(self.table)
 
     def update(self):
         element.update(self)
         match = int('0b' + ''.join([str(self.inputs[pinName].value) for pinName in list(self.inputs.keys())]), base=2)
         result = self.table[match]
         for o, outputPin in enumerate(self.outputs.values()):
-            outputPin.set(result[o])
+            outputPin.set(int(result[o]))
 
 class tristate(element):
     def __init__(self):
