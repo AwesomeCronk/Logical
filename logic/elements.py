@@ -165,7 +165,7 @@ class bus(element):
                     activeTristate = t          # Select the current one as active.
                 else:
                     raise busError('Multiple tristates enabled.')   # Otherwise raise a busError.
-                print(activeTristate)
+                # print(activeTristate)
         # input('press enter to continue...')
                 
         # If we got here, everything is ok. Set the ouptut of the bus to the value of the tristate's input pin.
