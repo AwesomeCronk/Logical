@@ -1,0 +1,14 @@
+button > a & 'q'
+button > b & 'w'
+button > e0 & 'a'
+button > e1 & 's'
+
+bus > busA
+tristate a e0 > busA
+tristate b e1 > busA
+
+led a & 20 255 20 2 5
+led b & 20 255 20 4 5
+led e0 & 255 255 20 2 6
+led e1 & 255 255 20 4 6
+led busA & 255 20 20 6 6

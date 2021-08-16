@@ -30,3 +30,4 @@ The best way to get started is by reading through the docs. They are written in 
 * 0.5.1 - Added a check for input, output, and arg count.
 * 0.6.0 - Switched to Nuitka for the compiler and added a pause indicator
 * 0.6.1 - Improved truth tables by switching to lists instead of dicts
+* 0.6.2 - Fixed tristates

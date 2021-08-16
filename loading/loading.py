@@ -196,13 +196,13 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
         elif comm.element == 'tristate':
             newElement = tristate()
             mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.inputs})
+            needsConnected.update({newElement: comm.inputs + comm.outputs})
 
         elif comm.element == 'bus':
             newElement = bus()
             newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
-            busses.update({comm.inputs[0]: newElement})
+            busses.update({comm.outputs[0]: newElement})
 
         # UI elements
         elif comm.element == 'led':
