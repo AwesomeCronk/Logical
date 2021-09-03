@@ -14,11 +14,13 @@ class andGate(element):
 
     def update(self):
         element.update(self)
-        if bool(self.inputs['a'].value) and bool(self.inputs['b'].value):
-            list(self.outputs.values())[0].set(1)
+        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+            next(iter(self.outputs)).set(None)
+        elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 2:
+            next(iter(self.outputs)).set(1)
             #print('and gate set high')
         else:
-            list(self.outputs.values())[0].set(0)
+            next(iter(self.outputs)).set(0)
             #print('and gate set low')
 
 class orGate(element):
@@ -30,11 +32,13 @@ class orGate(element):
 
     def update(self):
         element.update(self)
-        if bool(self.inputs['a'].value) or bool(self.inputs['b'].value):
-            list(self.outputs.values())[0].set(1)
+        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+            next(iter(self.outputs)).set(None)
+        elif 1 in [self.inputs['a'].value, self.inputs['b'].value]:
+            next(iter(self.outputs)).set(1)
             #print('or gate set high')
         else:
-            list(self.outputs.values())[0].set(0)
+            next(iter(self.outputs)).set(0)
             #print('or gate set low')
 
 class xorGate(element):
@@ -46,11 +50,13 @@ class xorGate(element):
 
     def update(self):
         element.update(self)
-        if (bool(self.inputs['a'].value) or bool(self.inputs['b'].value)) and not (bool(self.inputs['a'].value) and bool(self.inputs['b'].value)):
-            list(self.outputs.values())[0].set(1)
+        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+            next(iter(self.outputs)).set(None)
+        elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 1:
+            next(iter(self.outputs.values())).set(1)
             #print('xor gate set high')
         else:
-            list(self.outputs.values())[0].set(0)
+            next(iter(self.outputs)).set(0)
             #print('xor gate set low')
 
 class notGate(element):
@@ -61,11 +67,13 @@ class notGate(element):
 
     def update(self):
         element.update(self)
-        if bool(self.inputs['a'].value):
-            list(self.outputs.values())[0].set(0)
+        if self.inputs['a'].value is None:
+            next(iter(self.outputs)).set(None)
+        elif self.inputs['a'].value == 1:
+            next(iter(self.outputs)).set(0)
             #print('xnor gate set low')
         else:
-            list(self.outputs.values())[0].set(1)
+            next(iter(self.outputs)).set(1)
             #print('xnor gate set high')
 
 class nandGate(element):
@@ -77,11 +85,13 @@ class nandGate(element):
 
     def update(self):
         element.update(self)
-        if bool(self.inputs['a'].value) and bool(self.inputs['b'].value):
-            list(self.outputs.values())[0].set(0)
+        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+            next(iter(self.outputs)).set(None)
+        elif bool(self.inputs['a'].value) and bool(self.inputs['b'].value):
+            next(iter(self.outputs)).set(0)
             #print('nand gate set low')
         else:
-            list(self.outputs.values())[0].set(1)
+            next(iter(self.outputs)).set(1)
             #print('nand gate set high')
 
 class norGate(element):
@@ -93,11 +103,13 @@ class norGate(element):
 
     def update(self):
         element.update(self)
-        if bool(self.inputs['a'].value) or bool(self.inputs['b'].value):
-            list(self.outputs.values())[0].set(0)
+        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+            next(iter(self.outputs)).set(None)
+        elif bool(self.inputs['a'].value) or bool(self.inputs['b'].value):
+            next(iter(self.outputs)).set(0)
             #print('nor gate set low')
         else:
-            list(self.outputs.values())[0].set(1)
+            next(iter(self.outputs)).set(1)
             #print('nor gate set high')
 
 class xnorGate(element):
@@ -109,11 +121,13 @@ class xnorGate(element):
 
     def update(self):
         element.update(self)
-        if (bool(self.inputs['a'].value) or bool(self.inputs['b'].value)) and not (bool(self.inputs['a'].value) and bool(self.inputs['b'].value)):
-            list(self.outputs.values())[0].set(0)
+        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+            next(iter(self.outputs)).set(None)
+        elif (bool(self.inputs['a'].value) or bool(self.inputs['b'].value)) and not (bool(self.inputs['a'].value) and bool(self.inputs['b'].value)):
+            next(iter(self.outputs)).set(0)
             #print('xnor gate set low')
         else:
-            list(self.outputs.values())[0].set(1)
+            next(iter(self.outputs)).set(1)
             #print('xnor gate set high')
 
 class truthTable(element):
@@ -133,46 +147,33 @@ class truthTable(element):
 
     def update(self):
         element.update(self)
-        match = int('0b' + ''.join([str(self.inputs[pinName].value) for pinName in list(self.inputs.keys())]), base=2)
+        values = [str(self.inputs[pinName].value) for pinName in iter(self.inputs)]
+        if 'None' in values:
+            unconnectedPins = True
+        else:
+            unconnectedPins = False
+        match = int('0b' + ''.join(values), base=2)
         result = self.table[match]
-        for o, outputPin in enumerate(self.outputs.values()):
-            outputPin.set(int(result[o]))
+        if unconnectedPins:
+            for o, outputPin in enumerate(self.outputs.values()):
+                outputPin.set(None)
+        else:
+            for o, outputPin in enumerate(self.outputs.values()):
+                outputPin.set(int(result[o]))
 
 class tristate(element):
     def __init__(self):
         element.__init__(self)
         self.addInput(pin('a'))
         self.addInput(pin('e'))
-        # tristate has no output.
-        self.enabled = 0
-
-class bus(element):
-    def __init__(self):
-        element.__init__(self)
         self.addOutput(pin('y'))
-        self.tristates = []
-        
-    def addTristate(self, tristate):
-        self.tristates.append(tristate)
-        
+
     def update(self):
-        #breakpoint()
-        activeTristate = None
-        for t in self.tristates:
-            # print('tristate values are {} {}'.format(t.inputs['a'].value, t.inputs['e'].value))
-            if t.inputs['e'].value:
-                if activeTristate is None:  # If there is not already an active tristate,
-                    activeTristate = t          # Select the current one as active.
-                else:
-                    raise busError('Multiple tristates enabled.')   # Otherwise raise a busError.
-                # print(activeTristate)
-        # input('press enter to continue...')
-                
-        # If we got here, everything is ok. Set the ouptut of the bus to the value of the tristate's input pin.
-        if not activeTristate is None:
-            self.outputs['y'].set(activeTristate.inputs['a'].value)
+        element.update(self)
+        if self.inputs['e'].value == 1:
+            self.outputs['y'].set(self.inputs['a'].value)
         else:
-            self.outputs['y'].set(0)
+            self.outputs['y'].set(None)
             
 class led(element):
     def __init__(self, colorR, colorG, colorB, posX, posY):
@@ -201,6 +202,10 @@ class button(element):
         element.__init__(self)
         self.keyBinds = {keyBind: [self.keyEvent]}
         self.addOutput(pin('y'))
+        self.outputs['y'].set(0)
+
+    def preUpdate(self):
+        pass
 
     def keyEvent(self, state):
         if state:
@@ -212,13 +217,20 @@ class switch(element):
     def __init__(self, keyBind):
         element.__init__(self)
         self.writeable = True
+        self.value = 0
         self.keyBinds = {keyBind: [self.keyEvent]}
         self.addOutput(pin('y'))
+        self.outputs['y'].set(0)
+        print(self.outputs['y'].value)
+
+    def preUpdate(self):
+        pass
 
     def keyEvent(self, state):
         if state:
             if self.writeable:
-                self.outputs['y'].set(1 - self.outputs['y'].value)
+                self.value = 1 - self.value
+                self.outputs['y'].set(self.value)
                 self.writeable = False
         else:
             self.writeable = True
@@ -235,7 +247,7 @@ class label(element):
             height += 1
         self.blankText = (' ' * width + '\n') * self.height
         
-        self.addInput(pin('a'))
+        self.addInput(pin('e'))
         self.widget = widget()
         self.widget.setText(self.text)
         self.widget.moveTo(vec2(posX, posY))
@@ -244,7 +256,7 @@ class label(element):
 
     def update(self):
         element.update(self)
-        if self.inputs['a'].value:
+        if self.inputs['e'].value:
             self.widget.setText(self.text)
         else:
             self.widget.setText(self.blankText)

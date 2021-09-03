@@ -1,5 +1,6 @@
 import sys, time, os, ctypes
 from pynput import keyboard     # MUST USE pynput 1.6.8!!
+from time import process_time
 from loading.loading import loadElement
 from ui import vec2, widget, ansiManager
 import simpleANSI as ANSI
@@ -70,10 +71,15 @@ class simulation():
         self.title.setText(self.titleString)
         self.mainWidget.addWidget(self.title)
 
-        self.keyListenerDebug = widget()
-        self.keyListenerDebug.resize(vec2(terminalSize[0], 1))
-        self.keyListenerDebug.moveTo(vec2(0, 2))
-        self.mainWidget.addWidget(self.keyListenerDebug)
+        # self.keyListenerDebug = widget()
+        # self.keyListenerDebug.resize(vec2(terminalSize[0], 1))
+        # self.keyListenerDebug.moveTo(vec2(0, 2))
+        # self.mainWidget.addWidget(self.keyListenerDebug)
+
+        self.timingDebug = widget()
+        self.timingDebug.resize(vec2(30, 1))
+        self.timingDebug.moveTo(vec2(0, terminalSize[1] - 2))
+        self.mainWidget.addWidget(self.timingDebug)
 
     def keyPress(self, key):
         with keyBoardListenerManager(self):     # Prevent hanging threads
@@ -82,11 +88,11 @@ class simulation():
                 return
             
             # self.keyListenerDebug.setText(str(key))
-            self.keyListenerDebug.setText(str(key) + ' - ' + str(self.mainElement.keyBinds))
+            # self.keyListenerDebug.setText(str(key) + ' - ' + str(self.mainElement.keyBinds))
 
             # Backspace to toggle simulation
             if key == keyboard.Key.backspace:
-                self.keyListenerDebug.setText('backspace pressed                  ')
+                # self.keyListenerDebug.setText('backspace pressed                  ')
                 self.simRunFlag = not self.simRunFlag
                 if self.simRunFlag:
                     self.title.setText(self.titleString + '         ')
@@ -96,19 +102,19 @@ class simulation():
 
             # Escape to exit
             elif key == keyboard.Key.esc:
-                self.keyListenerDebug.setText('escape pressed                     ')
+                # self.keyListenerDebug.setText('escape pressed                     ')
                 self.mainWidget.update()    # One last update to see if it died right
                 self.runFlag = False
                 return False
 
             # Set the appropriate keybinds
             elif str(key) in self.mainElement.keyBinds.keys():
-                self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
+                # self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
                 for f in self.mainElement.keyBinds[str(key)]:
                     f(True)
 
-            else:
-                self.keyListenerDebug.setText('{} not found in {}'.format(repr(key), repr(self.mainElement.keyBinds)))
+            # else:
+                # self.keyListenerDebug.setText('{} not found in {}'.format(repr(key), repr(self.mainElement.keyBinds)))
 
     def keyRelease(self, key):
         with keyBoardListenerManager(self):
@@ -121,13 +127,18 @@ class simulation():
         self.exit()
 
     def main(self):
+        startTime = process_time()
+        updateTime = process_time() - startTime
         while self.runFlag:
+            startTime = process_time()
+            self.timingDebug.setText('Update loop time: {}s'.format(updateTime))
             if self.simRunFlag:
                 self.mainElement.update()
                 self.mainWidget.update()
             else:
                 self.mainWidget.update()
                 time.sleep(0.2) # Chillax for a split second, saves the CPU
+            updateTime = process_time() - startTime
         
         self.keyListener.join()
 

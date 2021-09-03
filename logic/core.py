@@ -2,8 +2,8 @@ class pin():    #Basic pin class
     def __init__(self, name):
         self.name = name
         self.alias = name
-        self.target = self
-        self.value = 0
+        self.targets = []
+        self.value = None
 
     def rename(self, name):
         self.name = name
@@ -12,7 +12,10 @@ class pin():    #Basic pin class
         self.alias = alias
 
     def connect(self, target):
-        self.target = target
+        self.targets.append(target)
+
+    def disconnect(self, target):
+        self.targets.remove(target)
 
     def set(self, value):
         self.value = value
@@ -20,8 +23,16 @@ class pin():    #Basic pin class
     def toggle(self):
         self.value = 1 - self.value
     
-    def update(self):
-        self.value = self.target.value
+    def fetch(self):
+        values =  [target.value for target in self.targets]
+        if 1 in values and 0 in values:
+            raise Exception('Contending inputs for {}'.format(self))
+        elif 1 in values:
+            self.set(1)
+        elif 0 in values:
+            self.set(0)
+        else:
+            self.set(None)
 
 class element():    # Basic element class
     def __init__(self):
@@ -66,10 +77,14 @@ class element():    # Basic element class
             else:
                 self.keyBinds[key] = keyBinds[key]
 
-    def update(self):
+    def preUpdate(self):
         for i in self.inputs.values():
-            i.update()
+            i.fetch()
+        for e in self.elements:
+            e.preUpdate()
+
+    def update(self):
         for e in self.elements:
             e.update()
         for o in self.outputs.values():
-            o.update()
+            o.fetch()

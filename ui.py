@@ -77,14 +77,14 @@ class widget():
             self.fgColor[0],
             self.fgColor[1],
             self.fgColor[2]
-        ))
+        ), end = '')
         print(ansi.graphics.setGraphicsMode(
             ansi.graphics.bgColor,
             ansi.graphics.mode16Bit,
             self.bgColor[0],
             self.bgColor[1],
             self.bgColor[2]
-        ))
+        ), end = '')
 
         if self.mode == self.containerMode:
             for w in self.widgets:
