@@ -269,7 +269,7 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
             e.connect(a)
         else:
             ctr = 0
-            for i in list(e.inputs.keys()):
+            for i in iter(e.inputs.keys()):
                 # pdb.set_trace()
                 e.inputs[i].connect(mainElement.aliasInternalPins[needsConnected[e][ctr]])
                 ctr += 1

@@ -67,9 +67,9 @@ class widget():
     def update(self):
         # Parent check and cursor homing (to prevent colored bars at the bottom of the console)
         if self.parent is None:
-            print(ansi.cursor.moveTo(*(self.pos + self.consolePosOffset)))
+            print(ansi.cursor.moveTo(*(self.pos + self.consolePosOffset)), end='')
         elif isinstance(self.parent, widget):
-            print(ansi.cursor.moveTo(*(self.pos + self.parent.pos + self.consolePosOffset)))
+            print(ansi.cursor.moveTo(*(self.pos + self.parent.pos + self.consolePosOffset)), end='')
         
         print(ansi.graphics.setGraphicsMode(
             ansi.graphics.fgColor,
@@ -77,14 +77,14 @@ class widget():
             self.fgColor[0],
             self.fgColor[1],
             self.fgColor[2]
-        ), end = '')
+        ), end='')
         print(ansi.graphics.setGraphicsMode(
             ansi.graphics.bgColor,
             ansi.graphics.mode16Bit,
             self.bgColor[0],
             self.bgColor[1],
             self.bgColor[2]
-        ), end = '')
+        ), end='')
 
         if self.mode == self.containerMode:
             for w in self.widgets:
@@ -109,9 +109,9 @@ class widget():
                     newPos = self.pos + self.consolePosOffset + vec2(0, i)
                 elif isinstance(self.parent, widget):
                     newPos = self.pos + self.parent.pos + self.consolePosOffset + vec2(0, i)
-                print(ansi.cursor.moveTo(*newPos), end = '')
+                print(ansi.cursor.moveTo(*newPos), end='')
                 try:
-                    print(textToPrint[i], end = '')
+                    print(textToPrint[i], end='')
                 except IndexError:
                     pass
     
@@ -152,17 +152,20 @@ class ansiManager():
 
     def __enter__(self):
         if sys.platform == 'win32':
-            print(ansi.conhostEnableANSI(), end = '')
-        print(ansi.clear.entireScreen(), end = '')
-        print('\x1b[?25l', end = '')    # Hide cursor
+            print(ansi.conhostEnableANSI(), end='')
+        print(ansi.clear.entireScreen(), end='')
+        print('\x1b[?25l', end='')    # Hide cursor
 
     def __exit__(self, *args):
-        print('\x1b[25h', end = '')     # Show cursor
-        print('\x1b[39;49m')            # Reset colors
+        print('')
+        print('\x1b[25h', end='')     # Show cursor
+        print('ANSI manager: Cursor showing.')
+        print('\x1b[39;49m', end='')            # Reset colors
+        print('ANSI manager: Colors reset.')
 
 def testUI():
-    print(ansi.clear.entireScreen(), end = '')
-    print(ansi.cursor.home(), end = '')
+    print(ansi.clear.entireScreen(), end='')
+    print(ansi.cursor.home(), end='')
     
     w1 = widget()
     w1.moveTo(vec2(1, 0))
@@ -193,4 +196,4 @@ if __name__ == '__main__':
     ansi.conhostEnableANSI()
     with ansiManager():
         testUI()
-        print(ansi.cursor.moveTo(0, 20))
+        print(ansi.cursor.moveTo(0, 20), end='')

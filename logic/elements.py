@@ -1,10 +1,6 @@
 from logic.core import element, pin
 from ui import widget, vec2
 
-# Error raised by bus elements
-class busError(Exception):
-    pass
-
 class andGate(element):
     def __init__(self):
         element.__init__(self)
@@ -15,12 +11,12 @@ class andGate(element):
     def update(self):
         element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
-            next(iter(self.outputs)).set(None)
+            next(iter(self.outputs.values())).set(None)
         elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 2:
-            next(iter(self.outputs)).set(1)
+            next(iter(self.outputs.values())).set(1)
             #print('and gate set high')
         else:
-            next(iter(self.outputs)).set(0)
+            next(iter(self.outputs.values())).set(0)
             #print('and gate set low')
 
 class orGate(element):
@@ -33,12 +29,12 @@ class orGate(element):
     def update(self):
         element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
-            next(iter(self.outputs)).set(None)
+            next(iter(self.outputs.values())).set(None)
         elif 1 in [self.inputs['a'].value, self.inputs['b'].value]:
-            next(iter(self.outputs)).set(1)
+            next(iter(self.outputs.values())).set(1)
             #print('or gate set high')
         else:
-            next(iter(self.outputs)).set(0)
+            next(iter(self.outputs.values())).set(0)
             #print('or gate set low')
 
 class xorGate(element):
@@ -51,12 +47,12 @@ class xorGate(element):
     def update(self):
         element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
-            next(iter(self.outputs)).set(None)
+            next(iter(self.outputs.values())).set(None)
         elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 1:
-            next(iter(self.outputs.values())).set(1)
+            next(iter(self.outputs.values().values())).set(1)
             #print('xor gate set high')
         else:
-            next(iter(self.outputs)).set(0)
+            next(iter(self.outputs.values())).set(0)
             #print('xor gate set low')
 
 class notGate(element):
@@ -68,12 +64,12 @@ class notGate(element):
     def update(self):
         element.update(self)
         if self.inputs['a'].value is None:
-            next(iter(self.outputs)).set(None)
+            next(iter(self.outputs.values())).set(None)
         elif self.inputs['a'].value == 1:
-            next(iter(self.outputs)).set(0)
+            next(iter(self.outputs.values())).set(0)
             #print('xnor gate set low')
         else:
-            next(iter(self.outputs)).set(1)
+            next(iter(self.outputs.values())).set(1)
             #print('xnor gate set high')
 
 class nandGate(element):
@@ -86,12 +82,12 @@ class nandGate(element):
     def update(self):
         element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
-            next(iter(self.outputs)).set(None)
+            next(iter(self.outputs.values())).set(None)
         elif bool(self.inputs['a'].value) and bool(self.inputs['b'].value):
-            next(iter(self.outputs)).set(0)
+            next(iter(self.outputs.values())).set(0)
             #print('nand gate set low')
         else:
-            next(iter(self.outputs)).set(1)
+            next(iter(self.outputs.values())).set(1)
             #print('nand gate set high')
 
 class norGate(element):
@@ -104,12 +100,12 @@ class norGate(element):
     def update(self):
         element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
-            next(iter(self.outputs)).set(None)
+            next(iter(self.outputs.values())).set(None)
         elif bool(self.inputs['a'].value) or bool(self.inputs['b'].value):
-            next(iter(self.outputs)).set(0)
+            next(iter(self.outputs.values())).set(0)
             #print('nor gate set low')
         else:
-            next(iter(self.outputs)).set(1)
+            next(iter(self.outputs.values())).set(1)
             #print('nor gate set high')
 
 class xnorGate(element):
@@ -122,12 +118,12 @@ class xnorGate(element):
     def update(self):
         element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
-            next(iter(self.outputs)).set(None)
+            next(iter(self.outputs.values())).set(None)
         elif (bool(self.inputs['a'].value) or bool(self.inputs['b'].value)) and not (bool(self.inputs['a'].value) and bool(self.inputs['b'].value)):
-            next(iter(self.outputs)).set(0)
+            next(iter(self.outputs.values())).set(0)
             #print('xnor gate set low')
         else:
-            next(iter(self.outputs)).set(1)
+            next(iter(self.outputs.values())).set(1)
             #print('xnor gate set high')
 
 class truthTable(element):

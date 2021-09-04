@@ -24,7 +24,7 @@ class pin():    #Basic pin class
         self.value = 1 - self.value
     
     def fetch(self):
-        values =  [target.value for target in self.targets]
+        values = [target.value for target in self.targets]
         if 1 in values and 0 in values:
             raise Exception('Contending inputs for {}'.format(self))
         elif 1 in values:
@@ -33,6 +33,8 @@ class pin():    #Basic pin class
             self.set(0)
         else:
             self.set(None)
+        # print('targets: {}'.format(self.targets), end='')
+        # print('values: {}'.format(values), end='')
 
 class element():    # Basic element class
     def __init__(self):
