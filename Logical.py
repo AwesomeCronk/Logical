@@ -34,6 +34,7 @@ class simulation():
     def __init__(self):
         self.runFlag = True
         self.simRunFlag = True
+        self.breakpointFlag = False
         self.altHeld = False
         self.altKeys = [keyboard.Key.alt,
             keyboard.Key.alt_gr,
@@ -109,7 +110,7 @@ class simulation():
 
             # Insert to break into debugger
             elif key == keyboard.Key.insert:
-                breakpoint()
+                self.breakpointFlag = True
 
             # Set the appropriate keybinds
             elif str(key) in self.mainElement.keyBinds.keys():
@@ -131,18 +132,25 @@ class simulation():
         self.exit()
 
     def main(self):
+        self.pausedForCycles = 0
         updateTime = 0.0
         while self.runFlag:
-            # startTime = getTime()
-            # self.updateDebug.setText('Update time: {}ms   '.format(str(updateTime).rjust(7)))
+            if self.breakpointFlag:
+                self.breakpointFlag = False
+                breakpoint()
+            startTime = getTime()
+            self.updateDebug.setText('Update time: {}ms   '.format(str(updateTime).rjust(7)))
             if self.simRunFlag:
+                self.pausedForCycles = 0
                 self.mainElement.preUpdate()    # Fetch pin states before they change
                 self.mainElement.update()   # Update each element
                 self.mainWidget.update()    # Update each widget
             else:
+                self.pausedForCycles += 1
+                print('pause cycle', end='')
                 self.mainWidget.update()
                 time.sleep(0.2) # Chillax for a split second, saves the CPU
-            # updateTime = round((getTime() - startTime) / 1000000, 2)
+            updateTime = round((getTime() - startTime) / 1000000, 2)
         
         self.keyListener.join()
 
