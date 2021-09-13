@@ -1,4 +1,4 @@
-import sys
+import sys, time
 import simpleANSI as ansi
 
 class vec2():
@@ -157,8 +157,8 @@ class ansiManager():
         print('\x1b[?25l', end='')    # Hide cursor
 
     def __exit__(self, *args):
-        print('')
-        print('\x1b[25h', end='')     # Show cursor
+        print('\nANSI Manager: Commencing cleanup...', end='end\n')
+        # print('\x1b[25h', end='')     # Show cursor
         print('ANSI manager: Cursor showing.')
         print('\x1b[39;49m', end='')            # Reset colors
         print('ANSI manager: Colors reset.')
@@ -167,11 +167,16 @@ def testUI():
     print(ansi.clear.entireScreen(), end='')
     print(ansi.cursor.home(), end='')
     
+    mainWidget = widget()
+    mainWidget.setMode(widget.containerMode)
+
     w1 = widget()
     w1.moveTo(vec2(1, 0))
     w1.resize(vec2(22, 2))
     w1.setMode(widget.textMode)
     w1.setText('Hello world!\nThis text cuts off soon.')
+    mainWidget.addWidget(w1)
+    mainWidget.update()
 
     w2 = widget()
     w2.moveTo(vec2(25, 2))
@@ -180,6 +185,8 @@ def testUI():
     w2.setWrapping(1)
     w2.setFGColor((255, 0, 0))
     w2.setText('We have colors!!!')
+    mainWidget.addWidget(w2)
+    mainWidget.update()
 
     w3 = widget()
     w3.moveTo(vec2(15, 5))
@@ -187,10 +194,8 @@ def testUI():
     w3.setMode(widget.textMode)
     w3.setWrapping(1)
     w3.setText('This text should wrap around several times.')
-
-    w1.update()
-    w2.update()
-    w3.update()
+    mainWidget.addWidget(w3)
+    mainWidget.update()
     
 if __name__ == '__main__':
     ansi.conhostEnableANSI()
