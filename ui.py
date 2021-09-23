@@ -157,7 +157,8 @@ class ansiManager():
         print('\x1b[?25l', end='')    # Hide cursor
 
     def __exit__(self, *args):
-        print('\nANSI Manager: Commencing cleanup...', end='end\n')
+        print('Begin binary dump: ', end='End binary dump.')
+        print('\nANSI Manager: Commencing cleanup...')
         # print('\x1b[25h', end='')     # Show cursor
         print('ANSI manager: Cursor showing.')
         print('\x1b[39;49m', end='')            # Reset colors
