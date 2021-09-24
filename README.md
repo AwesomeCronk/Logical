@@ -17,6 +17,11 @@ The best way to get started is by reading through the docs. They are written in 
 * Error logging with `logging`
 * Error handling
 
+## Known Issues:
+* LED widgets are not updating after initial update. May be in the LED update, may be in the GUI update.
+* If the line `time.sleep(0.2)` is uncommented in the main loop, the GUI takes 6-7 seconds to update while paused.
+* Dumps random binary between string and end string of the first `print` command in `ui.ansiManager.__exit__`
+
 ## Release Notes
 * 0.1.0 - Added version tracking
 * 0.2.0 - Fixed includes

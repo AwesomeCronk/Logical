@@ -133,13 +133,13 @@ class simulation():
 
     def main(self):
         self.pausedForCycles = 0
-        updateTime = 0.0
+        updateTime = 0
         while self.runFlag:
             if self.breakpointFlag:
                 self.breakpointFlag = False
                 breakpoint()
             startTime = getTime()
-            self.updateDebug.setText('Update time: {}ms   '.format(str(updateTime).rjust(7)))
+            self.updateDebug.setText('Update time: {}us   '.format(str(updateTime).rjust(7)))
             if self.simRunFlag:
                 self.pausedForCycles = 0
                 self.mainElement.preUpdate()    # Fetch pin states before they change
@@ -147,10 +147,10 @@ class simulation():
                 self.mainWidget.update()    # Update each widget
             else:
                 self.pausedForCycles += 1
-                print('pause cycle', end='')
+                print('pause cycle {}'.format(self.pausedForCycles), end='')
                 self.mainWidget.update()
-                time.sleep(0.2) # Chillax for a split second, saves the CPU
-            updateTime = round((getTime() - startTime) / 1000000, 2)
+                # time.sleep(0.2) # Chillax for a split second, saves the CPU
+            updateTime = int((getTime() - startTime) / 1000)
         
         self.keyListener.join()
 
