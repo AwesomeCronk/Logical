@@ -1,6 +1,5 @@
 //a simple test program
-in a; in b
+$pins a b > c y
 
-and a b cc //the and gate
-xor a b yy
-out cc c;out yy y
+and a b > c
+xor a b > y

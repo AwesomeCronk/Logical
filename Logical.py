@@ -1,10 +1,12 @@
-import sys, time, os, ctypes
+import sys, time, os, ctypes, io
 from pynput import keyboard     # MUST USE pynput 1.6.8!!
 from time import process_time_ns as getTime
 from time import sleep
-from loading.loading import loadElement
-from ui import vec2, widget, ansiManager
 import simpleANSI as ANSI
+from loading.loading import loadElement
+from ui import vec2, widget, ansiManager, initANSI, cleanupANSI
+
+sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
 
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
 
@@ -41,20 +43,13 @@ class simulation():
             keyboard.Key.alt_l,
             keyboard.Key.alt_r
         ]
+        self.keyBindsToExecute = []
 
         self.mainElement, self.mainWidget = loadElement(sys.argv[1])
         input('press enter to continue...')
 
         self.titleString = 'Logical {} (Python {} on {} {})'.format(version, pythonVersion, architecture, platform)
         self.initUI()
-        # pdb.set_trace()
-
-        # Start the keyboard listener
-        # self.exitHotKey = keyboard.HotKey(
-        #     keyboard.HotKey.parse('<alt>+<esc>'),
-        #     self.exit
-        # )
-        
         self.keyListener = keyboard.Listener(
             on_press=self.keyPress,
             on_release=self.keyRelease
@@ -62,9 +57,10 @@ class simulation():
         self.keyListener.start()
 
     def initUI(self):
-        # Activate ANSI escapes because conhost ¯\_(ツ)_/¯
-        print(ANSI.conhostEnableANSI(), end = '')
-        # Clear the screen
+        # Already done in ui.ansiManager
+        # # Activate ANSI escapes because conhost ¯\_(ツ)_/¯
+        # print(ANSI.conhostEnableANSI(), end = '')
+        # Clear the screen. Must be done after all the debug printing in loadElement
         print(ANSI.clear.entireScreen(), end = '')
 
         self.title = widget()
@@ -116,7 +112,7 @@ class simulation():
             elif str(key) in self.mainElement.keyBinds.keys():
                 self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
                 for f in self.mainElement.keyBinds[str(key)]:
-                    f(True)
+                    self.keyBindsToExecute.append((f, True))
 
             else:
                 self.keyListenerDebug.setText('{} not found in {}'.format(str(key), str(self.mainElement.keyBinds)))
@@ -126,30 +122,34 @@ class simulation():
             # Set the appropriate keybinds
             if str(key) in self.mainElement.keyBinds.keys():
                 for f in self.mainElement.keyBinds[str(key)]:
-                    f(False)
-
-    def hotKeyExit(self):
-        self.exit()
+                    self.keyBindsToExecute.append((f, False))
 
     def main(self):
-        self.pausedForCycles = 0
         updateTime = 0
         while self.runFlag:
+            startTime = getTime()
+            self.updateDebug.setText('Update time: {}us   '.format(str(updateTime).rjust(7)))
+            
             if self.breakpointFlag:
                 self.breakpointFlag = False
                 breakpoint()
-            startTime = getTime()
-            self.updateDebug.setText('Update time: {}us   '.format(str(updateTime).rjust(7)))
+
             if self.simRunFlag:
-                self.pausedForCycles = 0
+                # Execute all the key binding functions set during the last update cycle
+                # Prevents contentions from threading
+                for f, state in self.keyBindsToExecute:
+                    f(state)
+                    self.keyBindsToExecute.remove((f, state))
+
                 self.mainElement.preUpdate()    # Fetch pin states before they change
                 self.mainElement.update()   # Update each element
-                self.mainWidget.update()    # Update each widget
             else:
-                self.pausedForCycles += 1
-                print('pause cycle {}'.format(self.pausedForCycles), end='')
-                self.mainWidget.update()
-                # time.sleep(0.2) # Chillax for a split second, saves the CPU
+                time.sleep(0.2) # Chillax for a split second, saves the CPU
+
+            self.mainWidget.update()    # Update each widget
+            # Need to either flush or replace sys.stdout
+            # print('', end='', flush=True)   # Flush stdout each update loop to ensure that updates get printed.
+            
             updateTime = int((getTime() - startTime) / 1000)
         
         self.keyListener.join()
@@ -158,6 +158,13 @@ class simulation():
         self.runFlag = False
             
 if __name__ == '__main__':
+    # try:
+    #     initANSI()
+    #     sim = simulation()
+    #     sim.main()
+    # finally:
+    #     cleanupANSI()
+
     with ansiManager():
         sim = simulation()
         sim.main()

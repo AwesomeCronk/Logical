@@ -1,12 +1,6 @@
-$include halfAdder ../test1/halfAdder.lgc
+$include ../test1/halfAdder.lgc > halfAdder
+$pins a b cIn > cOut y
 
-in a
-in b
-in cIn
-
-halfAdder a b c1 y1
-halfAdder cIn y1 c2 y2
-or c1 c2 c3
-
-out c3 cOut
-out y2 y
+halfAdder a b > cc y0
+halfAdder cIn y0 > c1 y1
+or c0 c1 > cOut

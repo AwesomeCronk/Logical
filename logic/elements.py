@@ -148,12 +148,12 @@ class truthTable(element):
             unconnectedPins = True
         else:
             unconnectedPins = False
-        match = int('0b' + ''.join(values), base=2)
-        result = self.table[match]
         if unconnectedPins:
             for o, outputPin in enumerate(self.outputs.values()):
                 outputPin.set(None)
         else:
+            match = int('0b' + ''.join(values), base=2)
+            result = self.table[match]
             for o, outputPin in enumerate(self.outputs.values()):
                 outputPin.set(int(result[o]))
 
@@ -203,6 +203,9 @@ class button(element):
     def preUpdate(self):
         pass
 
+    def update(self):
+        pass
+
     def keyEvent(self, state):
         if state:
             self.outputs['y'].set(1)
@@ -221,6 +224,9 @@ class switch(element):
 
     def preUpdate(self):
         pass
+
+    def update(self):
+        print('switch value {}'.format(self.value), end='')
 
     def keyEvent(self, state):
         if state:

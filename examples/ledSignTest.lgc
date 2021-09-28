@@ -1,5 +1,0 @@
-$include ledSign.py > sign
-
-button > enable & 'a'
-
-sign enable

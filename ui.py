@@ -62,8 +62,6 @@ class widget():
         self.text = ''
         self.widgets = []
         
-        # print(self.size[0])
-        
     def update(self):
         # Parent check and cursor homing (to prevent colored bars at the bottom of the console)
         if self.parent is None:
@@ -144,25 +142,29 @@ class widget():
 
     def addWidget(self, newWidget):
         self.widgets.append(newWidget)
-        
+
+def initANSI():
+    if sys.platform == 'win32':
+        print(ansi.conhostEnableANSI(), end='')
+    print(ansi.clear.entireScreen(), end='')
+    print('\x1b[?25l', end='')    # Hide cursor
+
+def cleanupANSI():
+    print('\nANSI Manager: Commencing cleanup...')
+    print('\x1b[25h', end='')     # Show cursor
+    print('ANSI manager: Cursor showing.')
+    print('\x1b[39;49m', end='')            # Reset colors
+    print('ANSI manager: Colors reset.')
 
 class ansiManager():
     def __init__(self):
         pass
 
     def __enter__(self):
-        if sys.platform == 'win32':
-            print(ansi.conhostEnableANSI(), end='')
-        print(ansi.clear.entireScreen(), end='')
-        print('\x1b[?25l', end='')    # Hide cursor
+        initANSI()
 
     def __exit__(self, *args):
-        print('Begin binary dump: ', end='End binary dump.')
-        print('\nANSI Manager: Commencing cleanup...')
-        # print('\x1b[25h', end='')     # Show cursor
-        print('ANSI manager: Cursor showing.')
-        print('\x1b[39;49m', end='')            # Reset colors
-        print('ANSI manager: Colors reset.')
+        cleanupANSI()    
 
 def testUI():
     print(ansi.clear.entireScreen(), end='')

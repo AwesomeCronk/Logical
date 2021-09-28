@@ -1,0 +1,11 @@
+// Logical test file
+// Tests butons, switches, leds, and \high and \low states
+
+button > k & 'k'
+switch > l & 'l'
+
+led k & 255 0 0 20 10
+led l & 0 255 0 21 10
+
+led \high & 255 20 20 5 5
+led \low  & 255 20 20 6 5

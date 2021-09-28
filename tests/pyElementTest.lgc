@@ -1,0 +1,8 @@
+// Logical test file
+// Tests pyElements
+
+$include pyElementTest.py > pyElement
+
+button > enable & 'a'
+
+pyElement enable
