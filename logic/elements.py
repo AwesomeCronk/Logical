@@ -49,7 +49,7 @@ class xorGate(element):
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
             next(iter(self.outputs.values())).set(None)
         elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 1:
-            next(iter(self.outputs.values().values())).set(1)
+            next(iter(self.outputs.values())).set(1)
             #print('xor gate set high')
         else:
             next(iter(self.outputs.values())).set(0)
@@ -193,6 +193,57 @@ class led(element):
         else:
             self.widget.setBGColor(self.dimColor)
 
+class label(element):
+    def __init__(self, fgColorR, fgColorG, fgColorB, bgColorR, bgColorG, bgColorB, posX, posY, text, mode):
+        element.__init__(self)
+        
+        # Height calculations and newline management
+        width, height = 0, 0
+        self.text = text.replace('\\n', '\n')
+        for line in self.text.split('\n'):
+            if len(line) > width:
+                width = len(line)
+            height += 1
+
+        # Mode handling
+        if mode in ['fg', 'bg']:
+            self.mode = mode
+        else:
+            raise Exception('Invalid mode "{}" for label'.format(mode))
+                
+        # Color calculations
+        self.fgLitColor = (int(fgColorR), int(fgColorG), int(fgColorB))
+        self.fgDimColor = (int(self.fgLitColor[0] / 2), int(self.fgLitColor[1] / 2), int(self.fgLitColor[2] / 2))
+        self.bgLitColor = (int(bgColorR), int(bgColorG), int(bgColorB))
+        self.bgDimColor = (int(self.bgLitColor[0] / 2), int(self.bgLitColor[1] / 2), int(self.bgLitColor[2] / 2))
+
+        # Widget setup
+        self.addInput(pin('e'))
+        self.widget = widget()
+        self.widget.setText(self.text)
+        self.widget.moveTo(vec2(int(posX), int(posY)))
+        self.widget.resize(vec2(int(width), int(height)))
+
+        # Precoloring
+        if self.mode == 'fg':
+            self.widget.setFGColor(self.fgDimColor)
+            self.widget.setBGColor(self.bgLitColor)
+        elif self.mode == 'bg':
+            self.widget.setFGColor(self.fgLitColor)
+            self.widget.setBGColor(self.bgDimColor)
+
+    def update(self):
+        if self.inputs['e'].value:
+            if self.mode == 'fg':
+                self.widget.setFGColor(self.fgLitColor)
+            elif self.mode == 'bg':
+                self.widget.setBGColor(self.bgLitColor)
+        else:
+            if self.mode == 'fg':
+                self.widget.setFGColor(self.fgDimColor)
+            elif self.mode == 'bg':
+                self.widget.setBGColor(self.bgDimColor)
+
 class button(element):
     def __init__(self, keyBind):
         element.__init__(self)
@@ -235,33 +286,3 @@ class switch(element):
                 self.writeable = False
         else:
             self.writeable = True
-
-class label(element):
-    def __init__(self, fgColorR, fgColorG, fgColorB, bgColorR, bgColorG, bgColorB, posX, posY, text, mode):
-        element.__init__(self)
-        
-        width, height = 0, 0
-        self.text = text.replace('\\n', '\n')
-        for line in self.text.split('\n'):
-            if len(line) > width:
-                width = len(line)
-            height += 1
-
-        if mode in ['fg', 'bg']:
-            self.mode = mode
-        else:
-            raise Exception('Invalid mode "{}" for label'.format(mode))
-        
-        self.addInput(pin('e'))
-        self.widget = widget()
-        self.widget.setText(self.text)
-        self.widget.moveTo(vec2(posX, posY))
-        self.widget.resize(vec2(width, height))
-        self.widget.setFGColor((fgColorR, fgColorG, fgColorB))
-
-    def update(self):
-        element.update(self)
-        if self.inputs['e'].value:
-            self.widget.setText(self.text)
-        else:
-            self.widget.setText(self.blankText)

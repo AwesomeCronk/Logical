@@ -1,15 +1,37 @@
 // Logical test file
-// Tests butons, switches, leds, labels, and \high and \low states
+// Tests butons, switches, basic gates, leds, labels, and \high and \low states
 
 button > j & 'j'
 switch > k & 'k'
 
 switch > l & 'l'
 
-led k & 255 20 20  5 10
-led l & 20 255 20  6 10
-
-label l & 255 20 20  0 0 0  9 10 label fg
-
 led \high & 255 20 20 5 5
 led \low  & 255 20 20 6 5
+
+led j & 255 20 20  9 5
+led k & 20 255 20  10 5
+
+label l & 255 20 20  0 0 0  13 5 label fg
+
+button > a & 'a'
+button > b & 'b'
+
+and a b > and
+or a b > or
+xor a b > xor
+not a > not
+nand a b > nand
+nor a b > nor
+xnor a b > xnor
+
+led a & 40 40 255  3 8
+led b & 40 40 255  4 8
+
+label and  & 0 0 0  20 255 20  5 10 and  bg
+label or   & 0 0 0  20 255 20  5 11 or   bg
+label xor  & 0 0 0  20 255 20  5 12 xor  bg
+label not  & 0 0 0  20 255 20  5 13 not  bg
+label nand & 0 0 0  20 255 20  5 14 nand bg
+label nor  & 0 0 0  20 255 20  5 15 nor  bg
+label xnor & 0 0 0  20 255 20  5 16 xnor bg

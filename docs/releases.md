@@ -47,5 +47,6 @@ This document contains release notes for all versions from 0.1.0 on.
 * Fixed binary dump on exit.
 * Fixed UI not updating.
 * Fixed UI lag when paused.
-* Added support for tristate logic, replaced tristate/bus combo with just tristate.
+* Added support for tristate logic, eliminating the need for bus objects.
 * Improved PDB breakout by cleaning up what it prints when it returns.
+* Fixed labels not accessble from lgc code.
