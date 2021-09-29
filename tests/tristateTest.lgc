@@ -1,0 +1,17 @@
+// Logical test file
+// Tests tristates
+
+button > in0 & 'q'
+button > in1 & 'w'
+
+switch > enable0 & 'a'
+switch > enable1 & 's'
+
+tristate in0 enable0 > out
+tristate in1 enable1 > out
+
+led in0 &     255 20 20  5 5
+led in1 &     255 20 20  7 5
+led enable0 & 20 255 20  5 6
+led enable1 & 20 255 20  7 6
+led out &     20 20 255  9 5

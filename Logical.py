@@ -29,6 +29,7 @@ class keyBoardListenerManager():
     def __exit__(self, *args):
         # Take action only if there was an exception
         if not args[0] is None:
+            # Stop the main thread if the keyboard thread crashes
             self.simulation.simRunFlag = False
             self.simulation.runFlag = False
 
@@ -80,49 +81,51 @@ class simulation():
         self.mainWidget.addWidget(self.updateDebug)
 
     def keyPress(self, key):
-        with keyBoardListenerManager(self):     # Prevent hanging threads
-            # If this console is not the active window then return
-            if user32.GetForegroundWindow() != kernel32.GetConsoleWindow():
-                return
-            
-            self.keyListenerDebug.setText(str(key))
-            self.keyListenerDebug.setText(str(key) + ' - ' + str(self.mainElement.keyBinds))
+        if not self.breakpointFlag:
+            with keyBoardListenerManager(self):     # Prevent hanging threads
+                # If this console is not the active window then return
+                if user32.GetForegroundWindow() != kernel32.GetConsoleWindow():
+                    return
+                
+                self.keyListenerDebug.setText(str(key))
+                self.keyListenerDebug.setText(str(key) + ' - ' + str(self.mainElement.keyBinds))
 
-            # Backspace to toggle simulation
-            if key == keyboard.Key.backspace:
-                self.keyListenerDebug.setText('backspace pressed                  ')
-                self.simRunFlag = not self.simRunFlag
-                if self.simRunFlag:
-                    self.title.setText(self.titleString + '         ')
+                # Backspace to toggle simulation
+                if key == keyboard.Key.backspace:
+                    self.keyListenerDebug.setText('backspace pressed                  ')
+                    self.simRunFlag = not self.simRunFlag
+                    if self.simRunFlag:
+                        self.title.setText(self.titleString + '         ')
+                    else:
+                        self.title.setText(self.titleString + ' (paused)')
+
+                # Escape to exit
+                elif key == keyboard.Key.esc:
+                    self.keyListenerDebug.setText('escape pressed                     ')
+                    self.mainWidget.update()    # One last update to see if it died right
+                    self.runFlag = False
+                    return False
+
+                # Insert to break into debugger
+                elif key == keyboard.Key.insert:
+                    self.breakpointFlag = True
+
+                # Set the appropriate keybinds
+                elif str(key) in self.mainElement.keyBinds.keys():
+                    self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
+                    for f in self.mainElement.keyBinds[str(key)]:
+                        self.keyBindsToExecute.append((f, True))
+
                 else:
-                    self.title.setText(self.titleString + ' (paused)')
-
-            # Escape to exit
-            elif key == keyboard.Key.esc:
-                self.keyListenerDebug.setText('escape pressed                     ')
-                self.mainWidget.update()    # One last update to see if it died right
-                self.runFlag = False
-                return False
-
-            # Insert to break into debugger
-            elif key == keyboard.Key.insert:
-                self.breakpointFlag = True
-
-            # Set the appropriate keybinds
-            elif str(key) in self.mainElement.keyBinds.keys():
-                self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
-                for f in self.mainElement.keyBinds[str(key)]:
-                    self.keyBindsToExecute.append((f, True))
-
-            else:
-                self.keyListenerDebug.setText('{} not found in {}'.format(str(key), str(self.mainElement.keyBinds)))
+                    self.keyListenerDebug.setText('{} not found in {}'.format(str(key), str(self.mainElement.keyBinds)))
 
     def keyRelease(self, key):
-        with keyBoardListenerManager(self):
-            # Set the appropriate keybinds
-            if str(key) in self.mainElement.keyBinds.keys():
-                for f in self.mainElement.keyBinds[str(key)]:
-                    self.keyBindsToExecute.append((f, False))
+        if not self.breakpointFlag:
+            with keyBoardListenerManager(self):
+                # Set the appropriate keybinds
+                if str(key) in self.mainElement.keyBinds.keys():
+                    for f in self.mainElement.keyBinds[str(key)]:
+                        self.keyBindsToExecute.append((f, False))
 
     def main(self):
         updateTime = 0
@@ -131,8 +134,9 @@ class simulation():
             self.updateDebug.setText('Update time: {}us   '.format(str(updateTime).rjust(7)))
             
             if self.breakpointFlag:
-                self.breakpointFlag = False
                 breakpoint()
+                print(ANSI.clear.entireScreen(), end='')
+                self.breakpointFlag = False
 
             if self.simRunFlag:
                 # Execute all the key binding functions set during the last update cycle

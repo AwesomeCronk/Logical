@@ -1,0 +1,10 @@
+// Logical test file
+// Helper file for elementTest.lgc
+
+$pins a b > c d
+
+and a b > d
+
+button > c & 'c'
+
+led c & 255 255 20  11 5

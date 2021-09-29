@@ -220,13 +220,12 @@ class switch(element):
         self.keyBinds = {keyBind: [self.keyEvent]}
         self.addOutput(pin('y'))
         self.outputs['y'].set(0)
-        print(self.outputs['y'].value)
 
     def preUpdate(self):
         pass
 
     def update(self):
-        print('switch value {}'.format(self.value), end='')
+        pass
 
     def keyEvent(self, state):
         if state:
@@ -238,7 +237,7 @@ class switch(element):
             self.writeable = True
 
 class label(element):
-    def __init__(self, colorR, colorG, colorB, posX, posY, text):
+    def __init__(self, fgColorR, fgColorG, fgColorB, bgColorR, bgColorG, bgColorB, posX, posY, text, mode):
         element.__init__(self)
         
         width, height = 0, 0
@@ -247,14 +246,18 @@ class label(element):
             if len(line) > width:
                 width = len(line)
             height += 1
-        self.blankText = (' ' * width + '\n') * self.height
+
+        if mode in ['fg', 'bg']:
+            self.mode = mode
+        else:
+            raise Exception('Invalid mode "{}" for label'.format(mode))
         
         self.addInput(pin('e'))
         self.widget = widget()
         self.widget.setText(self.text)
         self.widget.moveTo(vec2(posX, posY))
         self.widget.resize(vec2(width, height))
-        self.widget.setFGColor((colorR, colorG, colorB))
+        self.widget.setFGColor((fgColorR, fgColorG, fgColorB))
 
     def update(self):
         element.update(self)

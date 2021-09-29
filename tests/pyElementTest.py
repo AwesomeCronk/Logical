@@ -1,5 +1,5 @@
 # Logical test file
-# To use, run pyElementTest.lgc
+# Helper file for pyElementTest.lgc
 
 class pyElement(element):
     def __init__(self, *args):

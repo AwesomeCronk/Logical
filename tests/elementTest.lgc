@@ -1,0 +1,15 @@
+// Logical test file
+// Tests element includes and buttons and leds within included elements
+
+$include elementTestHelper.lgc > testHelper
+
+button > a & 'a'
+button > b & 'b'
+
+testHelper a b > c d
+
+led a & 255 20 20  5 6
+led b & 255 20 20  5 7
+
+led c & 20 255 20  8 5
+led d & 10 10 255  8 7

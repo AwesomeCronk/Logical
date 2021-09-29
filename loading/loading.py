@@ -121,25 +121,27 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
     mainElement = element()
 
     highPin = pin('\\high')
-    mainElement.internalPins.update({highPin.name: highPin})
-    mainElement.aliasInternalPins.update({highPin.alias: highPin})
-    mainElement.internalPins['\\high'].set(1)
+    mainElement.internalPins.update({highPin.name: [highPin]})
+    mainElement.aliasInternalPins.update({highPin.alias: [highPin]})
+    mainElement.internalPins['\\high'][0].set(1)
 
     lowPin = pin('\\low')
-    mainElement.internalPins.update({lowPin.name: lowPin})
-    mainElement.aliasInternalPins.update({lowPin.alias: lowPin})
-    mainElement.internalPins['\\low'].set(0)
+    mainElement.internalPins.update({lowPin.name: [lowPin]})
+    mainElement.aliasInternalPins.update({lowPin.alias: [lowPin]})
+    mainElement.internalPins['\\low'][0].set(0)
 
     # Main widget setup
     mainWidget = widget()
     mainWidget.setMode(widget.containerMode)
 
     for comm in commands:
+        performIOChecks = True
         debug('\n' + comm.info().replace('self.', ''), debugLevel, )
         # Element config
         if comm.element == '$include':
             # Add a note of where to find this element that has been included
             registeredElements.update({comm.outputs[0]: comm.inputs[0].replace('/','\\')})
+            performIOChecks = False
         
         elif comm.element == '$pins':
             for i in comm.inputs:
@@ -148,6 +150,7 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
                 newPin = pin(o)
                 needsConnected.update({newPin: o})
                 mainElement.addOutput(newPin)
+            performIOChecks = False
 
         # Basic gates
         elif comm.element == 'and':
@@ -192,21 +195,21 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
-        # Bus elements
         elif comm.element == 'tristate':
             newElement = tristate()
-            mainElement.addElement(newElement)
-            needsConnected.update({newElement: comm.inputs + comm.outputs})
-
-        elif comm.element == 'bus':
-            newElement = bus()
             newElement.outputs['y'].realias(comm.outputs[0])
             mainElement.addElement(newElement)
-            busses.update({comm.outputs[0]: newElement})
+            needsConnected.update({newElement: comm.inputs})
 
         # UI elements
         elif comm.element == 'led':
             newElement = led(*comm.args)
+            mainElement.addElement(newElement)
+            mainWidget.addWidget(newElement.widget)
+            needsConnected.update({newElement: comm.inputs})
+
+        elif comm.element == 'label':
+            newElement = label(*comm.args)
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
             needsConnected.update({newElement: comm.inputs})
@@ -241,12 +244,6 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
                 mainWidget.addWidget(newWidget)     # Add newWidget to mainWidget
             
             # Add inputs to needsConnected
-            if not len(newElement.inputs) == len(comm.inputs):
-                raise Exception('Invalid number of inputs: {}'.format(len(comm.inputs)))
-            if not len(newElement.outputs) == len(comm.outputs):
-                raise Exception('Invalid number of outputs: {}'.format(len(comm.outputs)))
-            if not len(newElement.args) == len(comm.args):
-                raise Exception('Invalid number of args: {}'.format(len(comm.args)))
             
             pins = []
             for i in range(len(newElement.inputs)):
@@ -258,25 +255,36 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
 
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))
+            
+        # Input/output checks
+        # Should be skipped if the command being run is $include or $pins
+        if performIOChecks:
+            if len(newElement.inputs) != len(comm.inputs):
+                raise Exception('Invalid number of inputs: {}'.format(len(comm.inputs)))
+            if len(newElement.outputs) != len(comm.outputs):
+                raise Exception('Invalid number of outputs: {}'.format(len(comm.outputs)))
+            # if len(newElement.args) != len(comm.args):
+            #     raise Exception('Invalid number of args: {}'.format(len(comm.args)))
 
-    # needsConnected is a dict of {element: targetNames} or {pin: targetName}
+    # needsConnected is a dict of {element: targetAliases} or {pin: targetAlias}
     debug('\nEstablishing connections.', debugLevel)
     for e in needsConnected.keys():
+        # debug('', debugLevel)
         debug('connecting {} to {}'.format(e, needsConnected[e]), debugLevel)
         if isinstance(e, pin):
             targetName = needsConnected[e]
-            a = mainElement.aliasInternalPins[targetName]
-            e.connect(a)
+            targetPins = mainElement.aliasInternalPins[targetName]
+            for targetPin in targetPins:
+                e.connect(targetPin)
         else:
-            ctr = 0
-            for i in iter(e.inputs.keys()):
-                # pdb.set_trace()
-                e.inputs[i].connect(mainElement.aliasInternalPins[needsConnected[e][ctr]])
-                ctr += 1
-            #debug(e.inputs['a'].target, debugLevel)
-            #debug(e.inputs['e'].target, debugLevel)
-            if isinstance(e, tristate):
-                busses[needsConnected[e][ctr]].addTristate(e)
+            targetNames = needsConnected[e]
+            # debug(targetNames, debugLevel)
+            for i, inputPin in enumerate(e.inputs.values()):
+                # debug('i: {} inputPin: {}'.format(i, inputPin), debugLevel)
+                targetPins = mainElement.aliasInternalPins[targetNames[i]]
+                for targetPin in targetPins:
+                    # debug('connected pin', debugLevel)
+                    inputPin.connect(targetPin)
 
     debug('Element loaded.', debugLevel, end = '\n\n')
     return mainElement, mainWidget
