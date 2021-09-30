@@ -9,6 +9,7 @@ pinSeparatorSequence = '>'
 
 lineNumberOffset = 1
 entryNumberOffset = 1
+maxEntriesPerLine = 50
 
 class ParseError(Exception):
     pass
@@ -29,7 +30,7 @@ class command():
         self.args = args        # List of arguments
         
     def __repr__(self):
-        return 'command "{}" on line {}'.format(self.text, self.line)
+        return 'command \'{}\' on line {}'.format(self.text, self.line)
 
     def info(self):
         infoStr = self.__repr__()
@@ -54,12 +55,14 @@ def parseCommands(lines):
 
         for e in range(len(entries)):
             entry = entries[e]      # Iterate through each entry on the line
-            # Remove artifacting
-            while entry[0] == ' ':
-                entry = entry[1:]
 
-            element = entry.split(' ')[0]   # The element being called
-            other = ' '.join(entry.split(' ')[1:])  # Everything else, to be consumed bit by bit
+            # Hopefully can remove by using str.split() instead of str.split(' ')
+            # # Remove artifacting
+            # while entry[0] == ' ':
+            #     entry = entry[1:]
+
+            element = entry.split()[0]   # The element being called
+            other = ' '.join(entry.split()[1:])  # Everything else, to be consumed bit by bit
             
             # Split at the argument separator and subsequently at spaces
             if other.count(argumentSequence) > 1:
@@ -68,6 +71,18 @@ def parseCommands(lines):
             if other.count(argumentSequence) == 1:
                 other, args = other.split(argumentSequence)
                 args = args.split()
+                strings = []
+                inString = False
+                for i, arg in enumerate(args):
+                    if arg[0] == '"':
+                        start = i
+                        inString = True
+                    if arg[-1] == '"':
+                        end = i + 1
+                        strings.insert(0, (start, end)) # insert instead of append to avoid having to reverse it later
+                        inString = False
+                for start, end in strings:
+                    args[start:end] = [' '.join(args[start:end])[1:-1]]
 
             else:
                 args = []
@@ -78,26 +93,24 @@ def parseCommands(lines):
                 raise ParseError('Only one instance of "{}" per entry allowed.'.format(pinSeparatorSequence))
             
             elif other.count(pinSeparatorSequence) == 1:
-                inputs, outputs = [o.split(' ') for o in other.split(pinSeparatorSequence)]
+                inputs, outputs = [o.split() for o in other.split(pinSeparatorSequence)]
             
             else:
-                inputs = other.split(' ')
+                inputs = other.split()
                 outputs = []
 
-            # Remove artifacting
-            while '' in inputs:
-                inputs.remove('')
-            while '' in outputs:
-                outputs.remove('')
+            # Hopefully can remove by using str.split() instead of str.split(' ')
+            # # Remove artifacting
+            # while '' in inputs:
+            #     inputs.remove('')
+            # while '' in outputs:
+            #     outputs.remove('')
 
             if element == includeSequence:
                 if len(inputs) != 1 or len(outputs) != 1:
                     raise ParseError('{} must have file name and element name separated by {}'.format(includeSequence, pinSeparatorSequence))
-                
-                # Allows me to change the sequences without breaking loading.py
-                element = '$include'
-            elif element == pinsSequence:
-                element = '$pins'
+
+            
 
             commands.append(command(
                 l + lineNumberOffset,
@@ -110,6 +123,13 @@ def parseCommands(lines):
             ))
 
     return commands
+
+    for l, line in enumerate(lines):    # l is line number and line is line text
+        lineRemaining = line
+        for i in range(maxEntriesPerLine):
+            lineRemaining = parseEntry(lineRemaining, i)
+            if lineRemaining == '':
+                break
 
 if __name__ == '__main__':
     with open(sys.argv[1], 'r') as file:

@@ -50,3 +50,6 @@ This document contains release notes for all versions from 0.1.0 on.
 * Added support for tristate logic, eliminating the need for bus objects.
 * Improved PDB breakout by cleaning up what it prints when it returns.
 * Fixed labels not accessble from lgc code.
+
+### 0.8.0.pre
+* Added support for strings in element arguments.

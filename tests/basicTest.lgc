@@ -12,7 +12,7 @@ led \low  & 255 20 20 6 5
 led j & 255 20 20  9 5
 led k & 20 255 20  10 5
 
-label l & 255 20 20  0 0 0  13 5 label fg
+label l & 255 20 20  0 0 0  13 5 "label object" fg
 
 button > a & 'a'
 button > b & 'b'
