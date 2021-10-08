@@ -1,14 +1,14 @@
 // Logical test file
-// Tests ttbs
+// Tests ttbs and bussing
 
-$include ttbTest.ttb > ttb
+$include ttbTestHelper.ttb > ttb
 
-button > a & 'a'
-button > b & 'b'
+button > in0F & 'a'
+button > in10 & 'b'
 
-ttb a b > 0 1 2 3
+ttb in[0F..10] > data[0..3]
 
-led 0 & 255 20 20  5 5
-led 1 & 255 20 20  6 5
-led 2 & 255 20 20  7 5
-led 3 & 255 20 20  8 5
+led data0 & 255 20 20  5 5
+led data1 & 255 20 20  6 5
+led data2 & 255 20 20  7 5
+led data3 & 255 20 20  8 5
