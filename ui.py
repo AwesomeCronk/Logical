@@ -53,8 +53,9 @@ class widget():
 
     def __init__(self):
         self.parent = None
-        self.size = vec2(10,1)
-        self.pos = vec2(0,0)
+        self.size = vec2(10, 1)
+        self.pos = vec2(0, 0)
+        self.actualPos = vec2(0, 0)
         self.mode = self.textMode
         self.wrapping = 0
         self.fgColor = (255, 255, 255)
@@ -64,10 +65,9 @@ class widget():
         
     def update(self):
         # Parent check and cursor homing (to prevent colored bars at the bottom of the console)
-        if self.parent is None:
-            print(ansi.cursor.moveTo(*(self.pos + self.consolePosOffset)), end='')
-        elif isinstance(self.parent, widget):
-            print(ansi.cursor.moveTo(*(self.pos + self.parent.pos + self.consolePosOffset)), end='')
+        if isinstance(self.parent, widget):
+            self.actualPos = self.parent.actualPos
+        print(ansi.cursor.moveTo(*(self.actualPos + self.consolePosOffset)), end='')
         
         print(ansi.graphics.setGraphicsMode(
             ansi.graphics.fgColor,
@@ -113,7 +113,7 @@ class widget():
                 except IndexError:
                     pass
     
-    def setparent(self, newParent):
+    def setParent(self, newParent):
         self.parent = newParent
 
     def resize(self, size: vec2):
@@ -121,6 +121,7 @@ class widget():
 
     def moveTo(self, pos: vec2):
         self.pos = pos
+        self.actualPos = pos
 
     def setMode(self, mode: str):
         if mode in self.modes:
@@ -142,29 +143,33 @@ class widget():
 
     def addWidget(self, newWidget):
         self.widgets.append(newWidget)
+        newWidget.setParent(self)
 
 def initANSI():
     if sys.platform == 'win32':
         print(ansi.conhostEnableANSI(), end='')
-    print(ansi.clear.entireScreen(), end='')
+    # print(ansi.clear.entireScreen(), end='')
     print('\x1b[?25l', end='')    # Hide cursor
 
-def cleanupANSI():
-    print('\nANSI Manager: Commencing cleanup...')
+def cleanupANSI(debug=False):
+    if debug:
+        print('\nANSI Manager: Commencing cleanup...')
     print('\x1b[25h', end='')     # Show cursor
-    print('ANSI manager: Cursor showing.')
+    if debug:
+        print('ANSI manager: Cursor showing.')
     print('\x1b[39;49m', end='')            # Reset colors
-    print('ANSI manager: Colors reset.')
+    if debug:
+        print('ANSI manager: Colors reset.')
 
 class ansiManager():
-    def __init__(self):
-        pass
+    def __init__(self, debug=False):
+        self.debug = debug
 
     def __enter__(self):
         initANSI()
 
     def __exit__(self, *args):
-        cleanupANSI()    
+        cleanupANSI(self.debug)
 
 def testUI():
     print(ansi.clear.entireScreen(), end='')
@@ -172,14 +177,14 @@ def testUI():
     
     mainWidget = widget()
     mainWidget.setMode(widget.containerMode)
+    mainWidget.moveTo(vec2(2, 2))
 
     w1 = widget()
-    w1.moveTo(vec2(1, 0))
+    w1.moveTo(vec2(0, 0))
     w1.resize(vec2(22, 2))
     w1.setMode(widget.textMode)
     w1.setText('Hello world!\nThis text cuts off soon.')
     mainWidget.addWidget(w1)
-    mainWidget.update()
 
     w2 = widget()
     w2.moveTo(vec2(25, 2))
@@ -189,7 +194,6 @@ def testUI():
     w2.setFGColor((255, 0, 0))
     w2.setText('We have colors!!!')
     mainWidget.addWidget(w2)
-    mainWidget.update()
 
     w3 = widget()
     w3.moveTo(vec2(15, 5))
@@ -198,6 +202,7 @@ def testUI():
     w3.setWrapping(1)
     w3.setText('This text should wrap around several times.')
     mainWidget.addWidget(w3)
+
     mainWidget.update()
     
 if __name__ == '__main__':

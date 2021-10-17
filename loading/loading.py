@@ -5,11 +5,18 @@ from ui import *
 from loading.parsing import parseCommands
 # import pdb
 
+debugEnabled = False
+
+def setDebug(state):
+    global debugEnabled
+    debugEnabled = state
+
 def debug(text, level, end='\n'):
-    lines = str(text).split('\n')
-    for line in lines[:-1]:
-        print('  ' * level + line)
-    print('  ' * level + lines[-1], end=end)
+    if debugEnabled:
+        lines = str(text).split('\n')
+        for line in lines[:-1]:
+            print('  ' * level + line)
+        print('  ' * level + lines[-1], end=end)
 
 # Load a truth table from parsed .lgc source code
 def loadTable(filePath, debugLevel=0):

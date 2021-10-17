@@ -1,9 +1,11 @@
 import sys, time, os, ctypes, io
-from pynput import keyboard     # MUST USE pynput 1.6.8!!
-from time import process_time_ns as getTime
-from time import sleep
+from time import sleep, process_time_ns
+from argparse import ArgumentParser
+
+from pynput import keyboard
 import simpleANSI as ANSI
-from loading.loading import loadElement
+
+from loading.loading import loadElement, setDebug
 from ui import vec2, widget, ansiManager, initANSI, cleanupANSI
 
 sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
@@ -18,6 +20,46 @@ platform = 'win32'
 terminalSize = vec2(*os.get_terminal_size())
 user32 = ctypes.windll.user32
 kernel32 = ctypes.windll.kernel32
+
+def getArgs():
+    parser = ArgumentParser()
+    parser.add_argument(
+        'file',
+        nargs='?',
+        default='None',
+        help='file to be run'
+    )
+    parser.add_argument(
+        '-v',
+        help='verbose mode',
+        action='store_true'
+    )
+    parser.add_argument(
+        '-k',
+        help='keys mode',
+        action='store_true'
+    )
+
+    return parser, parser.parse_args()
+
+class keyTester():
+    def __init__(self):
+        print('Press any key to see the text for that should be used in Logical code for key bindings. Press Esc to exit.')
+    
+        keyListener = keyboard.Listener(
+                    on_press=self.keyPress,
+                    on_release=self.keyRelease
+                )
+        keyListener.start()
+        keyListener.join()
+
+    def keyPress(self, key):
+        print(str(key))
+        if key == keyboard.Key.esc:
+            return False
+
+    def keyRelease(self, key):
+        pass
 
 class keyBoardListenerManager():
     def __init__(self, simulation):
@@ -34,7 +76,7 @@ class keyBoardListenerManager():
             self.simulation.runFlag = False
 
 class simulation():
-    def __init__(self):
+    def __init__(self, filePath, verbose):
         self.runFlag = True
         self.simRunFlag = True
         self.breakpointFlag = False
@@ -45,11 +87,14 @@ class simulation():
             keyboard.Key.alt_r
         ]
         self.keyBindsToExecute = []
+        self.verbose = verbose
 
-        self.mainElement, self.mainWidget = loadElement(sys.argv[1])
-        input('press enter to continue...')
+        setDebug(self.verbose)
+        self.mainElement, self.mainWidget = loadElement(filePath)
+        if self.verbose:
+            input('Press enter to continue...')
 
-        self.titleString = 'Logical {} (Python {} on {} {})'.format(version, pythonVersion, architecture, platform)
+        self.titleString = 'Logical {} (Python {} on {} {}): {}'.format(version, pythonVersion, architecture, platform, filePath.replace('\\', '/').split('/')[-1])
         self.initUI()
         self.keyListener = keyboard.Listener(
             on_press=self.keyPress,
@@ -58,41 +103,45 @@ class simulation():
         self.keyListener.start()
 
     def initUI(self):
-        # Already done in ui.ansiManager
-        # # Activate ANSI escapes because conhost ¯\_(ツ)_/¯
-        # print(ANSI.conhostEnableANSI(), end = '')
-        # Clear the screen. Must be done after all the debug printing in loadElement
         print(ANSI.clear.entireScreen(), end = '')
+
+        self.mainWidget.moveTo(vec2(0, 2))
 
         self.title = widget()
         self.title.resize(vec2(terminalSize[0], 1))
-        self.title.moveTo(vec2(0, 0))
+        self.title.moveTo(vec2(0, -2))
         self.title.setText(self.titleString)
         self.mainWidget.addWidget(self.title)
 
-        self.keyListenerDebug = widget()
-        self.keyListenerDebug.resize(vec2(terminalSize[0], 1))
-        self.keyListenerDebug.moveTo(vec2(0, 2))
-        self.mainWidget.addWidget(self.keyListenerDebug)
+        if self.verbose:
+            self.keyListenerDebug = widget()
+            self.keyListenerDebug.resize(vec2(terminalSize[0], 1))
+            self.keyListenerDebug.moveTo(vec2(0, -1))
+            self.mainWidget.addWidget(self.keyListenerDebug)
 
         self.updateDebug = widget()
         self.updateDebug.resize(vec2(terminalSize[0], 1))
-        self.updateDebug.moveTo(vec2(0, terminalSize[1] - 1))
+        self.updateDebug.moveTo(vec2(0, terminalSize[1] - 3))
         self.mainWidget.addWidget(self.updateDebug)
 
     def keyPress(self, key):
+        if not self.runFlag:
+            return False
         if not self.breakpointFlag:
             with keyBoardListenerManager(self):     # Prevent hanging threads
                 # If this console is not the active window then return
                 if user32.GetForegroundWindow() != kernel32.GetConsoleWindow():
                     return
                 
-                self.keyListenerDebug.setText(str(key))
-                self.keyListenerDebug.setText(str(key) + ' - ' + str(self.mainElement.keyBinds))
+                if self.verbose:
+                    self.keyListenerDebug.setText(str(key))
+                    self.keyListenerDebug.setText(str(key) + ' - ' + str(self.mainElement.keyBinds))
 
                 # Backspace to toggle simulation
                 if key == keyboard.Key.backspace:
-                    self.keyListenerDebug.setText('backspace pressed                  ')
+                    if self.verbose:
+                        backspaceString = 'backspace pressed'
+                        self.keyListenerDebug.setText(backspaceString + ' ' * (terminalSize[0] - len(backspaceString)))
                     self.simRunFlag = not self.simRunFlag
                     if self.simRunFlag:
                         self.title.setText(self.titleString + '         ')
@@ -101,7 +150,8 @@ class simulation():
 
                 # Escape to exit
                 elif key == keyboard.Key.esc:
-                    self.keyListenerDebug.setText('escape pressed                     ')
+                    if self.verbose:
+                        self.keyListenerDebug.setText('escape pressed                     ')
                     self.mainWidget.update()    # One last update to see if it died right
                     self.runFlag = False
                     return False
@@ -112,14 +162,18 @@ class simulation():
 
                 # Set the appropriate keybinds
                 elif str(key) in self.mainElement.keyBinds.keys():
-                    self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
+                    if self.verbose:
+                        self.keyListenerDebug.setText('{} found in {}'.format(str(key), str(self.mainElement.keyBinds)))
                     for f in self.mainElement.keyBinds[str(key)]:
                         self.keyBindsToExecute.append((f, True))
 
                 else:
-                    self.keyListenerDebug.setText('{} not found in {}'.format(str(key), str(self.mainElement.keyBinds)))
+                    if self.verbose:
+                        self.keyListenerDebug.setText('{} not found in {}'.format(str(key), str(self.mainElement.keyBinds)))
 
     def keyRelease(self, key):
+        if not self.runFlag:
+            return False
         if not self.breakpointFlag:
             with keyBoardListenerManager(self):
                 # Set the appropriate keybinds
@@ -130,7 +184,7 @@ class simulation():
     def main(self):
         updateTime = 0
         while self.runFlag:
-            startTime = getTime()
+            startTime = process_time_ns()
             self.updateDebug.setText('Update time: {}us   '.format(str(updateTime).rjust(7)))
             
             if self.breakpointFlag:
@@ -151,24 +205,22 @@ class simulation():
                 time.sleep(0.2) # Chillax for a split second, saves the CPU
 
             self.mainWidget.update()    # Update each widget
-            # Need to either flush or replace sys.stdout
-            # print('', end='', flush=True)   # Flush stdout each update loop to ensure that updates get printed.
-            
-            updateTime = int((getTime() - startTime) / 1000)
-        
+            updateTime = int((process_time_ns() - startTime) / 1000)
+    
         self.keyListener.join()
 
     def exit(self):
         self.runFlag = False
             
 if __name__ == '__main__':
-    # try:
-    #     initANSI()
-    #     sim = simulation()
-    #     sim.main()
-    # finally:
-    #     cleanupANSI()
-
-    with ansiManager():
-        sim = simulation()
-        sim.main()
+    parser, args = getArgs()
+    # print(args.file, args.k, args.v)
+    if args.k:
+        keyTester()
+    else:
+        if args.file == 'None':
+            parser.error('file is required unless -k is set.')
+        else:
+            with ansiManager(args.v):
+                sim = simulation(args.file, args.v)
+                sim.main()
