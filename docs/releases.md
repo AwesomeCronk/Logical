@@ -53,3 +53,4 @@ This document contains release notes for all versions from 0.1.0 on.
 
 ### 0.8.0.pre
 * Added support for strings in element arguments.
+* Added support for bussing in inputs and outputs.
