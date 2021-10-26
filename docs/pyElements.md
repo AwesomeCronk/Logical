@@ -8,7 +8,7 @@ The `.py` file must contain one class called `pyElement` that inherits from `ele
 To add an input to a Python element, call `self.addInput(pin('pinName'))` somewhere in `pyElement.__init__` or a function called by it. To add an output use `self.addOutput(pin('pinName'))`. **Never** call either of these functions in `pyElement.update` or any function called by it.
 
 ## Update Cycle
-To make a Python element change its outputs' values, you must define the method `pyElement.update`. `pyElement.update` is given no arguments. The value of an input pin is stored in `self.inputs[inputPinName].value`. To set the value of an output pin, call `self.outputs[outputPinName].set(value)`, where `value` is either integer 0 or integer 1.
+To make a Python element change its outputs' values, you must define the method `pyElement.update`. `pyElement.update` is given no arguments. The value of an input pin is stored in `self.inputs[inputPinName].value`. To set the value of an output pin, call `self.outputs[outputPinName].set(value)`, where `value` is either `None`, `0`, or `1`.
 
 ## Key Bindings
 I don't even know...

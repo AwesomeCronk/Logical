@@ -56,3 +56,4 @@ This document contains release notes for all versions from 0.1.0 on.
 * Added support for bussing in inputs and outputs.
 * Cleaned up debug printing.
 * Set up command line args.
+* Repalced `keys` with `Logical -k`.

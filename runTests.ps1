@@ -11,6 +11,7 @@ foreach ($file in Get-ChildItem $args[0])
         {
             # echo ok
             python Logical.py $file
+            Clear-Host
         }
     }
 }
