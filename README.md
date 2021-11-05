@@ -5,7 +5,11 @@ Logical is a logic gate simulator for Windows. It supports all the basic gates a
 ## Getting Started and Documentation
 Tutorials to be made soon!
 
-View [documentation](./docs)
+View [documentation](./docs).
+
+Join the Discord server!
+
+![Discord Banner 2](https://discordapp.com/api/guilds/905850565383315506/widget.png?style=banner2)
 
 ## To Do
 * ~~Fix tristates and busses~~
