@@ -7,7 +7,7 @@ Tutorials to be made soon!
 
 View [documentation](./docs).
 
-Join the Discord server!
+Join the Discord server! https://discord.gg/mw3yfNr3Wd
 
 ![Discord Banner 2](https://discordapp.com/api/guilds/905850565383315506/widget.png?style=banner2)
 
