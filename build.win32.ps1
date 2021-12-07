@@ -9,6 +9,6 @@ if ($args -notcontains "--nocleanup") {
 }
 
 Remove-Item "dist/$program.$version" -Recurse -Force -ErrorAction Ignore
-Move-Item "$program.dist" "dist/$program.$version"
+Move-Item "$program.dist" "dist/$program.$version.win32"
 
 Write-Output "Done building $program.exe."

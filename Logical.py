@@ -1,25 +1,38 @@
-import sys, time, os, ctypes, io
+import sys, time, os, io
 from time import sleep, process_time_ns
 from argparse import ArgumentParser
 
-from pynput import keyboard
+# from pynput import keyboard
 import simpleANSI as ANSI
 
 from loading.loading import loadElement, setDebug
 from ui import vec2, widget, ansiManager, initANSI, cleanupANSI
 
 sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
-
+sys.stdout.write('=====test=====')
 # Info on pynput: https://pynput.readthedocs.io/en/latest/keyboard.html
+# Checking terminal activity status: https://unix.stackexchange.com/a/480138/496091
 
 with open(os.path.join(os.path.dirname(__file__), 'Logical.version.txt'), 'r') as file:
     version = file.read()
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
-platform = 'win32'
+platform = sys.platform
+if platform == 'win32':
+    from ctypes.windll import user32, kernel32
+    user32 = ctypes.windll.user32
+    kernel32 = ctypes.windll.kernel32
+    def checkTerminalActive():
+        return user32.GetForegroundWindow() == kernel32.GetConsoleWindow()
+
+elif platform == 'linux':
+    # Enable FocusIn/FocusOut mode
+    pass
+
+else:
+    raise RuntimeError('Platform "{}" not supported'.format(platform))
+
 terminalSize = vec2(*os.get_terminal_size())
-user32 = ctypes.windll.user32
-kernel32 = ctypes.windll.kernel32
 
 def getArgs():
     parser = ArgumentParser()
@@ -130,7 +143,7 @@ class simulation():
         if not self.breakpointFlag:
             with keyBoardListenerManager(self):     # Prevent hanging threads
                 # If this console is not the active window then return
-                if user32.GetForegroundWindow() != kernel32.GetConsoleWindow():
+                if not checkTerminalActive:
                     return
                 
                 if self.verbose:
