@@ -18,18 +18,8 @@ with open(os.path.join(os.path.dirname(__file__), 'Logical.version.txt'), 'r') a
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
 platform = sys.platform
-if platform == 'win32':
-    from ctypes.windll import user32, kernel32
-    user32 = ctypes.windll.user32
-    kernel32 = ctypes.windll.kernel32
-    def checkTerminalActive():
-        return user32.GetForegroundWindow() == kernel32.GetConsoleWindow()
 
-elif platform == 'linux':
-    # Enable FocusIn/FocusOut mode
-    pass
-
-else:
+if not platform in ('linux', 'win32'):
     raise RuntimeError('Platform "{}" not supported'.format(platform))
 
 terminalSize = vec2(*os.get_terminal_size())
@@ -136,6 +126,8 @@ class simulation():
         self.updateDebug.resize(vec2(terminalSize[0], 1))
         self.updateDebug.moveTo(vec2(0, terminalSize[1] - 3))
         self.mainWidget.addWidget(self.updateDebug)
+
+    def togglePause(self)
 
     def keyPress(self, key):
         if not self.runFlag:
