@@ -1,20 +1,36 @@
 # https://newbedev.com/how-to-key-press-detection-on-a-linux-terminal-low-level-style-in-python
-import sys, tty, termios, timeit, threading
+import sys, io, timeit, threading
 from contextlib import contextmanager
+
+if sys.platform == 'linux':
+    import termios, tty
+elif sys.platform == 'win32':
+    import msvcrt
+    # sys.stdin = io.TextIOWrapper(open(sys.stdin.fileno(), 'rb', 0), write_through=True)
+
+debugEnabled = False
+
+def debug(*args, **kwargs):
+    if debugEnabled:
+        print(*args, **kwargs)
+
+# Unfortunately the way sys.stdin.read works means that a key must be sent
+# after Ctrl+C sometimes. This is because the main thread cannot quit in time
+# before the IO thread loops back
 
 def getCharLinux():
     try:
-        print('setting terminal mode')
+        debug('setting terminal mode')
         fd = sys.stdin.fileno()
         attr = termios.tcgetattr(fd)
         tty.setraw(fd)
-        return sys.stdin.read(1)
+        return repr(sys.stdin.read(1))[1:-1]
     finally:
-        print('resetting terminal mode')
+        debug('resetting terminal mode')
         termios.tcsetattr(fd, termios.TCSANOW, attr)
 
 def getCharWindows():
-    pass
+    return repr(msvcrt.getch())[2:-1]
 
 getCharPlatform = {'linux': getCharLinux, 'win32': getCharWindows}
 
@@ -40,7 +56,7 @@ class keyEvent():
     def getTimeDiff(self):
         timeJustCalled = getTime()
         timeDiff = timeJustCalled - self.timeLastCalled
-        # print(timeJustCalled, self.timeLastCalled, timeDiff)
+        # debug(timeJustCalled, self.timeLastCalled, timeDiff)
         return timeJustCalled, timeDiff
 
     def call(self):
@@ -52,18 +68,18 @@ class keyEvent():
 
     def unCall(self):
         if self.called:
-            print('uncalling')
+            debug('uncalling')
             timeDiff = self.getTimeDiff()[1]
             if timeDiff > holdTimeThreshold:
                 self.simulation.eventsToCall.append((self.function, False))
                 self.called = False
-            else:
-                print('unCall skipped, timeDiff={}'.format(timeDiff))
+            # else:
+            #     debug('unCall skipped, timeDiff={}'.format(timeDiff))
 
 
 def createKeyEvent(keyValue, function, simulation):     # Create event that calls <function> when <keyEvent> is found in stdin
     keyEvents[keyValue] = keyEvent(keyValue, function, simulation)
-    print('key event created')
+    debug('key event created')
 
 @contextmanager
 def pollKeyEvents(simulation):
@@ -74,46 +90,38 @@ def pollKeyEvents(simulation):
             args=(simulation,)
         )
         poller.start()
-        print('poller started')
+        debug('poller started')
         yield
     finally:
         poller.join()
-        print('poller joined')
+        debug('poller joined')
 
 def __pollKeyEvents(simulation):    # Get and call key events
     while simulation.runFlag:
         char = getChar()
         try:
-            currentEvent = keyEvents[repr(char)]
+            if sys.platform == 'linux':
+                currentEvent = keyEvents[char]
+            elif sys.platform == 'win32':
+                currentEvent = keyEvents[repr(char)[1:]]
+
             currentEvent.call()
-            print('called event')
+            debug('called event')
 
         except KeyError:    # Event not registered
-            print('no event found')
+            debug('no event found')
+            pass
 
 
 def rawTest():
-    # # 01 - 1a are Ctrl+A - Ctrl+Z
-    # Esc = '\x1b'
-    # Bks = '\x7f'
-    # Ins = Esc, '[', '2', '~'
-    # Del = Esc, '[', '3', '~'
-    # ArrUp = Esc, '[', 'A'
-    # ArrDn = Esc, '[', 'B'
-    # ArrRt = Esc, '[', 'C'
-    # ArrLt = Esc, '[', 'D'
-    # # = Esc, '[', 'E'
-    # Home = Esc, '[', 'H'
-    # End = Esc, '[', 'F'
-    # PgUp = Esc, '[', '5', '~'
-    # PgDn = Esc, '[', '6', '~'
-
     oldTime = getTime()
     while True:
         c = getChar()
         newTime = getTime()
-        print(repr(c), int.from_bytes(c.encode('utf-8'), 'big'), newTime - oldTime, end=' ')
-        if c == '\x03':
+        print(c, end=' ')
+        # print(int.from_bytes(c.encode('utf-8'), 'big'), end=' ')
+        print(newTime - oldTime, end=' ')
+        if c == '\\x03':
             print('Ctrl+C')
             break
         else:
@@ -126,11 +134,15 @@ def eventTest():
             self.runFlag = True
             self.eventsToCall = []
 
-            createKeyEvent("'\\x03'", self.stop, self)
-            createKeyEvent("'t'", self.eventTest, self)
+            createKeyEvent('\\x03', self.stop, self)
+            createKeyEvent('1', self.eventTest, self)
+            createKeyEvent('2', self.eventTest2, self)
 
         def eventTest(self, value):
-            print('event test {}'.format(value))
+            print('event test 1 {}'.format(value))
+
+        def eventTest2(self, value):
+            print('event test 2 {}'.format(value))
 
         def stop(self, value):
             print('sim.stop called')
@@ -147,7 +159,7 @@ def eventTest():
                     for func, par in self.eventsToCall:
                         func(par)
                         del(self.eventsToCall[0])
-                        print('ran function')
+                        # print('ran function')
                     # Where other stuff will go
                 print('sim.main loop broke')
             print('sim.main context manager exited')
