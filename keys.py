@@ -100,11 +100,7 @@ def __pollKeyEvents(simulation):    # Get and call key events
     while simulation.runFlag:
         char = getChar()
         try:
-            if sys.platform == 'linux':
-                currentEvent = keyEvents[char]
-            elif sys.platform == 'win32':
-                currentEvent = keyEvents[repr(char)[1:]]
-
+            currentEvent = keyEvents[char]
             currentEvent.call()
             debug('called event')
 
