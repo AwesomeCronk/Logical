@@ -24,6 +24,7 @@ def getCharLinux():
         fd = sys.stdin.fileno()
         attr = termios.tcgetattr(fd)
         tty.setraw(fd)
+        debug('set terminal mode')
         return repr(sys.stdin.read(1))[1:-1]
     finally:
         debug('resetting terminal mode')
@@ -34,15 +35,12 @@ def getCharWindows():
 
 getCharPlatform = {'linux': getCharLinux, 'win32': getCharWindows}
 
-def getChar():
-    return getCharPlatform[sys.platform]()
+getChar = getCharPlatform[sys.platform]
 
 getTime = timeit.default_timer
 
 
 holdTimeThreshold = 0.6     # Time in seconds since last call to consider key as held
-
-keyEvents = {}
 
 class keyEvent():
     def __init__(self, keyValue, function, simulation):
@@ -78,7 +76,7 @@ class keyEvent():
 
 
 def createKeyEvent(keyValue, function, simulation):     # Create event that calls <function> when <keyEvent> is found in stdin
-    keyEvents[keyValue] = keyEvent(keyValue, function, simulation)
+    simulation.keyEvents[keyValue] = keyEvent(keyValue, function, simulation)
     debug('key event created')
 
 @contextmanager
@@ -100,7 +98,7 @@ def __pollKeyEvents(simulation):    # Get and call key events
     while simulation.runFlag:
         char = getChar()
         try:
-            currentEvent = keyEvents[char]
+            currentEvent = simulation.keyEvents[char]
             currentEvent.call()
             debug('called event')
 
@@ -128,6 +126,7 @@ def eventTest():
     class sim():
         def __init__(self):
             self.runFlag = True
+            self.keyEvents = {}
             self.eventsToCall = []
 
             createKeyEvent('\\x03', self.stop, self)
@@ -148,7 +147,7 @@ def eventTest():
             print('sim.main called')
             with pollKeyEvents(self):
                 while self.runFlag:
-                    for currentEvent in keyEvents.values():
+                    for currentEvent in simulation.keyEvents.values():
                         #if currentEvent.called:
                         currentEvent.unCall()
                         #print('uncalled event')

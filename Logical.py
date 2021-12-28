@@ -7,10 +7,10 @@ import simpleANSI as ANSI
 
 from loading.loading import loadElement, setDebug
 from ui import vec2, widget, ansiManager, initANSI, cleanupANSI
-from keys import createKeyEvent, keyEvents, pollKeyEvents
+from keys import createKeyEvent, pollKeyEvents
 
 sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
-sys.stdout.write('=====test=====')
+# sys.stdout.write('=====test=====')  # It works... move on!
 
 with open(os.path.join(os.path.dirname(__file__), 'Logical.version.txt'), 'r') as file:
     version = file.read()
@@ -63,6 +63,7 @@ class simulation():
         self.runFlag = True
         self.simRunFlag = True
         # self.breakpointFlag = False     # Reserved for breakpoint() feature
+        self.keyEvents = {}
         self.eventsToCall = []
         self.verbose = verbose
 
@@ -116,8 +117,10 @@ class simulation():
 
     def main(self):
         with pollKeyEvents(self):
+            print('context manager')
             updateTime = 0
             while self.runFlag:
+                # sys.stdout.write('loop')
                 startTime = process_time_ns()
                 self.updateDebug.setText('Update time: {}us   '.format(str(updateTime).rjust(7)))
                 
@@ -129,19 +132,13 @@ class simulation():
                 #     self.breakpointFlag = False
 
                 # Uncall & call all necessary key events
-                for currentEvent in keyEvents.values():
+                for currentEvent in self.keyEvents.values():
                     currentEvent.unCall()   # This is uncalled for...
                 for func, state in self.eventsToCall:
                     func(state)
                     del(self.eventsToCall[0])
 
                 if self.simRunFlag:
-                    # Execute all the key binding functions set during the last update cycle
-                    # Prevents contentions from threading
-                    for f, state in self.keyBindsToExecute:
-                        f(state)
-                        self.keyBindsToExecute.remove((f, state))
-
                     self.mainElement.preUpdate()    # Fetch pin states before they change
                     self.mainElement.update()   # Update each element
                 else:
@@ -149,9 +146,6 @@ class simulation():
 
                 self.mainWidget.update()    # Update each widget
                 updateTime = int((process_time_ns() - startTime) / 1000)
-
-    def exit(self):
-        self.runFlag = False
             
 if __name__ == '__main__':
     parser, args = getArgs()
