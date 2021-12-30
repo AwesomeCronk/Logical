@@ -1,10 +1,10 @@
 // Logical test file
 // Tests butons, switches, basic gates, leds, labels, and \high and \low states
 
-button > j & 'j'
-switch > k & 'k'
+button > j & j
+switch > k & k
 
-switch > l & 'l'
+switch > l & l
 
 led \high & 255 20 20 5 5
 led \low  & 255 20 20 6 5
@@ -14,8 +14,8 @@ led k & 20 255 20  10 5
 
 label l & 255 20 20  0 0 0  13 5 "label object" fg
 
-button > a & 'a'
-button > b & 'b'
+button > a & a
+button > b & b
 
 and a b > and
 or a b > or

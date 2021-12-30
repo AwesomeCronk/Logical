@@ -7,7 +7,7 @@ import simpleANSI as ANSI
 
 from loading.loading import loadElement, setDebug
 from ui import vec2, widget, ansiManager, initANSI, cleanupANSI
-from keys import createKeyEvent, pollKeyEvents
+from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyDebug
 
 sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
 # sys.stdout.write('=====test=====')  # It works... move on!
@@ -68,16 +68,26 @@ class simulation():
         self.verbose = verbose
 
         setDebug(self.verbose)
+        setKeyDebug(self.verbose)
         self.mainElement, self.mainWidget = loadElement(filePath)
+
+        self.initKeyBinds()
+
         if self.verbose:
             input('Press enter to continue...')
 
         self.titleString = 'Logical {} (Python {} on {} {}): {}'.format(version, pythonVersion, platform, architecture, filePath.replace('\\', '/').split('/')[-1])
         self.initUI()
         
+    def initKeyBinds(self):
         createKeyEvent('\\x7f', self.togglePaused, self)    # Backspace
         createKeyEvent('\\x1b', self.exit, self)    # Esc
         createKeyEvent('\\x03', self.exit, self)    # Ctrl+C
+
+        # Load element key binds
+        for key in self.mainElement.keyBinds.keys():
+            for function in self.mainElement.keyBinds[key]:
+                createKeyEvent(key, function, self)
 
     def initUI(self):
         print(ANSI.clear.entireScreen(), end = '')
@@ -117,7 +127,6 @@ class simulation():
 
     def main(self):
         with pollKeyEvents(self):
-            print('context manager')
             updateTime = 0
             while self.runFlag:
                 # sys.stdout.write('loop')
@@ -132,8 +141,9 @@ class simulation():
                 #     self.breakpointFlag = False
 
                 # Uncall & call all necessary key events
-                for currentEvent in self.keyEvents.values():
-                    currentEvent.unCall()   # This is uncalled for...
+                for currentEvents in self.keyEvents.values():
+                    for currentEvent in currentEvents:
+                        currentEvent.unCall()   # This is uncalled for...
                 for func, state in self.eventsToCall:
                     func(state)
                     del(self.eventsToCall[0])
@@ -146,12 +156,15 @@ class simulation():
 
                 self.mainWidget.update()    # Update each widget
                 updateTime = int((process_time_ns() - startTime) / 1000)
+            print(ANSI.clear.entireScreen(), end = '')
+            print(ANSI.cursor.moveTo(1, 1))
+            print('If Logical does not exit, please press a key to cycle stdin.')
             
 if __name__ == '__main__':
     parser, args = getArgs()
     # print(args.file, args.k, args.v)
     if args.k:
-        keyTester()
+        rawTest()   # Print out key values and timings
     else:
         if args.file == 'None':
             parser.error('file is required unless -k is set.')

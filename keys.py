@@ -10,13 +10,17 @@ elif sys.platform == 'win32':
 
 debugEnabled = False
 
+def setKeyDebug(state):
+    global debugEnabled
+    debugEnabled = state
+
 def debug(*args, **kwargs):
     if debugEnabled:
         print(*args, **kwargs)
 
-# Unfortunately the way sys.stdin.read works means that a key must be sent
-# after Ctrl+C sometimes. This is because the main thread cannot quit in time
-# before the IO thread loops back
+# Unfortunately the blocking nature of sys.stdin.read means that a key must
+# be sent after Ctrl+C sometimes. This is because the main thread often does
+# not quit before the IO thread loops back.
 
 def getCharLinux():
     try:
@@ -76,8 +80,13 @@ class keyEvent():
 
 
 def createKeyEvent(keyValue, function, simulation):     # Create event that calls <function> when <keyEvent> is found in stdin
-    simulation.keyEvents[keyValue] = keyEvent(keyValue, function, simulation)
-    debug('key event created')
+    newKeyEvent = keyEvent(keyValue, function, simulation)
+    if keyValue in simulation.keyEvents.keys():
+        if not function in simulation.keyEvents[keyValue]:
+            simulation.keyEvents[keyValue].append(newKeyEvent)
+    else:
+        simulation.keyEvents[keyValue] = [newKeyEvent]
+    debug('key event created for {}'.format(keyValue))
 
 @contextmanager
 def pollKeyEvents(simulation):
@@ -98,8 +107,9 @@ def __pollKeyEvents(simulation):    # Get and call key events
     while simulation.runFlag:
         char = getChar()
         try:
-            currentEvent = simulation.keyEvents[char]
-            currentEvent.call()
+            currentEvents = simulation.keyEvents[char]
+            for currentEvent in currentEvents:
+                currentEvent.call()
             debug('called event')
 
         except KeyError:    # Event not registered

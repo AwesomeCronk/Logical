@@ -154,7 +154,7 @@ def initANSI():
 def cleanupANSI(debug=False):
     if debug:
         print('\nANSI Manager: Commencing cleanup...')
-    print('\x1b[25h', end='')     # Show cursor
+    print('\x1b[?25h', end='')     # Show cursor
     if debug:
         print('ANSI manager: Cursor showing.')
     print('\x1b[39;49m', end='')            # Reset colors

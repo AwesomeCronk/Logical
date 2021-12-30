@@ -88,8 +88,9 @@ class element():    # Basic element class
         return self.elements.index(newElement)  # Return the index of the new element in self.elements
 
     def addKeyBinds(self, keyBinds):
-        # Basically this function takes a dict of lists, iterates through the dict keys,
-        # and ensures that self.keyBinds has each function in its list for that dict key.
+        # Basically this function takes a dict of lists, iterates through the
+        # dict keys, and ensures that self.keyBinds has each function in its
+        # list for that dict key.
         for key in keyBinds.keys():
             if key in self.keyBinds.keys():
                 for f in keyBinds[key]:
