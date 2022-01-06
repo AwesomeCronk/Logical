@@ -7,7 +7,7 @@ import simpleANSI as ANSI
 
 from loading.loading import loadElement, setDebug
 from ui import vec2, widget, ansiManager, initANSI, cleanupANSI
-from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyDebug
+from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyDebug, setKeyMap
 
 sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
 # sys.stdout.write('=====test=====')  # It works... move on!
@@ -80,9 +80,10 @@ class simulation():
         self.initUI()
         
     def initKeyBinds(self):
-        createKeyEvent('\\x7f', self.togglePaused, self)    # Backspace
-        createKeyEvent('\\x1b', self.exit, self)    # Esc
-        createKeyEvent('\\x03', self.exit, self)    # Ctrl+C
+        setKeyMap(sys.platform)
+        createKeyEvent('Backspace', self.togglePaused, self)
+        createKeyEvent('Escape', self.exit, self)
+        createKeyEvent('Ctrl+C', self.exit, self)
 
         # Load element key binds
         for key in self.mainElement.keyBinds.keys():
@@ -158,7 +159,7 @@ class simulation():
                 updateTime = int((process_time_ns() - startTime) / 1000)
             print(ANSI.clear.entireScreen(), end = '')
             print(ANSI.cursor.moveTo(1, 1))
-            print('If Logical does not exit, please press a key to cycle stdin.')
+            print('If Logical does not exit, please press a key to cycle stdin listener.')
             
 if __name__ == '__main__':
     parser, args = getArgs()
