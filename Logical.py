@@ -1,28 +1,33 @@
+# Builtins
 import sys, time, os, io
-from time import sleep, process_time_ns
+from time import process_time_ns
 from argparse import ArgumentParser
+import logging
 
-# from pynput import keyboard
+# Packages
 import simpleANSI as ANSI
 
+# Project
 from loading.loading import loadElement, setDebug
-from ui import vec2, widget, ansiManager, initANSI, cleanupANSI
+from ui import vec2, widget, ansiManager
 from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyDebug, setKeyMap
 
-sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
-# sys.stdout.write('=====test=====')  # It works... move on!
 
+# System info
 with open(os.path.join(os.path.dirname(__file__), 'Logical.version.txt'), 'r') as file:
     version = file.read()
 pythonVersion = '{}.{}.{}'.format(*sys.version_info[0:3])
 architecture = 'x86_64'
 platform = sys.platform
+terminalSize = vec2(*os.get_terminal_size())
+sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
+logPath = os.path.expanduser('~/.local/share/Logical/log.txt')
 
 if not platform in ('linux', 'win32'):
     raise RuntimeError('Platform "{}" not supported'.format(platform))
 
-terminalSize = vec2(*os.get_terminal_size())
 
+# Command line args
 def getArgs():
     parser = ArgumentParser()
     parser.add_argument(
@@ -31,11 +36,11 @@ def getArgs():
         default='None',
         help='file to be run'
     )
-    parser.add_argument(
-        '-v',
-        help='verbose mode',
-        action='store_true'
-    )
+    # parser.add_argument(
+    #     '-v',
+    #     help='verbose mode',
+    #     action='store_true'
+    # )
     parser.add_argument(
         '-k',
         help='keys mode',
@@ -44,39 +49,23 @@ def getArgs():
 
     return parser, parser.parse_args()
 
-class keyBoardListenerManager():
-    def __init__(self, simulation):
-        self.simulation = simulation
-
-    def __enter__(self):
-        pass
-
-    def __exit__(self, *args):
-        # Take action only if there was an exception
-        if not args[0] is None:
-            # Stop the main thread if the keyboard thread crashes
-            self.simulation.simRunFlag = False
-            self.simulation.runFlag = False
-
+# Main simulation class
 class simulation():
-    def __init__(self, filePath, verbose):
+    def __init__(self, filePath):
         self.runFlag = True
         self.simRunFlag = True
         # self.breakpointFlag = False     # Reserved for breakpoint() feature
         self.keyEvents = {}
         self.eventsToCall = []
-        self.verbose = verbose
+        self.titleString = 'Logical {} (Python {} on {} {}): {}'.format(version, pythonVersion, platform, architecture, filePath.replace('\\', '/').split('/')[-1])
 
-        setDebug(self.verbose)
-        setKeyDebug(self.verbose)
+        # setDebug(self.verbose)
+        # setKeyDebug(self.verbose)
+        self.log = logging.getLogger('simulation')
+
         self.mainElement, self.mainWidget = loadElement(filePath)
 
         self.initKeyBinds()
-
-        if self.verbose:
-            input('Press enter to continue...')
-
-        self.titleString = 'Logical {} (Python {} on {} {}): {}'.format(version, pythonVersion, platform, architecture, filePath.replace('\\', '/').split('/')[-1])
         self.initUI()
         
     def initKeyBinds(self):
@@ -163,13 +152,19 @@ class simulation():
             
 if __name__ == '__main__':
     parser, args = getArgs()
-    # print(args.file, args.k, args.v)
+    
+    # Ensure the log directory exists
+    if not os.path.exists(os.path.dirname(logPath)):
+        os.mkdirs(os.path.dirname(logPath))
+    # Initialize logging to logPath
+    logging.basicConfig(filename=os.path.expanduser('~/.local/share/Logical/log.txt'), encoding='utf-8', level=logging.DEBUG)
+    
     if args.k:
         rawTest()   # Print out key values and timings
     else:
         if args.file == 'None':
             parser.error('file is required unless -k is set.')
         else:
-            with ansiManager(args.v):
-                sim = simulation(args.file, args.v)
+            with ansiManager():
+                sim = simulation(args.file)
                 sim.main()

@@ -8,7 +8,7 @@ elif sys.platform == 'win32':
     import msvcrt
     # sys.stdin = io.TextIOWrapper(open(sys.stdin.fileno(), 'rb', 0), write_through=True)
 
-debugEnabled = True
+debugEnabled = False
 
 def setKeyDebug(state):
     global debugEnabled
@@ -44,6 +44,7 @@ def setKeyMap(keyMapName):
             if not char in keyMap.keys():
                 keyMap[char] = []
             keyMap[char].append(keyName)
+    debug('keyMap set to {}'.format(keyMapName))
     
 def printKeyMap():
     for key in keyMap.keys():
