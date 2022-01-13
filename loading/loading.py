@@ -1,33 +1,21 @@
-import os
+import os, logging
+
 from logic.core import element, pin
 from logic.elements import *
 from ui import *
 from loading.parsing import parseCommands
-# import pdb
-
-debugEnabled = False
-
-def setDebug(state):
-    global debugEnabled
-    debugEnabled = state
-
-def debug(text, level, end='\n'):
-    if debugEnabled:
-        lines = str(text).split('\n')
-        for line in lines[:-1]:
-            print('  ' * level + line)
-        print('  ' * level + lines[-1], end=end)
 
 # Load a truth table from parsed .lgc source code
-def loadTable(filePath, debugLevel=0):
-    debug('Loading as truth table...', debugLevel)
+def loadTable(filePath):
+    log = logging.getLogger('loadTable')
+    log.info('Loading as truth table...')
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
     table = truthTable()
     readingTable = False
 
     for ctr, comm in enumerate(commands):
-        debug('\n' + comm.info().replace('self.', ''), debugLevel)
+        log.debug('\n' + comm.info().replace('self.', ''))
         if comm.element == '$pins':
             for i in comm.inputs:
                 table.addInput(pin(i))
@@ -40,7 +28,7 @@ def loadTable(filePath, debugLevel=0):
     table.setupTable()
 
     for comm in commands[ctr:]:
-        debug('\n' + comm.info().replace('self.', ''), debugLevel)
+        log.debug('\n'.join([('    ' if i > 0 else '') + line for i, line in enumerate(comm.info().replace('self.', '').split('\n'))]))
         if comm.element == '$pins':
             raise Exception('Cannot add pins after matches have been declared.')
             
@@ -62,18 +50,19 @@ def loadTable(filePath, debugLevel=0):
             else:
                 match = int('0b' + ''.join([i for i in comm.inputs]), base=2)
                 result = ''.join([o for o in comm.outputs])
-                debug('Adding match for {} and {}'.format(match, result), debugLevel)
+                log.debug('Adding match for {} and {}'.format(match, result))
                 table.addMatch(match, result)
 
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))
 
-    debug('Truth table loaded.', debugLevel, end = '\n\n')
+    log.info('Truth table loaded.')
     return table, None  # No widget for truth tables
 
 # Load an element from Python source
 def loadPyElement(filePath, args=[], debugLevel=0):
-    debug('Loading as Python element...', debugLevel)
+    log = logging.getLogger('loadPyElement')
+    log.info('Loading as Python element...')
 
     globalVars = {
         'element': element,
@@ -95,20 +84,24 @@ def loadPyElement(filePath, args=[], debugLevel=0):
     else:
         raise Exception('Python file contained no class named "pyElement".')
 
-    debug('Python element loaded.', debugLevel, end = '\n\n')
+    log.info('Python element loaded.')
     return pyElement, pyWidget
 
 # Load an element from parsed .ttb source and return that element
 def loadElement(filePath, cwd=None, args=[], debugLevel=0):
+    log = logging.getLogger('loadElement')
+    log.info('Loading element...')
+    log.debug('old filePath: {}'.format(filePath))
+    log.debug('old cwd: {}'.format(cwd))
+
     # Some shenanigans to get the paths right
-    debug('Loading element...\nold filePath: {}\nold cwd: {}'.format(filePath, cwd), debugLevel)
     if cwd is None:
         filePath = os.path.abspath(filePath)
     else:
         filePath = os.path.join(cwd, filePath)
     cwd = os.path.split(filePath)[0]
-    #debug('=====loading element from {}====='.format(filePath), debugLevel)
-    debug('new filePath: {}\nnew cwd: {}\n'.format(filePath, cwd), debugLevel)
+    log.debug('new filePath: {}'.format(filePath))
+    log.debug('new cwd: {}'.format(cwd))
 
     if filePath.split('.')[-1] == 'ttb':    # Load as truth table if .ttb file
         return loadTable(filePath, debugLevel=debugLevel)
@@ -121,7 +114,6 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
     # Variables for loading things
     needsConnected = {}
     registeredElements = {} # Sort by name: filepath
-    busses = {}
     keyBinds = {}
 
     # Main element setup
@@ -143,7 +135,7 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
 
     for comm in commands:
         performIOChecks = True
-        debug('\n' + comm.info().replace('self.', ''), debugLevel, )
+        log.debug('\n'.join([('    ' if i > 0 else '') + line for i, line in enumerate(comm.info().replace('self.', '').split('\n'))]))
         # Element config
         if comm.element == '$include':
             # Add a note of where to find this element that has been included
@@ -235,10 +227,10 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
             mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
-            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args, debugLevel=debugLevel + 1)
+            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args)
             
-            debug(newElement.inputs, debugLevel)
-            debug(newElement.outputs, debugLevel)
+            log.debug(newElement.inputs)
+            log.debug(newElement.outputs)
             # Rename the outputs to the names specified in the .lgc script
             commandOffset = 0
             oldNames = list(newElement.outputs.keys())
@@ -254,7 +246,7 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
             
             pins = []
             for i in range(len(newElement.inputs)):
-                debug(i, debugLevel)
+                log.debug(i)
                 pins.append(comm.inputs[i])
             needsConnected.update({newElement: pins})
 
@@ -274,10 +266,10 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
             #     raise Exception('Invalid number of args: {}'.format(len(comm.args)))
 
     # needsConnected is a dict of {element: targetAliases} or {pin: targetAlias}
-    debug('\nEstablishing connections.', debugLevel)
+    log.debug('Establishing connections.')
     for e in needsConnected.keys():
         # debug('', debugLevel)
-        debug('connecting {} to {}'.format(e, needsConnected[e]), debugLevel)
+        log.debug('connecting {} to {}'.format(e, needsConnected[e]))
         if isinstance(e, pin):
             targetName = needsConnected[e]
             targetPins = mainElement.aliasInternalPins[targetName]
@@ -293,5 +285,5 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
                     # debug('connected pin', debugLevel)
                     inputPin.connect(targetPin)
 
-    debug('Element loaded.', debugLevel, end = '\n\n')
+    log.info('Element loaded.')
     return mainElement, mainWidget

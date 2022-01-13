@@ -1,0 +1,18 @@
+switch > in & i
+button > w & w
+
+not in > _in
+and w in > set
+nand w _in > _reset
+
+or set state > out
+and out _reset > state
+
+led w & 20 20 255  5 4
+led in & 200 200 20  5 5
+
+led set & 255 99 9  7 4
+led _reset & 255 99 9  7 5
+
+led out & 20 255 20  10 4
+led state & 20 255 20  10 5

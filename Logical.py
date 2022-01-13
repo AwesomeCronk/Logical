@@ -8,9 +8,9 @@ import logging
 import simpleANSI as ANSI
 
 # Project
-from loading.loading import loadElement, setDebug
+from loading.loading import loadElement
 from ui import vec2, widget, ansiManager
-from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyDebug, setKeyMap
+from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyMap
 
 
 # System info
@@ -21,7 +21,7 @@ architecture = 'x86_64'
 platform = sys.platform
 terminalSize = vec2(*os.get_terminal_size())
 sys.stdout = io.TextIOWrapper(open(sys.stdout.fileno(), 'wb', 0), write_through=True)
-logPath = os.path.expanduser('~/.local/share/Logical/log.txt')
+logPath = {'linux': os.path.expanduser('~/.local/share/Logical/Logical.log'), 'win32': os.path.expandvars('%USERPROFILE%\\AppData\Roaming\Logical\Logical.log')}[platform]
 
 if not platform in ('linux', 'win32'):
     raise RuntimeError('Platform "{}" not supported'.format(platform))
@@ -69,7 +69,7 @@ class simulation():
         self.initUI()
         
     def initKeyBinds(self):
-        setKeyMap(sys.platform)
+        setKeyMap(platform)
         createKeyEvent('Backspace', self.togglePaused, self)
         createKeyEvent('Escape', self.exit, self)
         createKeyEvent('Ctrl+C', self.exit, self)
@@ -77,6 +77,7 @@ class simulation():
         # Load element key binds
         for key in self.mainElement.keyBinds.keys():
             for function in self.mainElement.keyBinds[key]:
+                # delay = self.mainElement.keyBinds[key][-1]
                 createKeyEvent(key, function, self)
 
     def initUI(self):
@@ -89,12 +90,6 @@ class simulation():
         self.title.moveTo(vec2(0, -2))
         self.title.setText(self.titleString)
         self.mainWidget.addWidget(self.title)
-
-        if self.verbose:
-            self.keyListenerDebug = widget()
-            self.keyListenerDebug.resize(vec2(terminalSize[0], 1))
-            self.keyListenerDebug.moveTo(vec2(0, -1))
-            self.mainWidget.addWidget(self.keyListenerDebug)
 
         self.updateDebug = widget()
         self.updateDebug.resize(vec2(terminalSize[0], 1))
@@ -155,9 +150,9 @@ if __name__ == '__main__':
     
     # Ensure the log directory exists
     if not os.path.exists(os.path.dirname(logPath)):
-        os.mkdirs(os.path.dirname(logPath))
+        os.makedirs(os.path.dirname(logPath))
     # Initialize logging to logPath
-    logging.basicConfig(filename=os.path.expanduser('~/.local/share/Logical/log.txt'), encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename=logPath, filemode='w', encoding='utf-8', level=logging.DEBUG)
     
     if args.k:
         rawTest()   # Print out key values and timings
