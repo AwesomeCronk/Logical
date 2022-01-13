@@ -9,7 +9,6 @@ class andGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
             next(iter(self.outputs.values())).set(None)
         elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 2:
@@ -27,7 +26,6 @@ class orGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
             next(iter(self.outputs.values())).set(None)
         elif 1 in [self.inputs['a'].value, self.inputs['b'].value]:
@@ -45,7 +43,6 @@ class xorGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
             next(iter(self.outputs.values())).set(None)
         elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 1:
@@ -62,7 +59,6 @@ class notGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if self.inputs['a'].value is None:
             next(iter(self.outputs.values())).set(None)
         elif self.inputs['a'].value == 1:
@@ -80,7 +76,6 @@ class nandGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
             next(iter(self.outputs.values())).set(None)
         elif bool(self.inputs['a'].value) and bool(self.inputs['b'].value):
@@ -98,7 +93,6 @@ class norGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
             next(iter(self.outputs.values())).set(None)
         elif bool(self.inputs['a'].value) or bool(self.inputs['b'].value):
@@ -116,7 +110,6 @@ class xnorGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if None in [self.inputs['a'].value, self.inputs['b'].value]:
             next(iter(self.outputs.values())).set(None)
         elif (bool(self.inputs['a'].value) or bool(self.inputs['b'].value)) and not (bool(self.inputs['a'].value) and bool(self.inputs['b'].value)):
@@ -142,7 +135,6 @@ class truthTable(element):
         print(self.table)
 
     def update(self):
-        element.update(self)
         values = [str(self.inputs[pinName].value) for pinName in iter(self.inputs)]
         if 'None' in values:
             unconnectedPins = True
@@ -165,7 +157,6 @@ class tristate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        element.update(self)
         if self.inputs['e'].value == 1:
             self.outputs['y'].set(self.inputs['a'].value)
         else:
@@ -187,7 +178,6 @@ class led(element):
         self.widget.setBGColor(self.dimColor)
 
     def update(self):
-        element.update(self)
         if self.inputs['a'].value:
             self.widget.setBGColor(self.litColor)
         else:

@@ -6,7 +6,7 @@ from ui import *
 from loading.parsing import parseCommands
 
 # Load a truth table from parsed .lgc source code
-def loadTable(filePath):
+def loadTable(filePath, id=0):
     log = logging.getLogger('loadTable')
     log.info('Loading as truth table...')
     with open(filePath, 'r') as file:
@@ -56,11 +56,13 @@ def loadTable(filePath):
         else:
             raise Exception('Command {} not recognized.'.format(comm.text))
 
+    table.setID(id)
+
     log.info('Truth table loaded.')
     return table, None  # No widget for truth tables
 
 # Load an element from Python source
-def loadPyElement(filePath, args=[], debugLevel=0):
+def loadPyElement(filePath, args=[], id=0):
     log = logging.getLogger('loadPyElement')
     log.info('Loading as Python element...')
 
@@ -84,11 +86,12 @@ def loadPyElement(filePath, args=[], debugLevel=0):
     else:
         raise Exception('Python file contained no class named "pyElement".')
 
+    pyElement.setID(id)
     log.info('Python element loaded.')
     return pyElement, pyWidget
 
 # Load an element from parsed .ttb source and return that element
-def loadElement(filePath, cwd=None, args=[], debugLevel=0):
+def loadElement(filePath, cwd=None, args=[], id=0):
     log = logging.getLogger('loadElement')
     log.info('Loading element...')
     log.debug('old filePath: {}'.format(filePath))
@@ -104,9 +107,9 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
     log.debug('new cwd: {}'.format(cwd))
 
     if filePath.split('.')[-1] == 'ttb':    # Load as truth table if .ttb file
-        return loadTable(filePath, debugLevel=debugLevel)
+        return loadTable(filePath, id=id)
     elif filePath.split('.')[-1] == 'py':   # Load as Python element if .py file
-        return loadPyElement(filePath, args = args, debugLevel=debugLevel)
+        return loadPyElement(filePath, args = args, id=id)
 
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
@@ -118,6 +121,7 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
 
     # Main element setup
     mainElement = element()
+    mainElement.setID(id)
 
     highPin = pin('\\high')
     mainElement.internalPins.update({highPin.name: [highPin]})
@@ -134,6 +138,7 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
     mainWidget.setMode(widget.containerMode)
 
     for comm in commands:
+        id += 1
         performIOChecks = True
         log.debug('\n'.join([('    ' if i > 0 else '') + line for i, line in enumerate(comm.info().replace('self.', '').split('\n'))]))
         # Element config
@@ -155,60 +160,70 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
         elif comm.element == 'and':
             newElement = andGate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'or':
             newElement = orGate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'xor':
             newElement = xorGate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'not':
             newElement = notGate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'nand':
             newElement = nandGate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'nor':
             newElement = norGate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'xnor':
             newElement = xnorGate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'tristate':
             newElement = tristate()
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         # UI elements
         elif comm.element == 'led':
             newElement = led(*comm.args)
+            newElement.setID(id)
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'label':
             newElement = label(*comm.args)
+            newElement.setID(id)
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
             needsConnected.update({newElement: comm.inputs})
@@ -217,26 +232,27 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
         elif comm.element == 'button':
             newElement = button(*comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             mainElement.addKeyBinds(newElement.keyBinds)
         
         elif comm.element == 'switch':
             newElement = switch(*comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
+            newElement.setID(id)
             mainElement.addElement(newElement)
             mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
-            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args)
+            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args, id=id)
             
             log.debug(newElement.inputs)
             log.debug(newElement.outputs)
+
             # Rename the outputs to the names specified in the .lgc script
-            commandOffset = 0
-            oldNames = list(newElement.outputs.keys())
-            for o in oldNames:
-                newElement.outputs[o].realias(comm.outputs[commandOffset])
-                commandOffset += 1
+            names = list(newElement.outputs.keys())
+            for n, name in enumerate(names):
+                newElement.outputs[name].realias(comm.outputs[n])
                 
             mainElement.addElement(newElement)  # Add newElement to mainElement
             if not newWidget is None:
@@ -265,11 +281,13 @@ def loadElement(filePath, cwd=None, args=[], debugLevel=0):
             # if len(newElement.args) != len(comm.args):
             #     raise Exception('Invalid number of args: {}'.format(len(comm.args)))
 
+    log.info('Element {} has subelements {}'.format(mainElement.id, ', '.join([str(e.id) for e in mainElement.elements])))
+
     # needsConnected is a dict of {element: targetAliases} or {pin: targetAlias}
     log.debug('Establishing connections.')
     for e in needsConnected.keys():
         # debug('', debugLevel)
-        log.debug('connecting {} to {}'.format(e, needsConnected[e]))
+        log.debug('connecting  element {} inputs to {} in of element {}'.format(e.id, needsConnected[e], mainElement.id))
         if isinstance(e, pin):
             targetName = needsConnected[e]
             targetPins = mainElement.aliasInternalPins[targetName]

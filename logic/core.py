@@ -1,9 +1,14 @@
+import logging
+
 class pin():    #Basic pin class
     def __init__(self, name):
         self.name = name
         self.alias = name
         self.targets = []
+        self.elementID = -1
         self.value = None
+
+        self.log = logging.getLogger('pin')
 
     def rename(self, name):
         self.name = name
@@ -19,19 +24,27 @@ class pin():    #Basic pin class
         if target in self.targets:
             self.targets.remove(target)
 
+    def setElementID(self, id):
+        self.elementID = id
+
     def set(self, value):
+        self.log.debug('pin {} ({}) on element {} set to {}'.format(self.name, self.alias, self.elementID, value))
         self.value = value
 
-    def toggle(self):
-        self.value = 1 - self.value
+#     def toggle(self):
+#         self.value = 1 - self.value
     
     def fetch(self):
         values = [target.value for target in self.targets]
         if 1 in values and 0 in values:
             raise Exception('Contending inputs for {}'.format(self))
         elif 1 in values:
+            if self.value == 0:
+                self.log.debug('pin {} ({}) on element {} updated to 1'.format(self.name, self.elementID, self.alias))
             self.set(1)
         elif 0 in values:
+            if self.value == 1:
+                self.log.debug('pin {} ({}) on element {} updated to 0'.format(self.name, self.elementID, self.alias))
             self.set(0)
         else:
             self.set(None)
@@ -46,9 +59,11 @@ class element():    # Basic element class
         self.aliasOutputs = {}  # dict of outputs by {alias: pin}
         self.internalPins = {}  # dict of internal pins by {name: [pin, pin...]} for ease of connecting elements
         self.aliasInternalPins = {} # dict of internal pins by {alias: [pin, pin...]} for ease of connecting elements
+
         self.args = []          # list of arguments
         self.elements = []      # list of elements in this element
         self.keyBinds = {}      # dict of key bindings by {key: [function, function]}
+        self.id = -1
 
     def addInput(self, newPin):
         # Please note that the pin should be named and aliased before adding it to an element
@@ -98,6 +113,13 @@ class element():    # Basic element class
                         self.keyBinds[key].append(f)
             else:
                 self.keyBinds[key] = keyBinds[key]
+
+    def setID(self, id):
+        self.id = id
+        for pin in self.inputs.values():
+            pin.setElementID(self.id)
+        for pin in self.outputs.values():
+            pin.setElementID(self.id)
 
     def preUpdate(self):
         for i in self.inputs.values():
