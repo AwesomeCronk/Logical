@@ -9,9 +9,10 @@ class andGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+        values = [self.inputs['a'].value, self.inputs['b'].value]
+        if values == [None, None]:
             next(iter(self.outputs.values())).set(None)
-        elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 2:
+        elif values.count(1) == 2:
             next(iter(self.outputs.values())).set(1)
             #print('and gate set high')
         else:
@@ -26,9 +27,10 @@ class orGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+        values = [self.inputs['a'].value, self.inputs['b'].value]
+        if values == [None, None]:
             next(iter(self.outputs.values())).set(None)
-        elif 1 in [self.inputs['a'].value, self.inputs['b'].value]:
+        elif 1 in values:
             next(iter(self.outputs.values())).set(1)
             #print('or gate set high')
         else:
@@ -43,9 +45,10 @@ class xorGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+        values = [self.inputs['a'].value, self.inputs['b'].value]
+        if values == [None, None]:
             next(iter(self.outputs.values())).set(None)
-        elif [self.inputs['a'].value, self.inputs['b'].value].count(1) == 1:
+        elif values.count(1) == 1:
             next(iter(self.outputs.values())).set(1)
             #print('xor gate set high')
         else:
@@ -76,14 +79,15 @@ class nandGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+        values = [self.inputs['a'].value, self.inputs['b'].value]
+        if values == [None, None]:
             next(iter(self.outputs.values())).set(None)
-        elif bool(self.inputs['a'].value) and bool(self.inputs['b'].value):
+        elif values.count(1) == 2:
             next(iter(self.outputs.values())).set(0)
-            #print('nand gate set low')
+            #print('and gate set high')
         else:
             next(iter(self.outputs.values())).set(1)
-            #print('nand gate set high')
+            #print('and gate set low')
 
 class norGate(element):
     def __init__(self):
@@ -93,14 +97,15 @@ class norGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+        values = [self.inputs['a'].value, self.inputs['b'].value]
+        if values == [None, None]:
             next(iter(self.outputs.values())).set(None)
-        elif bool(self.inputs['a'].value) or bool(self.inputs['b'].value):
+        elif 1 in values:
             next(iter(self.outputs.values())).set(0)
-            #print('nor gate set low')
+            #print('or gate set high')
         else:
             next(iter(self.outputs.values())).set(1)
-            #print('nor gate set high')
+            #print('or gate set low')
 
 class xnorGate(element):
     def __init__(self):
@@ -110,14 +115,15 @@ class xnorGate(element):
         self.addOutput(pin('y'))
 
     def update(self):
-        if None in [self.inputs['a'].value, self.inputs['b'].value]:
+        values = [self.inputs['a'].value, self.inputs['b'].value]
+        if values == [None, None]:
             next(iter(self.outputs.values())).set(None)
-        elif (bool(self.inputs['a'].value) or bool(self.inputs['b'].value)) and not (bool(self.inputs['a'].value) and bool(self.inputs['b'].value)):
+        elif values.count(1) == 1:
             next(iter(self.outputs.values())).set(0)
-            #print('xnor gate set low')
+            #print('xor gate set high')
         else:
             next(iter(self.outputs.values())).set(1)
-            #print('xnor gate set high')
+            #print('xor gate set low')
 
 class truthTable(element):
     def __init__(self):

@@ -3,7 +3,8 @@ button > w & w
 
 not in > _in
 and w in > set
-nand w _in > _reset
+and w _in > reset
+not reset > _reset
 
 or set state > out
 and out _reset > state

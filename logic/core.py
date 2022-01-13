@@ -1,14 +1,14 @@
 import logging
 
 class pin():    #Basic pin class
+    log = logging.getLogger('pin')
+
     def __init__(self, name):
         self.name = name
         self.alias = name
         self.targets = []
         self.elementID = -1
         self.value = None
-
-        self.log = logging.getLogger('pin')
 
     def rename(self, name):
         self.name = name
@@ -41,13 +41,13 @@ class pin():    #Basic pin class
         elif 1 in values:
             if self.value == 0:
                 self.log.debug('pin {} ({}) on element {} updated to 1'.format(self.name, self.elementID, self.alias))
-            self.set(1)
+            self.value = 1
         elif 0 in values:
             if self.value == 1:
                 self.log.debug('pin {} ({}) on element {} updated to 0'.format(self.name, self.elementID, self.alias))
-            self.set(0)
+            self.value = 0
         else:
-            self.set(None)
+            self.value = None
         # print('targets: {}'.format(self.targets), end='')
         # print('values: {}'.format(values), end='')
 

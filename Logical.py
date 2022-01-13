@@ -140,7 +140,7 @@ class simulation():
                 else:
                     time.sleep(0.2)     # Chillax for a split second, saves the CPU
 
-                time.sleep(0.4)     # Delay to reduce log spam for debugging (comment out when done)
+                # ime.sleep(0.4)     # Delay to reduce log spam for debugging (comment out when done)
 
                 self.log.debug('Updating widgets...')
                 self.mainWidget.update()    # Update each widget
