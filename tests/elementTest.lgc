@@ -3,8 +3,8 @@
 
 $include elementTestHelper.lgc > testHelper
 
-button > a & 'a'
-button > b & 'b'
+button > a & a
+button > b & b
 
 testHelper a b > c d
 

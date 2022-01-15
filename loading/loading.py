@@ -287,7 +287,7 @@ def loadElement(filePath, cwd=None, args=[], id=0):
     log.debug('Establishing connections.')
     for e in needsConnected.keys():
         # debug('', debugLevel)
-        log.debug('connecting element {} inputs to {} in of element {}'.format(e.id, needsConnected[e], mainElement.id))
+        log.debug('connecting element {} inputs to {} in of element {}'.format(e.id if isinstance(e, element) else e.elementID, needsConnected[e], mainElement.id))
         if isinstance(e, pin):
             targetName = needsConnected[e]
             targetPins = mainElement.aliasInternalPins[targetName]

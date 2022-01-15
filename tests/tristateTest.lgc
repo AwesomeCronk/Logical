@@ -1,11 +1,11 @@
 // Logical test file
 // Tests tristates
 
-button > in0 & 'q'
-button > in1 & 'w'
+button > in0 & q
+button > in1 & w
 
-switch > enable0 & 'a'
-switch > enable1 & 's'
+switch > enable0 & a
+switch > enable1 & s
 
 tristate in0 enable0 > out
 tristate in1 enable1 > out

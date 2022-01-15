@@ -1,19 +1,21 @@
+#!/bin/bash
 # Logical test file
 # Runs each test in the specified directory
 
 echo "Running tests in '$1'"
-for file in "$1/*Test.lgc"
+cd $1
+for file in *
 do
-    echo "Checking $file"
-    if [$file =~ "*Test.lgc"]
+    if [[ $file =~ .*Test\.lgc ]]
     then
+        echo
         echo "Running test $file (enter 'n' to skip)"
-        read $goAhead
-        if ($goAhead != "n")
+        read goAhead
+        if [[ $goAhead != "n" ]]
         then
-            echo "running $file"
-            # python3.9 Logical.py $file
-            clear
+            # echo "running $file"
+            python3.9 ../Logical.py $file
+            
         fi
     fi
 done

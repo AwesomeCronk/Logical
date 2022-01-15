@@ -5,6 +5,6 @@ $pins a b > c d
 
 and a b > d
 
-button > c & 'c'
+button > c & c
 
 led c & 255 255 20  11 5

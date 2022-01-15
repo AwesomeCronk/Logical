@@ -3,6 +3,6 @@
 
 $include pyElementTestHelper.py > pyElement
 
-button > enable & 'a'
+button > enable & a
 
 pyElement enable

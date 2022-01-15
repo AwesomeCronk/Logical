@@ -3,8 +3,8 @@
 
 $include ttbTestHelper.ttb > ttbElement
 
-button > in09 & 'a'
-button > in10 & 'b'
+button > in09 & a
+button > in10 & b
 
 ttbElement in[9..10] > data[0..3]
 
