@@ -56,12 +56,12 @@ This document contains release notes for all versions from 0.1.0 on.
 * Added support for bussing in inputs and outputs.
 * Cleaned up debug printing.
 * Set up command line args.
-* Repalced `keys` with `Logical -k`.
+* Replaced `keys` with `Logical -k`.
 
 ### 0.9.0.pre
 * Added Linux support
 * Added a log file
 * Removed verbose mode
 * Changed the key binding names
-// * Fixed loops not working
+* Fixed loops not working
 * Upgraded to Python 3.9.9
