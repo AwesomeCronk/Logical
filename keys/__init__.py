@@ -1,5 +1,5 @@
 # https://newbedev.com/how-to-key-press-detection-on-a-linux-terminal-low-level-style-in-python
-import sys, os, timeit, threading
+import sys, os, timeit, threading, logging
 from contextlib import contextmanager
 
 if sys.platform == 'linux':
@@ -8,22 +8,14 @@ elif sys.platform == 'win32':
     import msvcrt
     # sys.stdin = io.TextIOWrapper(open(sys.stdin.fileno(), 'rb', 0), write_through=True)
 
-debugEnabled = False
-
-def setKeyDebug(state):
-    global debugEnabled
-    debugEnabled = state
-
-def debug(*args, **kwargs):
-    if debugEnabled:
-        print(*args, **kwargs)
-
 keyMap = {}
 
 # Set keyMap for cross-platform and terminal specialness compatibility
 # if keyMapName is 'linux' or 'win32' use the builtins, otherwise open as a file
 def setKeyMap(keyMapName):
     global keyMap
+    log = logging.getLogger('setKeyMap')
+
     if keyMapName in ('linux', 'win32'):
         keyMapPath = os.path.join(os.path.dirname(__file__), '{}.km'.format(keyMapName))
     else:
@@ -44,7 +36,7 @@ def setKeyMap(keyMapName):
             if not char in keyMap.keys():
                 keyMap[char] = []
             keyMap[char].append(keyName)
-    debug('keyMap set to {}'.format(keyMapName))
+    log.info('keyMap set to {}'.format(keyMapName))
     
 def printKeyMap():
     for key in keyMap.keys():
@@ -55,15 +47,16 @@ def printKeyMap():
 # not quit before the IO thread loops back.
 
 def __getCharLinux():
+    log = logging.getLogger('getChar')
     try:
-        debug('setting terminal mode')
+        log.debug('setting terminal mode')
         fd = sys.stdin.fileno()
         attr = termios.tcgetattr(fd)
         tty.setraw(fd)
-        debug('set terminal mode')
+        log.debug('set terminal mode')
         return sys.stdin.read(1).encode()
     finally:
-        debug('resetting terminal mode')
+        log.debug('resetting terminal mode')
         termios.tcsetattr(fd, termios.TCSANOW, attr)
 
 def __getCharWin32():
@@ -111,7 +104,6 @@ class keyEvent():
     def getTimeDiff(self):
         timeJustCalled = getTime()
         timeDiff = timeJustCalled - self.timeLastCalled
-        # debug(timeJustCalled, self.timeLastCalled, timeDiff)
         return timeJustCalled, timeDiff
 
     def call(self):
@@ -123,26 +115,25 @@ class keyEvent():
 
     def unCall(self):
         if self.called:
-            # debug('uncalling')
             timeDiff = self.getTimeDiff()[1]
             if timeDiff > holdTimeThreshold:
                 self.simulation.eventsToCall.append((self.function, False))
                 self.called = False
-            # else:
-            #     debug('unCall skipped, timeDiff={}'.format(timeDiff))
 
 
 def createKeyEvent(keyValue, function, simulation):     # Create event that calls <function> when <keyEvent> is found in stdin
+    log = logging.getLogger('createKeyEvent')
     newKeyEvent = keyEvent(keyValue, function, simulation)
     if keyValue in simulation.keyEvents.keys():
         if not function in simulation.keyEvents[keyValue]:
             simulation.keyEvents[keyValue].append(newKeyEvent)
     else:
         simulation.keyEvents[keyValue] = [newKeyEvent]
-    debug('key event created for {}'.format(keyValue))
+    log.info('key event created for {}'.format(keyValue))
 
 @contextmanager
 def pollKeyEvents(simulation):
+    log = logging.getLogger('pollKeyEvents')
     try:
         poller = threading.Thread(
             target=__pollKeyEvents,
@@ -150,23 +141,24 @@ def pollKeyEvents(simulation):
             args=(simulation,)
         )
         poller.start()
-        debug('poller started')
+        log.info('poller started')
         yield
     finally:
         poller.join()
-        debug('poller joined')
+        log.info('poller joined')
 
 def __pollKeyEvents(simulation):    # Get and call key events
+    log = logging.getLogger('pollKeyEvents')
     while simulation.runFlag:
         key, rawChar = getKey()
         try:
             currentEvents = simulation.keyEvents[key]
             for currentEvent in currentEvents:
                 currentEvent.call()
-            debug('called event')
+            log.debug('called event')
 
         except KeyError:    # Event not registered
-            debug('no event found')
+            log.debug('no event found')
             pass
 
 

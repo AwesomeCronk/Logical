@@ -28,7 +28,7 @@ class pin():    #Basic pin class
         self.elementID = id
 
     def set(self, value):
-        self.log.debug('pin {} ({}) on element {} set to {}'.format(self.name, self.alias, self.elementID, value))
+        # self.log.debug('pin {} ({}) on element {} set to {}'.format(self.name, self.alias, self.elementID, value))
         self.value = value
 
 #     def toggle(self):
@@ -39,12 +39,12 @@ class pin():    #Basic pin class
         if 1 in values and 0 in values:
             raise Exception('Contending inputs for {}'.format(self))
         elif 1 in values:
-            if self.value == 0:
-                self.log.debug('pin {} ({}) on element {} updated to 1'.format(self.name, self.elementID, self.alias))
+            # if self.value == 0:
+            #     self.log.debug('pin {} ({}) on element {} updated to 1'.format(self.name, self.elementID, self.alias))
             self.value = 1
         elif 0 in values:
-            if self.value == 1:
-                self.log.debug('pin {} ({}) on element {} updated to 0'.format(self.name, self.elementID, self.alias))
+            # if self.value == 1:
+            #     self.log.debug('pin {} ({}) on element {} updated to 0'.format(self.name, self.elementID, self.alias))
             self.value = 0
         else:
             self.value = None

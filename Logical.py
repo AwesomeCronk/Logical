@@ -134,7 +134,7 @@ class simulation():
                     del(self.eventsToCall[0])
 
                 if self.simRunFlag:
-                    self.log.debug('Updating elements...')
+                    # self.log.debug('Updating elements...')
                     self.mainElement.preUpdate()    # Fetch pin states so they don't change mid-update
                     self.mainElement.update()   # Update each element
                 else:
@@ -142,7 +142,7 @@ class simulation():
 
                 # time.sleep(0.4)     # Delay to reduce log spam for debugging (comment out when done)
 
-                self.log.debug('Updating widgets...')
+                # self.log.debug('Updating widgets...')
                 self.mainWidget.update()    # Update each widget
                 updateTime = int((process_time_ns() - startTime) / 1000)
             print(ANSI.clear.entireScreen(), end = '')
