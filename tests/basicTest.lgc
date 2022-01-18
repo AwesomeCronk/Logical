@@ -1,7 +1,7 @@
 // Logical test file
 // Tests butons, switches, basic gates, leds, labels, and \high and \low states
 
-button > j & j
+buton > j & j
 switch > k & k
 
 switch > l & l

@@ -1,4 +1,6 @@
-import logging
+import traceback, logging
+
+from errors import SimulateError, throw
 
 class pin():    #Basic pin class
     log = logging.getLogger('pin')
@@ -37,7 +39,7 @@ class pin():    #Basic pin class
     def fetch(self):
         values = [target.value for target in self.targets]
         if 1 in values and 0 in values:
-            raise Exception('Contending inputs for {}'.format(self))
+            throw(SimulateError('Contending inputs for {}'.format(self), self.elementID, None))
         elif 1 in values:
             # if self.value == 0:
             #     self.log.debug('pin {} ({}) on element {} updated to 1'.format(self.name, self.elementID, self.alias))
@@ -125,10 +127,16 @@ class element():    # Basic element class
         for i in self.inputs.values():
             i.fetch()
         for e in self.elements:
-            e.preUpdate()
+            try:
+                e.preUpdate()
+            except:
+                throw(SimulateError('element preUpdate failure:\n{}'.format(traceback.format_exc()), e.id))
 
     def update(self):
         for e in self.elements:
-            e.update()
+            try:
+                e.update()
+            except:
+                throw(SimulateError('element update failure:\n{}'.format(traceback.format_exc()), e.id))
         for o in self.outputs.values():
             o.fetch()

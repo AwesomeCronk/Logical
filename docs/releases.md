@@ -61,6 +61,7 @@ This document contains release notes for all versions from 0.1.0 on.
 ### 0.9.0.pre
 * Added Linux support
 * Added a log file
+* Added an error system that isn't Python tracebacks
 * Removed verbose mode
 * Changed the key binding names
 * Fixed loops not working

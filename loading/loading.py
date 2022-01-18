@@ -4,6 +4,7 @@ from logic.core import element, pin
 from logic.elements import *
 from ui import *
 from loading.parsing import parseCommands
+from errors import LoadError, throw
 
 # Load a truth table from parsed .lgc source code
 def loadTable(filePath, id=0):
@@ -30,7 +31,7 @@ def loadTable(filePath, id=0):
     for comm in commands[ctr:]:
         log.debug('\n'.join([('    ' if i > 0 else '') + line for i, line in enumerate(comm.info().replace('self.', '').split('\n'))]))
         if comm.element == '$pins':
-            raise Exception('Cannot add pins after matches have been declared.')
+            throw(LoadError('Cannot add pins after matches have been declared.', id, filePath, comm.line))
             
         elif comm.element == 'match':
             try:
@@ -39,13 +40,13 @@ def loadTable(filePath, id=0):
                 for o in comm.inputs:
                     assert int(o) in [0, 1]
             except:
-                raise Exception('Truth table matches must be 0 or 1.')
+                throw(LoadError('Truth table matches must be 0 or 1.', id, filePath, comm.line))
 
             if len(comm.inputs) != len(table.inputs):
-                raise Exception('Input length mismatch.')
+                throw(LoadError('Input length mismatch.', id, filePath, comm.line))
 
             elif len(comm.outputs) != len(table.outputs):
-                raise Exception('Output length mismatch.')
+                throw(LoadError('Output length mismatch.', id, filePath, comm.line))
             
             else:
                 match = int('0b' + ''.join([i for i in comm.inputs]), base=2)
@@ -54,7 +55,7 @@ def loadTable(filePath, id=0):
                 table.addMatch(match, result)
 
         else:
-            raise Exception('Command {} not recognized.'.format(comm.text))
+            throw(LoadError('Command {} not recognized.'.format(comm.text), id, filePath, comm.line))
 
     table.setID(id)
 
@@ -84,7 +85,7 @@ def loadPyElement(filePath, args=[], id=0):
         except AttributeError:
             pyWidget = None
     else:
-        raise Exception('Python file contained no class named "pyElement".')
+        throw(LoadError('Python file contained no class named "pyElement".', id, filePath))
 
     pyElement.setID(id)
     log.info('Python element loaded.')
@@ -269,15 +270,15 @@ def loadElement(filePath, cwd=None, args=[], id=0):
             mainElement.addKeyBinds(newElement.keyBinds)
 
         else:
-            raise Exception('Command {} not recognized.'.format(comm.text))
+            throw(LoadError('Command {} not recognized.'.format(comm.text), id, filePath, comm.line))
             
         # Input/output checks
         # Should be skipped if the command being run is $include or $pins
         if performIOChecks:
             if len(newElement.inputs) != len(comm.inputs):
-                raise Exception('Invalid number of inputs: {}'.format(len(comm.inputs)))
+                throw(LoadError('Invalid number of inputs: {}'.format(len(comm.inputs)), id, filePath, comm.line))
             if len(newElement.outputs) != len(comm.outputs):
-                raise Exception('Invalid number of outputs: {}'.format(len(comm.outputs)))
+                throw(LoadError('Invalid number of outputs: {}'.format(len(comm.outputs)), id, filePath, comm.line))
             # if len(newElement.args) != len(comm.args):
             #     raise Exception('Invalid number of args: {}'.format(len(comm.args)))
 

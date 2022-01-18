@@ -1,8 +1,7 @@
 # Builtins
-import sys, time, os, io
+import sys, time, os, io, traceback, logging
 from time import process_time_ns
 from argparse import ArgumentParser
-import logging
 
 # Packages
 import simpleANSI as ANSI
@@ -11,6 +10,7 @@ import simpleANSI as ANSI
 from loading.loading import loadElement
 from ui import vec2, widget, ansiManager
 from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyMap
+from errors import SimulateError, throw, setThrowEvent
 
 
 # System info
@@ -54,6 +54,7 @@ class simulation():
     def __init__(self, filePath):
         self.runFlag = True
         self.simRunFlag = True
+        self.stopMessage = ''
         # self.breakpointFlag = False     # Reserved for breakpoint() feature
         self.keyEvents = {}
         self.eventsToCall = []
@@ -67,18 +68,20 @@ class simulation():
 
         self.initKeyBinds()
         self.initUI()
+
+        setThrowEvent(self.throwEvent)
         
     def initKeyBinds(self):
         setKeyMap(platform)
-        createKeyEvent('Backspace', self.togglePaused, self)
-        createKeyEvent('Escape', self.exit, self)
-        createKeyEvent('Ctrl+C', self.exit, self)
+        createKeyEvent('Backspace', self.togglePaused, 0.0, self)
+        createKeyEvent('Escape', self.stop, 0.0, self)
+        createKeyEvent('Ctrl+C', self.stop, 0.0, self)
 
         # Load element key binds
         for key in self.mainElement.keyBinds.keys():
             for function in self.mainElement.keyBinds[key]:
                 # delay = self.mainElement.keyBinds[key][-1]
-                createKeyEvent(key, function, self)
+                createKeyEvent(key, function, 0.5, self)
 
     def initUI(self):
         print(ANSI.clear.entireScreen(), end = '')
@@ -104,11 +107,16 @@ class simulation():
                 self.title.setText(self.titleString + '         ')
             else:
                 self.title.setText(self.titleString + ' (paused)')
-    
-    def exit(self, state):
+
+    def throwEvent(self, errorToThrow):
+        self.stop(errorToThrow)
+        self.log.error(errorToThrow)
+
+    def stop(self, message='', state=0):
         # Here we don't care about state since it's a one-time gig
         self.mainWidget.update()    # One last update to see if it died right
         self.runFlag = False
+        self.stopMessage = message
 
     def main(self):
         with pollKeyEvents(self):
@@ -135,8 +143,14 @@ class simulation():
 
                 if self.simRunFlag:
                     # self.log.debug('Updating elements...')
-                    self.mainElement.preUpdate()    # Fetch pin states so they don't change mid-update
-                    self.mainElement.update()   # Update each element
+                    try:
+                        self.mainElement.preUpdate()    # Fetch pin states so they don't change mid-update
+                    except:
+                        throw(SimulateError('element preUpdate failure:\n{}'.format(traceback.format_exc()), self.mainElement.id))
+                    try:
+                        self.mainElement.update()   # Update each element
+                    except:
+                        throw(SimulateError('element update failure:\n{}'.format(traceback.format_exc()), self.mainElement.id))
                 else:
                     time.sleep(0.2)     # Chillax for a split second, saves the CPU
 
@@ -147,10 +161,11 @@ class simulation():
                 updateTime = int((process_time_ns() - startTime) / 1000)
             print(ANSI.clear.entireScreen(), end = '')
             print(ANSI.cursor.moveTo(1, 1))
+            print(self.stopMessage)
             print('If Logical does not exit, please press a key to cycle stdin listener.')
             
 if __name__ == '__main__':
-    parser, args = getArgs()
+    argParser, args = getArgs()
     
     # Ensure the log directory exists
     if not os.path.exists(os.path.dirname(logPath)):
@@ -162,7 +177,7 @@ if __name__ == '__main__':
         rawTest()   # Print out key values and timings
     else:
         if args.file == 'None':
-            parser.error('file is required unless -k is set.')
+            argParser.error('file is required unless -k is set.')
         else:
             with ansiManager():
                 sim = simulation(args.file)

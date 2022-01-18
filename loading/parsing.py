@@ -1,5 +1,7 @@
 import sys
 
+from errors import ParseError, throw
+
 commentSequence = '//'
 includeSequence = '$include'
 pinsSequence = '$pins'
@@ -11,9 +13,6 @@ bussingSequence = ['[', '..', ']']
 lineNumberOffset = 1
 entryNumberOffset = 1
 maxEntriesPerLine = 50
-
-class ParseError(Exception):
-    pass
 
 # Class to represent commands in .lgc or .ttb source
 class command():
@@ -45,7 +44,7 @@ class command():
         return infoStr
 
 # Function to parse .lgc and .ttb source code and return a list of commands.
-def parseCommands(lines):
+def parseCommands(lines, filePath='<no file>'):
     commands = []
     for l in range(len(lines)):
         line = lines[l].split(commentSequence)[0]       # Take out comments
@@ -62,7 +61,7 @@ def parseCommands(lines):
 
             # Split at the argument separator and subsequently at spaces
             if other.count(argumentSequence) > 1:
-                raise ParseError('Only one instance of "{}" per entry allowed.'.format(argumentSequence))
+                throw(ParseError('Only one instance of "{}" per entry allowed.'.format(argumentSequence), filePath, l))
             
             if other.count(argumentSequence) == 1:
                 other, args = other.split(argumentSequence)
@@ -78,7 +77,7 @@ def parseCommands(lines):
                         strings.insert(0, (start, end)) # insert instead of append to avoid having to reverse it later
                         inString = False
                 if inString:
-                    raise ParseError('Unmatched string operators: ""')
+                    throw(ParseError('Unmatched string operators ("")', filePath, l))
                 for start, end in strings:
                     args[start:end] = [' '.join(args[start:end])[1:-1]]
             else:
@@ -88,7 +87,7 @@ def parseCommands(lines):
             # Split at the pin separator and subsequently at spaces
             # inputs and outputs should both be lists of strings
             if other.count(pinSeparatorSequence) > 1:
-                raise ParseError('Only one instance of "{}" per entry allowed.'.format(pinSeparatorSequence))
+                throw(ParseError('Only one instance of "{}" per entry allowed.'.format(pinSeparatorSequence), filePath, l))
             elif other.count(pinSeparatorSequence) == 1:
                 inputs, outputs = [o.split() for o in other.split(pinSeparatorSequence)]
             else:
@@ -101,9 +100,9 @@ def parseCommands(lines):
                 for p in pins:
                     # print(i, i.count(bussingSequence[0]), i.count(bussingSequence[2]))
                     if p.count(bussingSequence[0]) > 1 or p.count(bussingSequence[2]) > 1:
-                        raise ParseError('Too many bussing operators: {}{}'.format(bussingSequence[0], bussingSequence[2]))
+                        throw(ParseError('Too many bussing operators: {}{}'.format(bussingSequence[0], bussingSequence[2]), filePath, l))
                     if p.count(bussingSequence[0]) != p.count(bussingSequence[2]):
-                        raise ParseError('Unmatched bussing operators: {}{}'.format(bussingSequence[0], bussingSequence[2]))
+                        throw(ParseError('Unmatched bussing operators: {}{}'.format(bussingSequence[0], bussingSequence[2]), filePath, l))
                 
                 # Detect bussing (i.e. "data[0..25]")
                 for index, p in enumerate(pins):
@@ -128,7 +127,7 @@ def parseCommands(lines):
 
             if element == includeSequence:
                 if len(inputs) != 1 or len(outputs) != 1:
-                    raise ParseError('{} must have file name and element name separated by {}'.format(includeSequence, pinSeparatorSequence))
+                    throw(ParseError('{} must have file name and element name separated by {}'.format(includeSequence, pinSeparatorSequence), filePath, l))
 
             commands.append(command(
                 l + lineNumberOffset,
@@ -153,6 +152,6 @@ if __name__ == '__main__':
     with open(sys.argv[1], 'r') as file:
         lines = file.read().split('\n')
         print('Parsing file "{}" ({} lines)'.format(sys.argv[1], len(lines)))
-        commands = parseCommands(lines)
+        commands = parseCommands(lines, sys.argv[1])
     for comm in commands:
         print(comm.info())

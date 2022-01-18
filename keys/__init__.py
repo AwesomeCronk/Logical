@@ -89,41 +89,39 @@ def getKey():
 
 getTime = timeit.default_timer
 
-
-holdTimeThreshold = 0.6     # Time in seconds since last call to consider key as held
-
 class keyEvent():
-    def __init__(self, keyValue, function, simulation):
+    def __init__(self, keyValue, function, delay, simulation):
         self.keyValue = keyValue
         self.function = function
+        self.delay = delay
         self.simulation = simulation
 
         self.called = False
-        self.timeLastCalled = 0.0
+        self.timeCalled = 0.0
 
     def getTimeDiff(self):
         timeJustCalled = getTime()
-        timeDiff = timeJustCalled - self.timeLastCalled
+        timeDiff = timeJustCalled - self.timeCalled
         return timeJustCalled, timeDiff
 
     def call(self):
         timeJustCalled, timeDiff = self.getTimeDiff()
-        if timeDiff > holdTimeThreshold and not self.called:
+        if timeDiff > self.delay and not self.called:
             self.simulation.eventsToCall.append((self.function, True))
-        self.called = True
-        self.timeLastCalled = timeJustCalled
+            self.called = True
+            self.timeCalled = timeJustCalled
 
     def unCall(self):
         if self.called:
             timeDiff = self.getTimeDiff()[1]
-            if timeDiff > holdTimeThreshold:
+            if timeDiff > self.delay:
                 self.simulation.eventsToCall.append((self.function, False))
                 self.called = False
 
 
-def createKeyEvent(keyValue, function, simulation):     # Create event that calls <function> when <keyEvent> is found in stdin
+def createKeyEvent(keyValue, function, delay, simulation):     # Create event that calls <function> when <keyEvent> is found in stdin
     log = logging.getLogger('createKeyEvent')
-    newKeyEvent = keyEvent(keyValue, function, simulation)
+    newKeyEvent = keyEvent(keyValue, function, delay, simulation)
     if keyValue in simulation.keyEvents.keys():
         if not function in simulation.keyEvents[keyValue]:
             simulation.keyEvents[keyValue].append(newKeyEvent)
