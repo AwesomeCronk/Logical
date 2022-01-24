@@ -13,11 +13,11 @@ Join the Discord server! https://discord.gg/mw3yfNr3Wd
 
 ## To Do
 * ~~Documentation~~ Started - needs more actual language work done to continue.
-* Error logging with `logging`
-* Error handling
 * Circular inclusion detection
 * Multiprocessing
 * Multi-PC processing via sockets?
+* ~~Error logging with `logging`~~
+* ~~Error handling~~
 * ~~Actual command line args with `argparse`~~
 * ~~Fix tristates and busses~~
 * ~~Improve/fix includes~~
