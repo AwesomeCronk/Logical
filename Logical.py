@@ -174,6 +174,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename=logPath, filemode='w', encoding='utf-8', level=logging.DEBUG)
     
     if args.k:
+        setKeyMap(platform)
         rawTest()   # Print out key values and timings
     else:
         if args.file == 'None':

@@ -1,0 +1,1212 @@
+[2022-01-23T21:01:51.188580 13006] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.188580 13006] Config: (default) base_dir = 
+[2022-01-23T21:01:51.188580 13006] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.188580 13006] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.188580 13006] Config: (default) compiler = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.188580 13006] Config: (default) compression = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.188580 13006] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) debug = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.188580 13006] Config: (default) disable = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) hard_link = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.188580 13006] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.188580 13006] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.188580 13006] Config: (default) max_files = 0
+[2022-01-23T21:01:51.188580 13006] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.188580 13006] Config: (default) path = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) read_only = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) recache = false
+[2022-01-23T21:01:51.188580 13006] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.188580 13006] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) stats = true
+[2022-01-23T21:01:51.188580 13006] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.188580 13006] Config: (default) umask = 
+[2022-01-23T21:01:51.188661 13006] Command line: gcc -o __constants.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src __constants.c
+[2022-01-23T21:01:51.188671 13006] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.188684 13006] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.188731 13006] Source file: __constants.c
+[2022-01-23T21:01:51.188735 13006] Object file: __constants.o
+[2022-01-23T21:01:51.188746 13006] Trying direct lookup
+[2022-01-23T21:01:51.188782 13006] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/c/0/ce51a17c5ee1b5eb22e7de2f57a42f-5652.manifest
+[2022-01-23T21:01:51.188794 13006] No such manifest file
+[2022-01-23T21:01:51.188798 13006] Did not find object file hash in manifest
+[2022-01-23T21:01:51.188843 13006] Running preprocessor
+[2022-01-23T21:01:51.188847 13006] Executing /usr/bin/gcc -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src -E __constants.c
+[2022-01-23T21:01:51.192802 13011] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.192802 13011] Config: (default) base_dir = 
+[2022-01-23T21:01:51.192802 13011] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.192802 13011] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.192802 13011] Config: (default) compiler = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.192802 13011] Config: (default) compression = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.192802 13011] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) debug = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.192802 13011] Config: (default) disable = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) hard_link = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.192802 13011] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.192802 13011] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.192802 13011] Config: (default) max_files = 0
+[2022-01-23T21:01:51.192802 13011] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.192802 13011] Config: (default) path = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) read_only = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) recache = false
+[2022-01-23T21:01:51.192802 13011] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.192802 13011] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) stats = true
+[2022-01-23T21:01:51.192802 13011] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.192802 13011] Config: (default) umask = 
+[2022-01-23T21:01:51.192884 13011] Command line: gcc -o __helpers.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src __helpers.c
+[2022-01-23T21:01:51.192895 13011] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.192908 13011] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.192955 13011] Source file: __helpers.c
+[2022-01-23T21:01:51.192960 13011] Object file: __helpers.o
+[2022-01-23T21:01:51.192971 13011] Trying direct lookup
+[2022-01-23T21:01:51.193007 13011] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/0/c/2c5416a8ffed61260c3616479f88ab-1239.manifest
+[2022-01-23T21:01:51.193020 13011] No such manifest file
+[2022-01-23T21:01:51.193024 13011] Did not find object file hash in manifest
+[2022-01-23T21:01:51.193073 13011] Running preprocessor
+[2022-01-23T21:01:51.193078 13011] Executing /usr/bin/gcc -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src -E __helpers.c
+[2022-01-23T21:01:51.203212 13016] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.203212 13016] Config: (default) base_dir = 
+[2022-01-23T21:01:51.203212 13016] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.203212 13016] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.203212 13016] Config: (default) compiler = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.203212 13016] Config: (default) compression = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.203212 13016] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) debug = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.203212 13016] Config: (default) disable = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) hard_link = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.203212 13016] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.203212 13016] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.203212 13016] Config: (default) max_files = 0
+[2022-01-23T21:01:51.203212 13016] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.203212 13016] Config: (default) path = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) read_only = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) recache = false
+[2022-01-23T21:01:51.203212 13016] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.203212 13016] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) stats = true
+[2022-01-23T21:01:51.203212 13016] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.203212 13016] Config: (default) umask = 
+[2022-01-23T21:01:51.203368 13016] Command line: gcc -o __loader.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src __loader.c
+[2022-01-23T21:01:51.203406 13016] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.203663 13016] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.204025 13016] Source file: __loader.c
+[2022-01-23T21:01:51.204058 13016] Object file: __loader.o
+[2022-01-23T21:01:51.204094 13016] Trying direct lookup
+[2022-01-23T21:01:51.204317 13016] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/b/4/13ddd3d1613ec9b59ca50c7586f529-68872.manifest
+[2022-01-23T21:01:51.208073 13016] Got object file hash from manifest
+[2022-01-23T21:01:51.208275 13016] Copying /home/aweso/.cache/Nuitka/ccache/f/6/5597bf368c9e0b9ba4fff9c4a66ce5-649281.o to __loader.o via __loader.o.VivoBookF512J.13016.lZEWwp (uncompressed)
+[2022-01-23T21:01:51.208486 13016] Created from cache: /home/aweso/.cache/Nuitka/ccache/f/6/5597bf368c9e0b9ba4fff9c4a66ce5-649281.o -> __loader.o
+[2022-01-23T21:01:51.208527 13016] Succeeded getting cached result
+[2022-01-23T21:01:51.208553 13016] Result: cache hit (direct)
+[2022-01-23T21:01:51.208588 13016] Acquired lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.208719 13016] Releasing lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.208748 13016] Unlink /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.216149 13019] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.216149 13019] Config: (default) base_dir = 
+[2022-01-23T21:01:51.216149 13019] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.216149 13019] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.216149 13019] Config: (default) compiler = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.216149 13019] Config: (default) compression = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.216149 13019] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) debug = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.216149 13019] Config: (default) disable = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) hard_link = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.216149 13019] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.216149 13019] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.216149 13019] Config: (default) max_files = 0
+[2022-01-23T21:01:51.216149 13019] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.216149 13019] Config: (default) path = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) read_only = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) recache = false
+[2022-01-23T21:01:51.216149 13019] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.216149 13019] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) stats = true
+[2022-01-23T21:01:51.216149 13019] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.216149 13019] Config: (default) umask = 
+[2022-01-23T21:01:51.216292 13019] Command line: gcc -o module.__main__.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.__main__.c
+[2022-01-23T21:01:51.216353 13019] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.216383 13019] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.216461 13019] Source file: module.__main__.c
+[2022-01-23T21:01:51.216485 13019] Object file: module.__main__.o
+[2022-01-23T21:01:51.216515 13019] Trying direct lookup
+[2022-01-23T21:01:51.217327 13019] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/f/c/acd869de19d092871d9fb2186176c1-394787.manifest
+[2022-01-23T21:01:51.217386 13019] No such manifest file
+[2022-01-23T21:01:51.217407 13019] Did not find object file hash in manifest
+[2022-01-23T21:01:51.217484 13019] Running preprocessor
+[2022-01-23T21:01:51.217508 13019] Executing /usr/bin/gcc -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src -E module.__main__.c
+[2022-01-23T21:01:51.239291 13024] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.239291 13024] Config: (default) base_dir = 
+[2022-01-23T21:01:51.239291 13024] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.239291 13024] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.239291 13024] Config: (default) compiler = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.239291 13024] Config: (default) compression = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.239291 13024] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) debug = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.239291 13024] Config: (default) disable = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) hard_link = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.239291 13024] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.239291 13024] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.239291 13024] Config: (default) max_files = 0
+[2022-01-23T21:01:51.239291 13024] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.239291 13024] Config: (default) path = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) read_only = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) recache = false
+[2022-01-23T21:01:51.239291 13024] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.239291 13024] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) stats = true
+[2022-01-23T21:01:51.239291 13024] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.239291 13024] Config: (default) umask = 
+[2022-01-23T21:01:51.239388 13024] Command line: gcc -o module.errors.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.errors.c
+[2022-01-23T21:01:51.239407 13024] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.239420 13024] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.239483 13024] Source file: module.errors.c
+[2022-01-23T21:01:51.239489 13024] Object file: module.errors.o
+[2022-01-23T21:01:51.239502 13024] Trying direct lookup
+[2022-01-23T21:01:51.239840 13024] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/8/5/7acfc6c64816ba629356a0a7d1bb08-154052.manifest
+[2022-01-23T21:01:51.245564 13024] Got object file hash from manifest
+[2022-01-23T21:01:51.245668 13024] Copying /home/aweso/.cache/Nuitka/ccache/e/4/6acdc96fc3ef58cceb03b240b749bd-969480.o to module.errors.o via module.errors.o.VivoBookF512J.13024.JNqOi2 (uncompressed)
+[2022-01-23T21:01:51.245867 13024] Created from cache: /home/aweso/.cache/Nuitka/ccache/e/4/6acdc96fc3ef58cceb03b240b749bd-969480.o -> module.errors.o
+[2022-01-23T21:01:51.245885 13024] Succeeded getting cached result
+[2022-01-23T21:01:51.245891 13024] Result: cache hit (direct)
+[2022-01-23T21:01:51.245909 13024] Acquired lock /home/aweso/.cache/Nuitka/ccache/e/stats.lock
+[2022-01-23T21:01:51.246029 13024] Releasing lock /home/aweso/.cache/Nuitka/ccache/e/stats.lock
+[2022-01-23T21:01:51.246036 13024] Unlink /home/aweso/.cache/Nuitka/ccache/e/stats.lock
+[2022-01-23T21:01:51.252733 13006] Got object file hash from preprocessor
+[2022-01-23T21:01:51.252889 13006] Copying /home/aweso/.cache/Nuitka/ccache/c/1/4937e6a6a600b3d12462dd5ea25b63-846214.o to __constants.o via __constants.o.VivoBookF512J.13006.HkNpiE (uncompressed)
+[2022-01-23T21:01:51.253042 13006] Created from cache: /home/aweso/.cache/Nuitka/ccache/c/1/4937e6a6a600b3d12462dd5ea25b63-846214.o -> __constants.o
+[2022-01-23T21:01:51.254274 13006] Added object file hash to /home/aweso/.cache/Nuitka/ccache/c/0/ce51a17c5ee1b5eb22e7de2f57a42f-5652.manifest
+[2022-01-23T21:01:51.254325 13006] Acquired lock /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.254454 13006] Releasing lock /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.254478 13006] Unlink /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.254506 13006] Succeeded getting cached result
+[2022-01-23T21:01:51.254553 13011] Got object file hash from preprocessor
+[2022-01-23T21:01:51.254620 13011] Copying /home/aweso/.cache/Nuitka/ccache/f/f/0cd3c90e6dcb2f341789120dec4420-843579.o to __helpers.o via __helpers.o.VivoBookF512J.13011.LE5cW1 (uncompressed)
+[2022-01-23T21:01:51.254671 13011] Created from cache: /home/aweso/.cache/Nuitka/ccache/f/f/0cd3c90e6dcb2f341789120dec4420-843579.o -> __helpers.o
+[2022-01-23T21:01:51.254796 13006] Result: cache hit (preprocessed)
+[2022-01-23T21:01:51.254834 13006] Acquired lock /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.254927 13006] Releasing lock /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.254956 13006] Unlink /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.255717 13011] Added object file hash to /home/aweso/.cache/Nuitka/ccache/0/c/2c5416a8ffed61260c3616479f88ab-1239.manifest
+[2022-01-23T21:01:51.255742 13011] Acquired lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.255825 13011] Releasing lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.255833 13011] Unlink /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.255845 13011] Succeeded getting cached result
+[2022-01-23T21:01:51.255966 13011] Result: cache hit (preprocessed)
+[2022-01-23T21:01:51.255982 13011] Acquired lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.256040 13011] Releasing lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.256049 13011] Unlink /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.264765 13027] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.264765 13027] Config: (default) base_dir = 
+[2022-01-23T21:01:51.264765 13027] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.264765 13027] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.264765 13027] Config: (default) compiler = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.264765 13027] Config: (default) compression = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.264765 13027] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) debug = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.264765 13027] Config: (default) disable = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) hard_link = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.264765 13027] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.264765 13027] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.264765 13027] Config: (default) max_files = 0
+[2022-01-23T21:01:51.264765 13027] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.264765 13027] Config: (default) path = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) read_only = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) recache = false
+[2022-01-23T21:01:51.264765 13027] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.264765 13027] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) stats = true
+[2022-01-23T21:01:51.264765 13027] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.264765 13027] Config: (default) umask = 
+[2022-01-23T21:01:51.264839 13027] Command line: gcc -o module.keys.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.keys.c
+[2022-01-23T21:01:51.264852 13027] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.264865 13027] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.264914 13027] Source file: module.keys.c
+[2022-01-23T21:01:51.264918 13027] Object file: module.keys.o
+[2022-01-23T21:01:51.264930 13027] Trying direct lookup
+[2022-01-23T21:01:51.265757 13027] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/6/e/47a184e65d04c94264fc30e1aa66e0-474608.manifest
+[2022-01-23T21:01:51.265777 13027] No such manifest file
+[2022-01-23T21:01:51.265781 13027] Did not find object file hash in manifest
+[2022-01-23T21:01:51.265837 13027] Running preprocessor
+[2022-01-23T21:01:51.265842 13027] Executing /usr/bin/gcc -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src -E module.keys.c
+[2022-01-23T21:01:51.278089 13032] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.278089 13032] Config: (default) base_dir = 
+[2022-01-23T21:01:51.278089 13032] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.278089 13032] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.278089 13032] Config: (default) compiler = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.278089 13032] Config: (default) compression = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.278089 13032] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) debug = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.278089 13032] Config: (default) disable = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) hard_link = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.278089 13032] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.278089 13032] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.278089 13032] Config: (default) max_files = 0
+[2022-01-23T21:01:51.278089 13032] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.278089 13032] Config: (default) path = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) read_only = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) recache = false
+[2022-01-23T21:01:51.278089 13032] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.278089 13032] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) stats = true
+[2022-01-23T21:01:51.278089 13032] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.278089 13032] Config: (default) umask = 
+[2022-01-23T21:01:51.278218 13032] Command line: gcc -o module.loading.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.loading.c
+[2022-01-23T21:01:51.278254 13032] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.278285 13032] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.278365 13032] Source file: module.loading.c
+[2022-01-23T21:01:51.278387 13032] Object file: module.loading.o
+[2022-01-23T21:01:51.278415 13032] Trying direct lookup
+[2022-01-23T21:01:51.278514 13032] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/1/4/d65f59d9b4d3cf72ed7eee5a45c1b1-26103.manifest
+[2022-01-23T21:01:51.285352 13032] Got object file hash from manifest
+[2022-01-23T21:01:51.285583 13032] Copying /home/aweso/.cache/Nuitka/ccache/0/1/388ba21578702e554986e1ff16e5f7-857546.o to module.loading.o via module.loading.o.VivoBookF512J.13032.nYBLCC (uncompressed)
+[2022-01-23T21:01:51.285763 13032] Created from cache: /home/aweso/.cache/Nuitka/ccache/0/1/388ba21578702e554986e1ff16e5f7-857546.o -> module.loading.o
+[2022-01-23T21:01:51.285797 13032] Succeeded getting cached result
+[2022-01-23T21:01:51.285823 13032] Result: cache hit (direct)
+[2022-01-23T21:01:51.285857 13032] Acquired lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.286005 13032] Releasing lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.286033 13032] Unlink /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.300490 13035] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.300490 13035] Config: (default) base_dir = 
+[2022-01-23T21:01:51.300490 13035] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.300490 13035] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.300490 13035] Config: (default) compiler = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.300490 13035] Config: (default) compression = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.300490 13035] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) debug = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.300490 13035] Config: (default) disable = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) hard_link = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.300490 13035] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.300490 13035] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.300490 13035] Config: (default) max_files = 0
+[2022-01-23T21:01:51.300490 13035] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.300490 13035] Config: (default) path = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) read_only = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) recache = false
+[2022-01-23T21:01:51.300490 13035] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.300490 13035] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) stats = true
+[2022-01-23T21:01:51.300490 13035] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.300490 13035] Config: (default) umask = 
+[2022-01-23T21:01:51.300578 13035] Command line: gcc -o module.loading.loading.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.loading.loading.c
+[2022-01-23T21:01:51.300596 13035] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.300608 13035] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.300667 13035] Source file: module.loading.loading.c
+[2022-01-23T21:01:51.300672 13035] Object file: module.loading.loading.o
+[2022-01-23T21:01:51.300683 13035] Trying direct lookup
+[2022-01-23T21:01:51.302240 13035] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/3/5/977fc5b84e4cc898ef236a6dfb6f44-725161.manifest
+[2022-01-23T21:01:51.305360 13019] Got object file hash from preprocessor
+[2022-01-23T21:01:51.305448 13019] Object file /home/aweso/.cache/Nuitka/ccache/7/0/6c3ad9bd69579e1970b720cafd32f8-1218595.o not in cache
+[2022-01-23T21:01:51.305474 13019] Running real compiler
+[2022-01-23T21:01:51.305571 13019] Executing /usr/bin/gcc -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src -c -o module.__main__.o module.__main__.c
+[2022-01-23T21:01:51.307947 13035] Got object file hash from manifest
+[2022-01-23T21:01:51.308056 13035] Copying /home/aweso/.cache/Nuitka/ccache/c/d/300f9c57bdc7bc82a054e8d4a75929-1559401.o to module.loading.loading.o via module.loading.loading.o.VivoBookF512J.13035.34j6oQ (uncompressed)
+[2022-01-23T21:01:51.308518 13035] Created from cache: /home/aweso/.cache/Nuitka/ccache/c/d/300f9c57bdc7bc82a054e8d4a75929-1559401.o -> module.loading.loading.o
+[2022-01-23T21:01:51.308539 13035] Succeeded getting cached result
+[2022-01-23T21:01:51.308547 13035] Result: cache hit (direct)
+[2022-01-23T21:01:51.308568 13035] Acquired lock /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.308696 13035] Releasing lock /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.308706 13035] Unlink /home/aweso/.cache/Nuitka/ccache/c/stats.lock
+[2022-01-23T21:01:51.323215 13041] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.323215 13041] Config: (default) base_dir = 
+[2022-01-23T21:01:51.323215 13041] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.323215 13041] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.323215 13041] Config: (default) compiler = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.323215 13041] Config: (default) compression = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.323215 13041] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) debug = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.323215 13041] Config: (default) disable = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) hard_link = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.323215 13041] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.323215 13041] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.323215 13041] Config: (default) max_files = 0
+[2022-01-23T21:01:51.323215 13041] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.323215 13041] Config: (default) path = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) read_only = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) recache = false
+[2022-01-23T21:01:51.323215 13041] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.323215 13041] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) stats = true
+[2022-01-23T21:01:51.323215 13041] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.323215 13041] Config: (default) umask = 
+[2022-01-23T21:01:51.323350 13041] Command line: gcc -o module.loading.parsing.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.loading.parsing.c
+[2022-01-23T21:01:51.323390 13041] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.323423 13041] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.323505 13041] Source file: module.loading.parsing.c
+[2022-01-23T21:01:51.323531 13041] Object file: module.loading.parsing.o
+[2022-01-23T21:01:51.323563 13041] Trying direct lookup
+[2022-01-23T21:01:51.324256 13041] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/5/5/c207dbffc76a7f21a91b9a5343720d-327662.manifest
+[2022-01-23T21:01:51.330693 13041] Got object file hash from manifest
+[2022-01-23T21:01:51.330795 13041] Copying /home/aweso/.cache/Nuitka/ccache/f/b/77e96f939724147387446745096f1c-1157096.o to module.loading.parsing.o via module.loading.parsing.o.VivoBookF512J.13041.HQzwOi (uncompressed)
+[2022-01-23T21:01:51.331121 13041] Created from cache: /home/aweso/.cache/Nuitka/ccache/f/b/77e96f939724147387446745096f1c-1157096.o -> module.loading.parsing.o
+[2022-01-23T21:01:51.331138 13041] Succeeded getting cached result
+[2022-01-23T21:01:51.331147 13041] Result: cache hit (direct)
+[2022-01-23T21:01:51.331164 13041] Acquired lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.331280 13041] Releasing lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.331288 13041] Unlink /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.334301 13044] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.334301 13044] Config: (default) base_dir = 
+[2022-01-23T21:01:51.334301 13044] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.334301 13044] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.334301 13044] Config: (default) compiler = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.334301 13044] Config: (default) compression = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.334301 13044] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) debug = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.334301 13044] Config: (default) disable = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) hard_link = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.334301 13044] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.334301 13044] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.334301 13044] Config: (default) max_files = 0
+[2022-01-23T21:01:51.334301 13044] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.334301 13044] Config: (default) path = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) read_only = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) recache = false
+[2022-01-23T21:01:51.334301 13044] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.334301 13044] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) stats = true
+[2022-01-23T21:01:51.334301 13044] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.334301 13044] Config: (default) umask = 
+[2022-01-23T21:01:51.334440 13044] Command line: gcc -o module.logic.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.logic.c
+[2022-01-23T21:01:51.334477 13044] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.334508 13044] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.334672 13044] Source file: module.logic.c
+[2022-01-23T21:01:51.334706 13044] Object file: module.logic.o
+[2022-01-23T21:01:51.334738 13044] Trying direct lookup
+[2022-01-23T21:01:51.334840 13044] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/e/0/65801086785dd7265972401935769a-26003.manifest
+[2022-01-23T21:01:51.340449 13044] Got object file hash from manifest
+[2022-01-23T21:01:51.340656 13044] Copying /home/aweso/.cache/Nuitka/ccache/d/f/121082f22dd2e70ace992845aeafe0-857468.o to module.logic.o via module.logic.o.VivoBookF512J.13044.XwnQ4x (uncompressed)
+[2022-01-23T21:01:51.340848 13044] Created from cache: /home/aweso/.cache/Nuitka/ccache/d/f/121082f22dd2e70ace992845aeafe0-857468.o -> module.logic.o
+[2022-01-23T21:01:51.340887 13044] Succeeded getting cached result
+[2022-01-23T21:01:51.340912 13044] Result: cache hit (direct)
+[2022-01-23T21:01:51.340951 13044] Acquired lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.341094 13044] Releasing lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.341122 13044] Unlink /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.342884 13027] Got object file hash from preprocessor
+[2022-01-23T21:01:51.342925 13027] Object file /home/aweso/.cache/Nuitka/ccache/d/0/c92d08b6aa537f35b336734fc693ae-1280728.o not in cache
+[2022-01-23T21:01:51.342934 13027] Running real compiler
+[2022-01-23T21:01:51.343011 13027] Executing /usr/bin/gcc -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src -c -o module.keys.o module.keys.c
+[2022-01-23T21:01:51.365865 13053] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.365865 13053] Config: (default) base_dir = 
+[2022-01-23T21:01:51.365865 13053] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.365865 13053] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.365865 13053] Config: (default) compiler = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.365865 13053] Config: (default) compression = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.365865 13053] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) debug = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.365865 13053] Config: (default) disable = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) hard_link = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.365865 13053] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.365865 13053] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.365865 13053] Config: (default) max_files = 0
+[2022-01-23T21:01:51.365865 13053] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.365865 13053] Config: (default) path = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) read_only = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) recache = false
+[2022-01-23T21:01:51.365865 13053] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.365865 13053] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) stats = true
+[2022-01-23T21:01:51.365865 13053] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.365865 13053] Config: (default) umask = 
+[2022-01-23T21:01:51.365943 13053] Command line: gcc -o module.logic.elements.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.logic.elements.c
+[2022-01-23T21:01:51.365959 13053] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.365972 13053] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.366022 13053] Source file: module.logic.elements.c
+[2022-01-23T21:01:51.366026 13053] Object file: module.logic.elements.o
+[2022-01-23T21:01:51.366037 13053] Trying direct lookup
+[2022-01-23T21:01:51.367647 13053] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/b/8/df41e6668f9124812f8782648caf92-943013.manifest
+[2022-01-23T21:01:51.371303 13050] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.371303 13050] Config: (default) base_dir = 
+[2022-01-23T21:01:51.371303 13050] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.371303 13050] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.371303 13050] Config: (default) compiler = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.371303 13050] Config: (default) compression = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.371303 13050] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) debug = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.371303 13050] Config: (default) disable = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) hard_link = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.371303 13050] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.371303 13050] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.371303 13050] Config: (default) max_files = 0
+[2022-01-23T21:01:51.371303 13050] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.371303 13050] Config: (default) path = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) read_only = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) recache = false
+[2022-01-23T21:01:51.371303 13050] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.371303 13050] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) stats = true
+[2022-01-23T21:01:51.371303 13050] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.371303 13050] Config: (default) umask = 
+[2022-01-23T21:01:51.371448 13050] Command line: gcc -o module.logic.core.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.logic.core.c
+[2022-01-23T21:01:51.371490 13050] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.371519 13050] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.371595 13050] Source file: module.logic.core.c
+[2022-01-23T21:01:51.371617 13050] Object file: module.logic.core.o
+[2022-01-23T21:01:51.371645 13050] Trying direct lookup
+[2022-01-23T21:01:51.372578 13053] Got object file hash from manifest
+[2022-01-23T21:01:51.372645 13050] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/a/1/ce23a062a6368fbcd1f1edfa06634c-333448.manifest
+[2022-01-23T21:01:51.372685 13053] Copying /home/aweso/.cache/Nuitka/ccache/d/e/9b317e00454a393c65315a6c1fa311-1723137.o to module.logic.elements.o via module.logic.elements.o.VivoBookF512J.13053.ihyUsd (uncompressed)
+[2022-01-23T21:01:51.373189 13053] Created from cache: /home/aweso/.cache/Nuitka/ccache/d/e/9b317e00454a393c65315a6c1fa311-1723137.o -> module.logic.elements.o
+[2022-01-23T21:01:51.373210 13053] Succeeded getting cached result
+[2022-01-23T21:01:51.373219 13053] Result: cache hit (direct)
+[2022-01-23T21:01:51.373238 13053] Acquired lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.373376 13053] Releasing lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.373383 13053] Unlink /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.379234 13050] Got object file hash from manifest
+[2022-01-23T21:01:51.379438 13050] Copying /home/aweso/.cache/Nuitka/ccache/5/4/4e6410497567ff4d6fe95058840879-1139460.o to module.logic.core.o via module.logic.core.o.VivoBookF512J.13050.456tZW (uncompressed)
+[2022-01-23T21:01:51.379868 13050] Created from cache: /home/aweso/.cache/Nuitka/ccache/5/4/4e6410497567ff4d6fe95058840879-1139460.o -> module.logic.core.o
+[2022-01-23T21:01:51.379904 13050] Succeeded getting cached result
+[2022-01-23T21:01:51.379928 13050] Result: cache hit (direct)
+[2022-01-23T21:01:51.379965 13050] Acquired lock /home/aweso/.cache/Nuitka/ccache/5/stats.lock
+[2022-01-23T21:01:51.380111 13050] Releasing lock /home/aweso/.cache/Nuitka/ccache/5/stats.lock
+[2022-01-23T21:01:51.380140 13050] Unlink /home/aweso/.cache/Nuitka/ccache/5/stats.lock
+[2022-01-23T21:01:51.393861 13059] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.393861 13059] Config: (default) base_dir = 
+[2022-01-23T21:01:51.393861 13059] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.393861 13059] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.393861 13059] Config: (default) compiler = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.393861 13059] Config: (default) compression = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.393861 13059] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) debug = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.393861 13059] Config: (default) disable = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) hard_link = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.393861 13059] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.393861 13059] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.393861 13059] Config: (default) max_files = 0
+[2022-01-23T21:01:51.393861 13059] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.393861 13059] Config: (default) path = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) read_only = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) recache = false
+[2022-01-23T21:01:51.393861 13059] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.393861 13059] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) stats = true
+[2022-01-23T21:01:51.393861 13059] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.393861 13059] Config: (default) umask = 
+[2022-01-23T21:01:51.393939 13059] Command line: gcc -o module.simpleANSI.clear.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.simpleANSI.clear.c
+[2022-01-23T21:01:51.393955 13059] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.393968 13059] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.394018 13059] Source file: module.simpleANSI.clear.c
+[2022-01-23T21:01:51.394022 13059] Object file: module.simpleANSI.clear.o
+[2022-01-23T21:01:51.394034 13059] Trying direct lookup
+[2022-01-23T21:01:51.394109 13059] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/6/e/e2662789a7149bd38356084864eee6-28842.manifest
+[2022-01-23T21:01:51.399210 13059] Got object file hash from manifest
+[2022-01-23T21:01:51.399316 13059] Copying /home/aweso/.cache/Nuitka/ccache/7/e/735000b5cf00a162712e502d39e761-860206.o to module.simpleANSI.clear.o via module.simpleANSI.clear.o.VivoBookF512J.13059.fMQZCG (uncompressed)
+[2022-01-23T21:01:51.399405 13059] Created from cache: /home/aweso/.cache/Nuitka/ccache/7/e/735000b5cf00a162712e502d39e761-860206.o -> module.simpleANSI.clear.o
+[2022-01-23T21:01:51.399421 13059] Succeeded getting cached result
+[2022-01-23T21:01:51.399431 13059] Result: cache hit (direct)
+[2022-01-23T21:01:51.399446 13059] Acquired lock /home/aweso/.cache/Nuitka/ccache/7/stats.lock
+[2022-01-23T21:01:51.399543 13059] Releasing lock /home/aweso/.cache/Nuitka/ccache/7/stats.lock
+[2022-01-23T21:01:51.399550 13059] Unlink /home/aweso/.cache/Nuitka/ccache/7/stats.lock
+[2022-01-23T21:01:51.402508 13056] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.402508 13056] Config: (default) base_dir = 
+[2022-01-23T21:01:51.402508 13056] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.402508 13056] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.402508 13056] Config: (default) compiler = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.402508 13056] Config: (default) compression = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.402508 13056] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) debug = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.402508 13056] Config: (default) disable = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) hard_link = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.402508 13056] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.402508 13056] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.402508 13056] Config: (default) max_files = 0
+[2022-01-23T21:01:51.402508 13056] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.402508 13056] Config: (default) path = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) read_only = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) recache = false
+[2022-01-23T21:01:51.402508 13056] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.402508 13056] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) stats = true
+[2022-01-23T21:01:51.402508 13056] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.402508 13056] Config: (default) umask = 
+[2022-01-23T21:01:51.402627 13056] Command line: gcc -o module.simpleANSI.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.simpleANSI.c
+[2022-01-23T21:01:51.402650 13056] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.402664 13056] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.402728 13056] Source file: module.simpleANSI.c
+[2022-01-23T21:01:51.402734 13056] Object file: module.simpleANSI.o
+[2022-01-23T21:01:51.402747 13056] Trying direct lookup
+[2022-01-23T21:01:51.402858 13056] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/2/3/80c9253af51488c27c116939e1fa03-43060.manifest
+[2022-01-23T21:01:51.408753 13056] Got object file hash from manifest
+[2022-01-23T21:01:51.408856 13056] Copying /home/aweso/.cache/Nuitka/ccache/d/4/b13318618ed0afc6a0a5522046745b-873412.o to module.simpleANSI.o via module.simpleANSI.o.VivoBookF512J.13056.whoHqs (uncompressed)
+[2022-01-23T21:01:51.408966 13056] Created from cache: /home/aweso/.cache/Nuitka/ccache/d/4/b13318618ed0afc6a0a5522046745b-873412.o -> module.simpleANSI.o
+[2022-01-23T21:01:51.408981 13056] Succeeded getting cached result
+[2022-01-23T21:01:51.408988 13056] Result: cache hit (direct)
+[2022-01-23T21:01:51.409006 13056] Acquired lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.409303 13056] Releasing lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.409314 13056] Unlink /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.413967 13062] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.413967 13062] Config: (default) base_dir = 
+[2022-01-23T21:01:51.413967 13062] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.413967 13062] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.413967 13062] Config: (default) compiler = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.413967 13062] Config: (default) compression = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.413967 13062] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) debug = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.413967 13062] Config: (default) disable = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) hard_link = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.413967 13062] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.413967 13062] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.413967 13062] Config: (default) max_files = 0
+[2022-01-23T21:01:51.413967 13062] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.413967 13062] Config: (default) path = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) read_only = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) recache = false
+[2022-01-23T21:01:51.413967 13062] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.413967 13062] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) stats = true
+[2022-01-23T21:01:51.413967 13062] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.413967 13062] Config: (default) umask = 
+[2022-01-23T21:01:51.414107 13062] Command line: gcc -o module.simpleANSI.cursor.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.simpleANSI.cursor.c
+[2022-01-23T21:01:51.414151 13062] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.414181 13062] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.414258 13062] Source file: module.simpleANSI.cursor.c
+[2022-01-23T21:01:51.414282 13062] Object file: module.simpleANSI.cursor.o
+[2022-01-23T21:01:51.414315 13062] Trying direct lookup
+[2022-01-23T21:01:51.414538 13062] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/5/8/66834241404fa28634c6cdea7c68e1-74401.manifest
+[2022-01-23T21:01:51.420999 13062] Got object file hash from manifest
+[2022-01-23T21:01:51.421146 13062] Copying /home/aweso/.cache/Nuitka/ccache/6/f/f88d8088240831a8b026e45e6119ab-893090.o to module.simpleANSI.cursor.o via module.simpleANSI.cursor.o.VivoBookF512J.13062.4UwLzS (uncompressed)
+[2022-01-23T21:01:51.421259 13062] Created from cache: /home/aweso/.cache/Nuitka/ccache/6/f/f88d8088240831a8b026e45e6119ab-893090.o -> module.simpleANSI.cursor.o
+[2022-01-23T21:01:51.421276 13062] Succeeded getting cached result
+[2022-01-23T21:01:51.421284 13062] Result: cache hit (direct)
+[2022-01-23T21:01:51.421304 13062] Acquired lock /home/aweso/.cache/Nuitka/ccache/6/stats.lock
+[2022-01-23T21:01:51.421410 13062] Releasing lock /home/aweso/.cache/Nuitka/ccache/6/stats.lock
+[2022-01-23T21:01:51.421418 13062] Unlink /home/aweso/.cache/Nuitka/ccache/6/stats.lock
+[2022-01-23T21:01:51.436604 13068] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.436604 13068] Config: (default) base_dir = 
+[2022-01-23T21:01:51.436604 13068] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.436604 13068] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.436604 13068] Config: (default) compiler = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.436604 13068] Config: (default) compression = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.436604 13068] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) debug = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.436604 13068] Config: (default) disable = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) hard_link = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.436604 13068] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.436604 13068] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.436604 13068] Config: (default) max_files = 0
+[2022-01-23T21:01:51.436604 13068] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.436604 13068] Config: (default) path = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) read_only = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) recache = false
+[2022-01-23T21:01:51.436604 13068] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.436604 13068] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) stats = true
+[2022-01-23T21:01:51.436604 13068] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.436604 13068] Config: (default) umask = 
+[2022-01-23T21:01:51.436683 13068] Command line: gcc -o module.ui.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.ui.c
+[2022-01-23T21:01:51.436692 13068] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.436705 13068] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.436753 13068] Source file: module.ui.c
+[2022-01-23T21:01:51.436757 13068] Object file: module.ui.o
+[2022-01-23T21:01:51.436769 13068] Trying direct lookup
+[2022-01-23T21:01:51.437589 13068] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/e/5/7e0045d42ce0ea3d1d1d916c5595e3-470204.manifest
+[2022-01-23T21:01:51.439218 13065] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.439218 13065] Config: (default) base_dir = 
+[2022-01-23T21:01:51.439218 13065] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.439218 13065] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.439218 13065] Config: (default) compiler = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.439218 13065] Config: (default) compression = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.439218 13065] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) debug = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.439218 13065] Config: (default) disable = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) hard_link = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.439218 13065] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.439218 13065] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.439218 13065] Config: (default) max_files = 0
+[2022-01-23T21:01:51.439218 13065] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.439218 13065] Config: (default) path = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) read_only = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) recache = false
+[2022-01-23T21:01:51.439218 13065] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.439218 13065] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) stats = true
+[2022-01-23T21:01:51.439218 13065] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.439218 13065] Config: (default) umask = 
+[2022-01-23T21:01:51.439343 13065] Command line: gcc -o module.simpleANSI.graphics.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src module.simpleANSI.graphics.c
+[2022-01-23T21:01:51.439382 13065] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.439412 13065] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.439488 13065] Source file: module.simpleANSI.graphics.c
+[2022-01-23T21:01:51.439509 13065] Object file: module.simpleANSI.graphics.o
+[2022-01-23T21:01:51.439537 13065] Trying direct lookup
+[2022-01-23T21:01:51.439649 13065] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/7/c/4df1b35291b9761afbd60b4e9e19fa-35442.manifest
+[2022-01-23T21:01:51.443082 13068] Got object file hash from manifest
+[2022-01-23T21:01:51.443195 13068] Copying /home/aweso/.cache/Nuitka/ccache/0/5/2909de04aebddbc81dda180b650881-1265582.o to module.ui.o via module.ui.o.VivoBookF512J.13068.GsMDhm (uncompressed)
+[2022-01-23T21:01:51.443578 13068] Created from cache: /home/aweso/.cache/Nuitka/ccache/0/5/2909de04aebddbc81dda180b650881-1265582.o -> module.ui.o
+[2022-01-23T21:01:51.443602 13068] Succeeded getting cached result
+[2022-01-23T21:01:51.443612 13068] Result: cache hit (direct)
+[2022-01-23T21:01:51.443630 13068] Acquired lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.443749 13068] Releasing lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.443757 13068] Unlink /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.447921 13065] Got object file hash from manifest
+[2022-01-23T21:01:51.448030 13065] Copying /home/aweso/.cache/Nuitka/ccache/0/5/9f14e0ed303f701aa4f315f89251c3-865476.o to module.simpleANSI.graphics.o via module.simpleANSI.graphics.o.VivoBookF512J.13065.FEx1m5 (uncompressed)
+[2022-01-23T21:01:51.448126 13065] Created from cache: /home/aweso/.cache/Nuitka/ccache/0/5/9f14e0ed303f701aa4f315f89251c3-865476.o -> module.simpleANSI.graphics.o
+[2022-01-23T21:01:51.448144 13065] Succeeded getting cached result
+[2022-01-23T21:01:51.448152 13065] Result: cache hit (direct)
+[2022-01-23T21:01:51.448168 13065] Acquired lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.448281 13065] Releasing lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.448290 13065] Unlink /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.464286 13074] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.464286 13074] Config: (default) base_dir = 
+[2022-01-23T21:01:51.464286 13074] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.464286 13074] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.464286 13074] Config: (default) compiler = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.464286 13074] Config: (default) compression = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.464286 13074] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) debug = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.464286 13074] Config: (default) disable = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) hard_link = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.464286 13074] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.464286 13074] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.464286 13074] Config: (default) max_files = 0
+[2022-01-23T21:01:51.464286 13074] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.464286 13074] Config: (default) path = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) read_only = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) recache = false
+[2022-01-23T21:01:51.464286 13074] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.464286 13074] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) stats = true
+[2022-01-23T21:01:51.464286 13074] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.464286 13074] Config: (default) umask = 
+[2022-01-23T21:01:51.464377 13074] Command line: gcc -o static_src/CompiledCellType.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src static_src/CompiledCellType.c
+[2022-01-23T21:01:51.464393 13074] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.464410 13074] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.464466 13074] Source file: static_src/CompiledCellType.c
+[2022-01-23T21:01:51.464470 13074] Object file: static_src/CompiledCellType.o
+[2022-01-23T21:01:51.464486 13074] Trying direct lookup
+[2022-01-23T21:01:51.464531 13074] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/9/7/992ce90356ce506921005bcfbf319e-8325.manifest
+[2022-01-23T21:01:51.467335 13071] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.467335 13071] Config: (default) base_dir = 
+[2022-01-23T21:01:51.467335 13071] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.467335 13071] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.467335 13071] Config: (default) compiler = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.467335 13071] Config: (default) compression = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.467335 13071] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) debug = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.467335 13071] Config: (default) disable = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) hard_link = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.467335 13071] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.467335 13071] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.467335 13071] Config: (default) max_files = 0
+[2022-01-23T21:01:51.467335 13071] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.467335 13071] Config: (default) path = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) read_only = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) recache = false
+[2022-01-23T21:01:51.467335 13071] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.467335 13071] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) stats = true
+[2022-01-23T21:01:51.467335 13071] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.467335 13071] Config: (default) umask = 
+[2022-01-23T21:01:51.467459 13071] Command line: gcc -o static_src/MainProgram.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src static_src/MainProgram.c
+[2022-01-23T21:01:51.467492 13071] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.467515 13071] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.467587 13071] Source file: static_src/MainProgram.c
+[2022-01-23T21:01:51.467602 13071] Object file: static_src/MainProgram.o
+[2022-01-23T21:01:51.467624 13071] Trying direct lookup
+[2022-01-23T21:01:51.467731 13071] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/2/b/2a37f820ac184e35fa0bd13c8ed11d-33799.manifest
+[2022-01-23T21:01:51.470153 13074] Got object file hash from manifest
+[2022-01-23T21:01:51.470266 13074] Copying /home/aweso/.cache/Nuitka/ccache/8/b/50adae7511c10a4787105a905fcc6b-849671.o to static_src/CompiledCellType.o via static_src/CompiledCellType.o.VivoBookF512J.13074.kMIB6M (uncompressed)
+[2022-01-23T21:01:51.470361 13074] Created from cache: /home/aweso/.cache/Nuitka/ccache/8/b/50adae7511c10a4787105a905fcc6b-849671.o -> static_src/CompiledCellType.o
+[2022-01-23T21:01:51.470383 13074] Succeeded getting cached result
+[2022-01-23T21:01:51.470392 13074] Result: cache hit (direct)
+[2022-01-23T21:01:51.470421 13074] Acquired lock /home/aweso/.cache/Nuitka/ccache/8/stats.lock
+[2022-01-23T21:01:51.470547 13074] Releasing lock /home/aweso/.cache/Nuitka/ccache/8/stats.lock
+[2022-01-23T21:01:51.470555 13074] Unlink /home/aweso/.cache/Nuitka/ccache/8/stats.lock
+[2022-01-23T21:01:51.473838 13071] Got object file hash from manifest
+[2022-01-23T21:01:51.474025 13071] Copying /home/aweso/.cache/Nuitka/ccache/f/c/1602658266cacbceb4819f5d76b81f-853336.o to static_src/MainProgram.o via static_src/MainProgram.o.VivoBookF512J.13071.XMRRQz (uncompressed)
+[2022-01-23T21:01:51.474156 13071] Created from cache: /home/aweso/.cache/Nuitka/ccache/f/c/1602658266cacbceb4819f5d76b81f-853336.o -> static_src/MainProgram.o
+[2022-01-23T21:01:51.474178 13071] Succeeded getting cached result
+[2022-01-23T21:01:51.474194 13071] Result: cache hit (direct)
+[2022-01-23T21:01:51.474224 13071] Acquired lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.474351 13071] Releasing lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.474373 13071] Unlink /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.603856 13080] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.603856 13080] Config: (default) base_dir = 
+[2022-01-23T21:01:51.603856 13080] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.603856 13080] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.603856 13080] Config: (default) compiler = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.603856 13080] Config: (default) compression = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.603856 13080] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) debug = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.603856 13080] Config: (default) disable = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) hard_link = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.603856 13080] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.603856 13080] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.603856 13080] Config: (default) max_files = 0
+[2022-01-23T21:01:51.603856 13080] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.603856 13080] Config: (default) path = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) read_only = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) recache = false
+[2022-01-23T21:01:51.603856 13080] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.603856 13080] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) stats = true
+[2022-01-23T21:01:51.603856 13080] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.603856 13080] Config: (default) umask = 
+[2022-01-23T21:01:51.603964 13080] Command line: gcc -o static_src/CompiledGeneratorType.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src static_src/CompiledGeneratorType.c
+[2022-01-23T21:01:51.603987 13080] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.604002 13080] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.604073 13080] Source file: static_src/CompiledGeneratorType.c
+[2022-01-23T21:01:51.604080 13080] Object file: static_src/CompiledGeneratorType.o
+[2022-01-23T21:01:51.604094 13080] Trying direct lookup
+[2022-01-23T21:01:51.604260 13080] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/9/1/e28ab7011cf8e58450644a800c0737-60305.manifest
+[2022-01-23T21:01:51.607266 13077] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.607266 13077] Config: (default) base_dir = 
+[2022-01-23T21:01:51.607266 13077] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.607266 13077] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.607266 13077] Config: (default) compiler = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.607266 13077] Config: (default) compression = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.607266 13077] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) debug = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.607266 13077] Config: (default) disable = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) hard_link = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.607266 13077] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.607266 13077] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.607266 13077] Config: (default) max_files = 0
+[2022-01-23T21:01:51.607266 13077] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.607266 13077] Config: (default) path = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) read_only = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) recache = false
+[2022-01-23T21:01:51.607266 13077] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.607266 13077] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) stats = true
+[2022-01-23T21:01:51.607266 13077] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.607266 13077] Config: (default) umask = 
+[2022-01-23T21:01:51.607416 13077] Command line: gcc -o static_src/CompiledFunctionType.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src static_src/CompiledFunctionType.c
+[2022-01-23T21:01:51.607458 13077] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.607488 13077] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.607565 13077] Source file: static_src/CompiledFunctionType.c
+[2022-01-23T21:01:51.607592 13077] Object file: static_src/CompiledFunctionType.o
+[2022-01-23T21:01:51.607620 13077] Trying direct lookup
+[2022-01-23T21:01:51.607900 13077] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/1/5/136dcec358fd382db8b6e0422e7939-95748.manifest
+[2022-01-23T21:01:51.612701 13080] Got object file hash from manifest
+[2022-01-23T21:01:51.612831 13080] Copying /home/aweso/.cache/Nuitka/ccache/2/3/bbdafd3af37d92723b580861de997b-1027534.o to static_src/CompiledGeneratorType.o via static_src/CompiledGeneratorType.o.VivoBookF512J.13080.92yuzf (uncompressed)
+[2022-01-23T21:01:51.613416 13080] Created from cache: /home/aweso/.cache/Nuitka/ccache/2/3/bbdafd3af37d92723b580861de997b-1027534.o -> static_src/CompiledGeneratorType.o
+[2022-01-23T21:01:51.613442 13080] Succeeded getting cached result
+[2022-01-23T21:01:51.613449 13080] Result: cache hit (direct)
+[2022-01-23T21:01:51.613473 13080] Acquired lock /home/aweso/.cache/Nuitka/ccache/2/stats.lock
+[2022-01-23T21:01:51.613593 13080] Releasing lock /home/aweso/.cache/Nuitka/ccache/2/stats.lock
+[2022-01-23T21:01:51.613603 13080] Unlink /home/aweso/.cache/Nuitka/ccache/2/stats.lock
+[2022-01-23T21:01:51.626710 13077] Got object file hash from manifest
+[2022-01-23T21:01:51.626837 13077] Copying /home/aweso/.cache/Nuitka/ccache/0/e/00ebe668bb270b618ec9759a0f0d67-3349241.o to static_src/CompiledFunctionType.o via static_src/CompiledFunctionType.o.VivoBookF512J.13077.eQ2Sx1 (uncompressed)
+[2022-01-23T21:01:51.629970 13077] Created from cache: /home/aweso/.cache/Nuitka/ccache/0/e/00ebe668bb270b618ec9759a0f0d67-3349241.o -> static_src/CompiledFunctionType.o
+[2022-01-23T21:01:51.629998 13077] Succeeded getting cached result
+[2022-01-23T21:01:51.630006 13077] Result: cache hit (direct)
+[2022-01-23T21:01:51.630029 13077] Acquired lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.630161 13077] Releasing lock /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.630169 13077] Unlink /home/aweso/.cache/Nuitka/ccache/0/stats.lock
+[2022-01-23T21:01:51.634223 13083] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.634223 13083] Config: (default) base_dir = 
+[2022-01-23T21:01:51.634223 13083] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.634223 13083] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.634223 13083] Config: (default) compiler = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.634223 13083] Config: (default) compression = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.634223 13083] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) debug = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.634223 13083] Config: (default) disable = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) hard_link = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.634223 13083] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.634223 13083] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.634223 13083] Config: (default) max_files = 0
+[2022-01-23T21:01:51.634223 13083] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.634223 13083] Config: (default) path = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) read_only = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) recache = false
+[2022-01-23T21:01:51.634223 13083] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.634223 13083] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) stats = true
+[2022-01-23T21:01:51.634223 13083] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.634223 13083] Config: (default) umask = 
+[2022-01-23T21:01:51.634326 13083] Command line: gcc -o static_src/InspectPatcher.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src static_src/InspectPatcher.c
+[2022-01-23T21:01:51.634349 13083] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.634363 13083] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.634431 13083] Source file: static_src/InspectPatcher.c
+[2022-01-23T21:01:51.634437 13083] Object file: static_src/InspectPatcher.o
+[2022-01-23T21:01:51.634450 13083] Trying direct lookup
+[2022-01-23T21:01:51.634513 13083] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/7/5/c89cf6432d9c81e4a248147ee638f8-14599.manifest
+[2022-01-23T21:01:51.640508 13083] Got object file hash from manifest
+[2022-01-23T21:01:51.640635 13083] Copying /home/aweso/.cache/Nuitka/ccache/1/2/d5073f2185a71196cc526f10acb715-855291.o to static_src/InspectPatcher.o via static_src/InspectPatcher.o.VivoBookF512J.13083.Gjw5Zt (uncompressed)
+[2022-01-23T21:01:51.640726 13083] Created from cache: /home/aweso/.cache/Nuitka/ccache/1/2/d5073f2185a71196cc526f10acb715-855291.o -> static_src/InspectPatcher.o
+[2022-01-23T21:01:51.640739 13083] Succeeded getting cached result
+[2022-01-23T21:01:51.640747 13083] Result: cache hit (direct)
+[2022-01-23T21:01:51.640768 13083] Acquired lock /home/aweso/.cache/Nuitka/ccache/1/stats.lock
+[2022-01-23T21:01:51.640900 13083] Releasing lock /home/aweso/.cache/Nuitka/ccache/1/stats.lock
+[2022-01-23T21:01:51.640908 13083] Unlink /home/aweso/.cache/Nuitka/ccache/1/stats.lock
+[2022-01-23T21:01:51.654548 13086] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.654548 13086] Config: (default) base_dir = 
+[2022-01-23T21:01:51.654548 13086] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.654548 13086] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.654548 13086] Config: (default) compiler = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.654548 13086] Config: (default) compression = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.654548 13086] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) debug = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.654548 13086] Config: (default) disable = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) hard_link = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.654548 13086] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.654548 13086] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.654548 13086] Config: (default) max_files = 0
+[2022-01-23T21:01:51.654548 13086] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.654548 13086] Config: (default) path = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) read_only = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) recache = false
+[2022-01-23T21:01:51.654548 13086] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.654548 13086] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) stats = true
+[2022-01-23T21:01:51.654548 13086] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.654548 13086] Config: (default) umask = 
+[2022-01-23T21:01:51.654698 13086] Command line: gcc -o static_src/MetaPathBasedLoader.o -c -flto -fuse-linker-plugin -fno-fat-lto-objects -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O2 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DPy_NO_ENABLE_SHARED -D_NUITKA_STATIC_LIBPYTHON -D_NUITKA_USE_UNEXPOSED_API -D_NUITKA_CONSTANTS_FROM_LINKER -D_NUITKA_FROZEN=164 -D_NUITKA_EXE -I/usr/include/python3.9 -I. -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/include -I/home/aweso/.local/lib/python3.9/site-packages/nuitka/build/static_src static_src/MetaPathBasedLoader.c
+[2022-01-23T21:01:51.654735 13086] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.654764 13086] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.654846 13086] Source file: static_src/MetaPathBasedLoader.c
+[2022-01-23T21:01:51.654871 13086] Object file: static_src/MetaPathBasedLoader.o
+[2022-01-23T21:01:51.654901 13086] Trying direct lookup
+[2022-01-23T21:01:51.655056 13086] Looking for object file hash in /home/aweso/.cache/Nuitka/ccache/7/1/f22e4d71e145018031f7e75f2d8752-56058.manifest
+[2022-01-23T21:01:51.660861 13086] Got object file hash from manifest
+[2022-01-23T21:01:51.661106 13086] Copying /home/aweso/.cache/Nuitka/ccache/e/e/3c86514dce6648ba0324152afe5940-877094.o to static_src/MetaPathBasedLoader.o via static_src/MetaPathBasedLoader.o.VivoBookF512J.13086.8NJ8HI (uncompressed)
+[2022-01-23T21:01:51.661368 13086] Created from cache: /home/aweso/.cache/Nuitka/ccache/e/e/3c86514dce6648ba0324152afe5940-877094.o -> static_src/MetaPathBasedLoader.o
+[2022-01-23T21:01:51.661405 13086] Succeeded getting cached result
+[2022-01-23T21:01:51.661429 13086] Result: cache hit (direct)
+[2022-01-23T21:01:51.661471 13086] Acquired lock /home/aweso/.cache/Nuitka/ccache/e/stats.lock
+[2022-01-23T21:01:51.661649 13086] Releasing lock /home/aweso/.cache/Nuitka/ccache/e/stats.lock
+[2022-01-23T21:01:51.661687 13086] Unlink /home/aweso/.cache/Nuitka/ccache/e/stats.lock
+[2022-01-23T21:01:51.739789 13019] Unlink /home/aweso/.cache/Nuitka/ccache/7/0/6c3ad9bd69579e1970b720cafd32f8-1218595.o.tmp.stdout.VivoBookF512J.13019.flvTzB
+[2022-01-23T21:01:51.739829 13019] Unlink /home/aweso/.cache/Nuitka/ccache/7/0/6c3ad9bd69579e1970b720cafd32f8-1218595.o.tmp.stderr.VivoBookF512J.13019.IJPOCF
+[2022-01-23T21:01:51.739877 13019] Copying module.__main__.o to /home/aweso/.cache/Nuitka/ccache/7/0/6c3ad9bd69579e1970b720cafd32f8-1218595.o via /home/aweso/.cache/Nuitka/ccache/7/0/6c3ad9bd69579e1970b720cafd32f8-1218595.o.VivoBookF512J.13019.467k3B (uncompressed)
+[2022-01-23T21:01:51.740095 13019] Stored in cache: module.__main__.o -> /home/aweso/.cache/Nuitka/ccache/7/0/6c3ad9bd69579e1970b720cafd32f8-1218595.o (copied)
+[2022-01-23T21:01:51.741000 13019] Added object file hash to /home/aweso/.cache/Nuitka/ccache/f/c/acd869de19d092871d9fb2186176c1-394787.manifest
+[2022-01-23T21:01:51.741018 13019] Acquired lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.741103 13019] Releasing lock /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.741109 13019] Unlink /home/aweso/.cache/Nuitka/ccache/f/stats.lock
+[2022-01-23T21:01:51.741298 13019] Result: cache miss
+[2022-01-23T21:01:51.741316 13019] Acquired lock /home/aweso/.cache/Nuitka/ccache/7/stats.lock
+[2022-01-23T21:01:51.741375 13019] Releasing lock /home/aweso/.cache/Nuitka/ccache/7/stats.lock
+[2022-01-23T21:01:51.741385 13019] Unlink /home/aweso/.cache/Nuitka/ccache/7/stats.lock
+[2022-01-23T21:01:51.804581 13027] Unlink /home/aweso/.cache/Nuitka/ccache/d/0/c92d08b6aa537f35b336734fc693ae-1280728.o.tmp.stdout.VivoBookF512J.13027.xIo0De
+[2022-01-23T21:01:51.804624 13027] Unlink /home/aweso/.cache/Nuitka/ccache/d/0/c92d08b6aa537f35b336734fc693ae-1280728.o.tmp.stderr.VivoBookF512J.13027.m0sEdg
+[2022-01-23T21:01:51.804670 13027] Copying module.keys.o to /home/aweso/.cache/Nuitka/ccache/d/0/c92d08b6aa537f35b336734fc693ae-1280728.o via /home/aweso/.cache/Nuitka/ccache/d/0/c92d08b6aa537f35b336734fc693ae-1280728.o.VivoBookF512J.13027.oV8PMf (uncompressed)
+[2022-01-23T21:01:51.804914 13027] Stored in cache: module.keys.o -> /home/aweso/.cache/Nuitka/ccache/d/0/c92d08b6aa537f35b336734fc693ae-1280728.o (copied)
+[2022-01-23T21:01:51.805833 13027] Added object file hash to /home/aweso/.cache/Nuitka/ccache/6/e/47a184e65d04c94264fc30e1aa66e0-474608.manifest
+[2022-01-23T21:01:51.805854 13027] Acquired lock /home/aweso/.cache/Nuitka/ccache/6/stats.lock
+[2022-01-23T21:01:51.805946 13027] Releasing lock /home/aweso/.cache/Nuitka/ccache/6/stats.lock
+[2022-01-23T21:01:51.805953 13027] Unlink /home/aweso/.cache/Nuitka/ccache/6/stats.lock
+[2022-01-23T21:01:51.806131 13027] Result: cache miss
+[2022-01-23T21:01:51.806146 13027] Acquired lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.806201 13027] Releasing lock /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.806209 13027] Unlink /home/aweso/.cache/Nuitka/ccache/d/stats.lock
+[2022-01-23T21:01:51.832064 13090] === CCACHE 3.7.7 STARTED =========================================
+[2022-01-23T21:01:51.832064 13090] Config: (default) base_dir = 
+[2022-01-23T21:01:51.832064 13090] Config: (environment) cache_dir = /home/aweso/.cache/Nuitka/ccache
+[2022-01-23T21:01:51.832064 13090] Config: (default) cache_dir_levels = 2
+[2022-01-23T21:01:51.832064 13090] Config: (default) compiler = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) compiler_check = mtime
+[2022-01-23T21:01:51.832064 13090] Config: (default) compression = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) compression_level = 6
+[2022-01-23T21:01:51.832064 13090] Config: (default) cpp_extension = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) debug = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) depend_mode = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) direct_mode = true
+[2022-01-23T21:01:51.832064 13090] Config: (default) disable = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) extra_files_to_hash = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) hard_link = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) hash_dir = true
+[2022-01-23T21:01:51.832064 13090] Config: (default) ignore_headers_in_manifest = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) keep_comments_cpp = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) limit_multiple = 0.8
+[2022-01-23T21:01:51.832064 13090] Config: (environment) log_file = /home/aweso/Source/Python/Logical/Logical.build/ccache-12995.txt
+[2022-01-23T21:01:51.832064 13090] Config: (default) max_files = 0
+[2022-01-23T21:01:51.832064 13090] Config: (/home/aweso/.cache/Nuitka/ccache/ccache.conf) max_size = 5.0G
+[2022-01-23T21:01:51.832064 13090] Config: (default) path = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) pch_external_checksum = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) prefix_command = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) prefix_command_cpp = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) read_only = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) read_only_direct = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) recache = false
+[2022-01-23T21:01:51.832064 13090] Config: (default) run_second_cpp = true
+[2022-01-23T21:01:51.832064 13090] Config: (default) sloppiness = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) stats = true
+[2022-01-23T21:01:51.832064 13090] Config: (default) temporary_dir = 
+[2022-01-23T21:01:51.832064 13090] Config: (default) umask = 
+[2022-01-23T21:01:51.832143 13090] Command line: gcc -o /home/aweso/Source/Python/Logical/Logical.dist/Logical -fuse-linker-plugin -flto=4 -fpartial-inlining -freorder-functions -O2 -z noexecstack -Xlinker -export-dynamic -rdynamic -s -Wl,-R,$ORIGIN -Wl,--disable-new-dtags -Wl,-b -Wl,binary -Wl,./__constants.bin -Wl,-b -Wl,elf64-x86-64 -Wl,-defsym -Wl,constant_bin_data=_binary_____constants_bin_start @./@link_input.txt -L/usr/lib -ldl -lm /usr/lib/python3.9/config-3.9-x86_64-linux-gnu/libpython3.9-pic.a -lz -lm -lutil -lpthread -lexpat
+[2022-01-23T21:01:51.832160 13090] Hostname: VivoBookF512J
+[2022-01-23T21:01:51.832172 13090] Working directory: /home/aweso/Source/Python/Logical/Logical.build
+[2022-01-23T21:01:51.832193 13090] noexecstack is not a regular file, not considering as input file
+[2022-01-23T21:01:51.832219 13090] Called for link with ./__helpers.o
+[2022-01-23T21:01:51.832226 13090] Failed; falling back to running the real compiler
+[2022-01-23T21:01:51.832229 13090] Executing /usr/bin/gcc -o /home/aweso/Source/Python/Logical/Logical.dist/Logical -fuse-linker-plugin -flto=4 -fpartial-inlining -freorder-functions -O2 -z noexecstack -Xlinker -export-dynamic -rdynamic -s -Wl,-R,$ORIGIN -Wl,--disable-new-dtags -Wl,-b -Wl,binary -Wl,./__constants.bin -Wl,-b -Wl,elf64-x86-64 -Wl,-defsym -Wl,constant_bin_data=_binary_____constants_bin_start @./@link_input.txt -L/usr/lib -ldl -lm /usr/lib/python3.9/config-3.9-x86_64-linux-gnu/libpython3.9-pic.a -lz -lm -lutil -lpthread -lexpat
+[2022-01-23T21:01:51.832238 13090] Result: called for link
+[2022-01-23T21:01:51.832263 13090] Acquired lock /home/aweso/.cache/Nuitka/ccache/9/stats.lock
+[2022-01-23T21:01:51.832362 13090] Releasing lock /home/aweso/.cache/Nuitka/ccache/9/stats.lock
+[2022-01-23T21:01:51.832388 13090] Unlink /home/aweso/.cache/Nuitka/ccache/9/stats.lock

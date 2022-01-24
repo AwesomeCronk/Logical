@@ -182,9 +182,9 @@ def eventTest():
             self.keyEvents = {}
             self.eventsToCall = []
 
-            createKeyEvent('Ctrl+C', self.stop, self)
-            createKeyEvent('1', self.eventTest, self)
-            createKeyEvent('2', self.eventTest2, self)
+            createKeyEvent('Ctrl+C', self.stop, 0.3, self)
+            createKeyEvent('1', self.eventTest, 0.3, self)
+            createKeyEvent('2', self.eventTest2, 0.3, self)
 
         def eventTest(self, value):
             print('event test 1 {}'.format(value))

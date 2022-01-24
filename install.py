@@ -7,7 +7,7 @@ downloadDir = os.path.dirname(os.path.realpath(sys.argv[0]))
 applicationVersions = [str.join('.', folder.split('.')[1:]) for folder in os.listdir(os.path.join(downloadDir, 'dist')) if folder.split('.')[0] == applicationName]
 applicationVersion = sorted(applicationVersions)[-1] # Last entry is highest version number
 
-srcDir = os.path.join(downloadDir, 'dist\\{}.{}'.format(applicationName, applicationVersion))
+srcDir = os.path.join(downloadDir, os.path.join('dist', '{}.{}'.format(applicationName, applicationVersion)))
 
 class directory():
     def __init__(self, src, dest, files, overwrite):
@@ -21,7 +21,7 @@ class directory():
 directories = {
     'install': directory(
         srcDir,
-        os.path.expandvars('%USERPROFILE%\\AppData\\Local\\Programs\\Logical'),
+        os.path.expandvars('%USERPROFILE%\\AppData\\Local\\Programs\\Logical') if sys.platform == 'win32' else '/usr/local/bin/Logical.{}'.format(applicationVersion),
         os.listdir(srcDir),
         overwrite = True
         )
