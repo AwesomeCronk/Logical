@@ -29,7 +29,7 @@ def loadTable(filePath, id=0):
     table.setupTable()
 
     for comm in commands[ctr:]:
-        log.debug('\n'.join([('    ' if i > 0 else '') + line for i, line in enumerate(comm.info().replace('self.', '').split('\n'))]))
+        log.debug('\n'.join([('    ' if i > 0 else '') + line for i, line in enumerate(comm.info().split('\n'))]))
         if comm.element == '$pins':
             throw(LoadError('Cannot add pins after matches have been declared.', id, filePath, comm.line))
             
@@ -145,7 +145,7 @@ def loadElement(filePath, cwd=None, args=[], id=0):
         # Element config
         if comm.element == '$include':
             # Add a note of where to find this element that has been included
-            registeredElements.update({comm.outputs[0]: comm.inputs[0].replace('/','\\')})
+            registeredElements.update({comm.outputs[0]: comm.inputs[0].replace('/','\\') if sys.platform == 'win32' else comm.inputs[0]})
             performIOChecks = False
         
         elif comm.element == '$pins':
@@ -245,7 +245,7 @@ def loadElement(filePath, cwd=None, args=[], id=0):
             mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
-            newElement, newWidget = loadElement(registeredElements[comm.element], cwd = cwd, args = comm.args, id=id)
+            newElement, newWidget = loadElement(registeredElements[comm.element], cwd=cwd, args=comm.args, id=id)
             
             log.debug(newElement.inputs)
             log.debug(newElement.outputs)

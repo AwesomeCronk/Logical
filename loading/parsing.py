@@ -34,13 +34,13 @@ class command():
 
     def info(self):
         infoStr = self.__repr__()
-        infoStr += '\nself.line: {}'.format(self.line)
-        infoStr += '\nself.entry: {}'.format(self.entry)
-        infoStr += '\nself.text: {}'.format(self.text)
-        infoStr += '\nself.element: {}'.format(self.element)
-        infoStr += '\nself.inputs: {}'.format(self.inputs)
-        infoStr += '\nself.outputs: {}'.format(self.outputs)
-        infoStr += '\nself.args: {}'.format(self.args)
+        infoStr += '\nline: {}'.format(self.line)
+        infoStr += '\nentry: {}'.format(self.entry)
+        infoStr += '\ntext: {}'.format(self.text)
+        infoStr += '\nelement: {}'.format(self.element)
+        infoStr += '\ninputs: {}'.format(self.inputs)
+        infoStr += '\noutputs: {}'.format(self.outputs)
+        infoStr += '\nargs: {}'.format(self.args)
         return infoStr
 
 # Function to parse .lgc and .ttb source code and return a list of commands.
@@ -141,17 +141,10 @@ def parseCommands(lines, filePath='<no file>'):
 
     return commands
 
-    for l, line in enumerate(lines):    # l is line number and line is line text
-        lineRemaining = line
-        for i in range(maxEntriesPerLine):
-            lineRemaining = parseEntry(lineRemaining, i)
-            if lineRemaining == '':
-                break
-
-if __name__ == '__main__':
-    with open(sys.argv[1], 'r') as file:
+def parseTest(path):
+    with open(path, 'r') as file:
         lines = file.read().split('\n')
-        print('Parsing file "{}" ({} lines)'.format(sys.argv[1], len(lines)))
-        commands = parseCommands(lines, sys.argv[1])
+        print('Parsing file "{}" ({} lines)'.format(path, len(lines)))
+        commands = parseCommands(lines, path)
     for comm in commands:
         print(comm.info())

@@ -8,6 +8,7 @@ import simpleANSI as ANSI
 
 # Project
 from loading.loading import loadElement
+from loading.parsing import parseTest
 from ui import vec2, widget, ansiManager
 from keys import createKeyEvent, pollKeyEvents, rawTest, setKeyMap
 from errors import SimulateError, throw, setThrowEvent
@@ -43,7 +44,12 @@ def getArgs():
     # )
     parser.add_argument(
         '-k',
-        help='keys mode',
+        help='key test mode',
+        action='store_true'
+    )
+    parser.add_argument(
+        '-p',
+        help='parse test mode',
         action='store_true'
     )
 
@@ -60,8 +66,6 @@ class simulation():
         self.eventsToCall = []
         self.titleString = 'Logical {} (Python {} on {} {}): {}'.format(version, pythonVersion, platform, architecture, filePath.replace('\\', '/').split('/')[-1])
 
-        # setDebug(self.verbose)
-        # setKeyDebug(self.verbose)
         self.log = logging.getLogger('simulation')
 
         self.mainElement, self.mainWidget = loadElement(filePath)
@@ -81,7 +85,7 @@ class simulation():
         for key in self.mainElement.keyBinds.keys():
             for function in self.mainElement.keyBinds[key]:
                 # delay = self.mainElement.keyBinds[key][-1]
-                createKeyEvent(key, function, 0.5, self)
+                createKeyEvent(key, function, 0.3, self)
 
     def initUI(self):
         print(ANSI.clear.entireScreen(), end = '')
@@ -176,6 +180,8 @@ if __name__ == '__main__':
     if args.k:
         setKeyMap(platform)
         rawTest()   # Print out key values and timings
+    elif args.p:
+        parseTest(args.file)
     else:
         if args.file == 'None':
             argParser.error('file is required unless -k is set.')
