@@ -1,4 +1,4 @@
-import sys
+import sys, logging
 
 from errors import ParseError, throw
 
@@ -13,6 +13,8 @@ bussingSequence = ['[', '..', ']']
 lineNumberOffset = 1
 entryNumberOffset = 1
 maxEntriesPerLine = 50
+
+log = logging.getLogger('parsing')
 
 # Class to represent commands in .lgc or .ttb source
 class command():
@@ -106,6 +108,7 @@ def parseCommands(lines, filePath='<no file>'):
                 
                 # Detect bussing (i.e. "data[0..25]")
                 for index, p in enumerate(pins):
+                    log.debug(pins)
                     if bussingSequence[0] in p:
                         name, bussing = p[0:-1].split(bussingSequence[0])
                         # print(name, bussing)
@@ -117,12 +120,11 @@ def parseCommands(lines, filePath='<no file>'):
                         
                         begin = int(begin)
                         end = int(end)
-                        # print(begin, end, length)
 
                         pins[index] = name + str(begin).zfill(length)
                         for j in range(1, end - begin + 1):
                             # print(j)
-                            pins.insert(index + j + 1, (name + str(j + begin).zfill(length)))
+                            pins.insert(index + j, (name + str(j + begin).zfill(length)))
 
 
             if element == includeSequence:

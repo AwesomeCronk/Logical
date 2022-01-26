@@ -6,7 +6,7 @@ platform='linux'    # Determine platform
 version=$(cat "$program.version.txt")
 
 echo "Building $program version $version.$platform..."
-python3.9 -m nuitka --standalone --include-data-file=Logical.version.txt=Logical.version.txt --include-data-file=LICENSE=LICENSE --include-data-file=README.md=README.md "$program.py" #Build with Nuitka
+python3.9 -m nuitka --standalone --include-data-file=Logical.version.txt=Logical.version.txt --include-data-file=LICENSE=LICENSE --include-data-file=README.md=README.md --include-data-dir=keys=keys "$program.py" #Build with Nuitka
 
 while test $# -gt 0
 do

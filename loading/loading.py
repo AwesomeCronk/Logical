@@ -1,10 +1,10 @@
-import os, logging
+import os, logging, traceback
 
 from logic.core import element, pin
 from logic.elements import *
 from ui import *
 from loading.parsing import parseCommands
-from errors import LoadError, throw
+from errors import ParseError, LoadError, SimulateError, throw
 
 # Load a truth table from parsed .lgc source code
 def loadTable(filePath, id=0):
@@ -67,18 +67,27 @@ def loadPyElement(filePath, args=[], id=0):
     log = logging.getLogger('loadPyElement')
     log.info('Loading as Python element...')
 
-    globalVars = {
-        'element': element,
-        'pin': pin,
-        'widget': widget,
-        'vec2': vec2
-    }
-    localVars = {}
     with open(filePath, 'r') as file:
-        exec(compile(file.read(), filePath, 'exec'), globalVars, localVars)
-    
-    if 'pyElement' in localVars.keys():
-        pyElement = localVars['pyElement']
+        source = file.read()
+    globalVars = {
+        'pin': pin,
+        'element': element,
+        'vec2': vec2,
+        'widget': widget,
+        'ParseError': ParseError,
+        'LoadError': LoadError,
+        'SimulateError': SimulateError,
+        'throw': throw
+    }
+    try:
+        exec(compile(source, filePath, 'exec'), globalVars)
+    except Exception as e:
+        throw(LoadError('pyElement load failure:\n{}'.format(traceback.format_exc()), id, filePath))
+
+    # log.debug(globalVars)
+
+    if 'pyElement' in globalVars.keys():
+        pyElement = globalVars['pyElement']
         pyElement = pyElement(*args)
         try:
             pyWidget = pyElement.widget
@@ -94,7 +103,7 @@ def loadPyElement(filePath, args=[], id=0):
 # Load an element from parsed .ttb source and return that element
 def loadElement(filePath, cwd=None, args=[], id=0):
     log = logging.getLogger('loadElement')
-    log.info('Loading element...')
+    log.info('Loading element {}...'.format(id))
     log.debug('old filePath: {}'.format(filePath))
     log.debug('old cwd: {}'.format(cwd))
 

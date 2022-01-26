@@ -17,7 +17,7 @@ class LoadError():
         self.line = line
 
     def __repr__(self):
-        return 'LoadError (element {} file {}, line {}): {}'.format(self.elementID, self.file, self.line, self.message)
+        return 'LoadError (element {}, file {}, line {}): {}'.format(self.elementID, self.file, self.line, self.message)
 
     __str__ = __repr__
 
@@ -29,7 +29,7 @@ class SimulateError():
         self.line = line
 
     def __repr__(self):
-        return 'SimulateError (element {} file {}, line {}): {}'.format(self.elementID, self.file, self.line, self.message)
+        return 'SimulateError (element {}, file {}, line {}): {}'.format(self.elementID, self.file, self.line, self.message)
 
     __str__ = __repr__
 

@@ -65,4 +65,6 @@ This document contains release notes for all versions from 0.1.0 on.
 * Removed verbose mode
 * Changed the key binding names
 * Fixed loops not working
+* Fixed includes failing on Linux
+* Fixed bussing inputs improperly mapped
 * Upgraded to Python 3.9.9

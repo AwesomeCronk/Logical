@@ -52,7 +52,7 @@ def __getCharLinux():
         log.debug('setting terminal mode')
         fd = sys.stdin.fileno()
         attr = termios.tcgetattr(fd)
-        tty.setraw(fd)
+        tty.setcbreak(fd)
         log.debug('set terminal mode')
         return sys.stdin.read(1).encode()
     finally:

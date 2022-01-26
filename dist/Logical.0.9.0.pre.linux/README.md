@@ -24,4 +24,4 @@ Join the Discord server! https://discord.gg/mw3yfNr3Wd
 * ~~Automatic circuit updates~~
 * ~~Improve the UI~~
 
-### NOTE: Win32 binaries are not up to date. Do not use them until I am able to update them!!
+### NOTE: Win32 binaries are not up to date. Do not use them inless you compile them yourself or until I am able to update them!!
