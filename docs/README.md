@@ -1,4 +1,3 @@
-![Logical Logo](/images/Logo128.png)
 # What is Logical?
 Logical is a Hardware Description Language and command-line logic simulator. More complicated logic elements that don't necessarily need to be implemented in Logical can be implemented in Python instead! The availability of Python allows you to simulate devices like memory without having to design and simulate millions of gates for a single, albeit complex, component. This greatly increases the speed of simulation, allowing for the simulation of more complex designs.
 
