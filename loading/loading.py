@@ -55,7 +55,7 @@ def loadTable(filePath, id=0):
                 table.addMatch(match, result)
 
         else:
-            throw(LoadError('Command {} not recognized.'.format(comm.text), id, filePath, comm.line))
+            throw(LoadError('Command "{}" not recognized.'.format(comm.text), id, filePath, comm.line))
 
     table.setID(id)
 

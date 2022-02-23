@@ -68,6 +68,9 @@ class element():    # Basic element class
         self.id = -1
 
     def addInput(self, newPin):
+        # Set new pin's elementID to self.id
+        newPin.setElementID(self.id)
+
         # Please note that the pin should be named and aliased before adding it to an element
         # Update inputs
         self.inputs.update({newPin.name: newPin})
@@ -85,6 +88,9 @@ class element():    # Basic element class
             self.aliasInternalPins.update({newPin.alias: [newPin]})
 
     def addOutput(self, newPin):
+        # Set new pin's elementID to self.id
+        newPin.setElementID(self.id)
+        
         # Please note that the pin should be named and aliased before adding it to an element
         self.outputs.update({newPin.name: newPin})
         self.aliasOutputs.update({newPin.alias: newPin})
