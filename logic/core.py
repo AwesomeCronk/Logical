@@ -1,6 +1,6 @@
 import traceback, logging
 
-from errors import SimulateError, throw
+from errors import LoadError, SimulateError, throw
 
 class pin():    #Basic pin class
     log = logging.getLogger('pin')
@@ -54,7 +54,11 @@ class pin():    #Basic pin class
         # print('values: {}'.format(values), end='')
 
 class element():    # Basic element class
-    def __init__(self):
+    def __init__(self, id, command, arguments):
+        self.id = id
+        self.command = command
+        self.arguments = arguments
+
         self.inputs = {}        # dict of inputs by {name: pin}
         self.aliasInputs = {}   # dict of inputs by {alias: pin}
         self.outputs = {}       # dict of outputs by {name: pin}
@@ -62,10 +66,8 @@ class element():    # Basic element class
         self.internalPins = {}  # dict of internal pins by {name: [pin, pin...]} for ease of connecting elements
         self.aliasInternalPins = {} # dict of internal pins by {alias: [pin, pin...]} for ease of connecting elements
 
-        self.args = []          # list of arguments
         self.elements = []      # list of elements in this element
         self.keyBinds = {}      # dict of key bindings by {key: [function, function]}
-        self.id = -1
 
     def addInput(self, newPin):
         # Set new pin's elementID to self.id
@@ -122,12 +124,17 @@ class element():    # Basic element class
             else:
                 self.keyBinds[key] = keyBinds[key]
 
-    def setID(self, id):
-        self.id = id
-        for pin in self.inputs.values():
-            pin.setElementID(self.id)
-        for pin in self.outputs.values():
-            pin.setElementID(self.id)
+    # def setID(self, id):
+    #     self.id = id
+    #     for pin in self.inputs.values():
+    #         pin.setElementID(self.id)
+    #     for pin in self.outputs.values():
+    #         pin.setElementID(self.id)
+
+    def ensureNumArguments(self, desiredNumArguments):
+        numArguments = len(self.arguments)
+        if numArguments != desiredNumArguments:
+            throw(LoadError('Too {} arguments! Got {}, expected {}'.format('many' if numArguments > desiredNumArguments else 'few', numArguments, desiredNumArguments), elementID=self.id, file=self.command.file, line=self.command.line))
 
     def preUpdate(self):
         for i in self.inputs.values():
@@ -136,13 +143,13 @@ class element():    # Basic element class
             try:
                 e.preUpdate()
             except:
-                throw(SimulateError('element preUpdate failure:\n{}'.format(traceback.format_exc()), e.id))
+                throw(SimulateError('element preUpdate failure:\n{}'.format(traceback.format_exc()), elementID=e.id, file=e.command.file, line=e.command.line))
 
     def update(self):
         for e in self.elements:
             try:
                 e.update()
             except:
-                throw(SimulateError('element update failure:\n{}'.format(traceback.format_exc()), e.id))
+                throw(SimulateError('element update failure:\n{}'.format(traceback.format_exc()), elementID=e.id, file=e.command.file, line=e.command.line))
         for o in self.outputs.values():
             o.fetch()

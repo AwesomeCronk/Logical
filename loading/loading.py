@@ -7,13 +7,12 @@ from loading.parsing import parseCommands
 from errors import ParseError, LoadError, SimulateError, throw
 
 # Load a truth table from parsed .lgc source code
-def loadTable(filePath, id=0):
+def loadTable(filePath, callComm=None, args=[], id=0):
     log = logging.getLogger('loadTable')
     log.info('Loading as truth table...')
     with open(filePath, 'r') as file:
         commands = parseCommands(file.read().split('\n'))
-    table = truthTable()
-    readingTable = False
+    table = truthTable(callComm, args)
 
     for ctr, comm in enumerate(commands):
         log.debug('\n' + comm.info().replace('self.', ''))
@@ -63,7 +62,7 @@ def loadTable(filePath, id=0):
     return table, None  # No widget for truth tables
 
 # Load an element from Python source
-def loadPyElement(filePath, args=[], id=0):
+def loadPyElement(filePath, callComm=None, args=[], id=0):
     log = logging.getLogger('loadPyElement')
     log.info('Loading as Python element...')
 
@@ -88,7 +87,7 @@ def loadPyElement(filePath, args=[], id=0):
 
     if 'pyElement' in globalVars.keys():
         pyElement = globalVars['pyElement']
-        pyElement = pyElement(*args)
+        pyElement = pyElement(callComm, args)
         try:
             pyWidget = pyElement.widget
         except AttributeError:
@@ -101,7 +100,7 @@ def loadPyElement(filePath, args=[], id=0):
     return pyElement, pyWidget
 
 # Load an element from parsed .ttb source and return that element
-def loadElement(filePath, cwd=None, args=[], id=0):
+def loadElement(filePath, cwd=None, callComm=None, args=[], id=0):
     log = logging.getLogger('loadElement')
     log.info('Loading element {}...'.format(id))
     log.debug('old filePath: {}'.format(filePath))
@@ -122,16 +121,14 @@ def loadElement(filePath, cwd=None, args=[], id=0):
         return loadPyElement(filePath, args = args, id=id)
 
     with open(filePath, 'r') as file:
-        commands = parseCommands(file.read().split('\n'))
+        commands = parseCommands(file.read().split('\n'), filePath=filePath)
 
     # Variables for loading things
     needsConnected = {}
     registeredElements = {} # Sort by name: filepath
-    keyBinds = {}
 
     # Main element setup
-    mainElement = element()
-    mainElement.setID(id)
+    mainElement = element(id, callComm, args)
 
     highPin = pin('\\high')
     mainElement.internalPins.update({highPin.name: [highPin]})
@@ -168,93 +165,82 @@ def loadElement(filePath, cwd=None, args=[], id=0):
 
         # Basic gates
         elif comm.element == 'and':
-            newElement = andGate()
+            newElement = andGate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'or':
-            newElement = orGate()
+            newElement = orGate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'xor':
-            newElement = xorGate()
+            newElement = xorGate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'not':
-            newElement = notGate()
+            newElement = notGate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'nand':
-            newElement = nandGate()
+            newElement = nandGate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'nor':
-            newElement = norGate()
+            newElement = norGate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'xnor':
-            newElement = xnorGate()
+            newElement = xnorGate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'tristate':
-            newElement = tristate()
+            newElement = tristate(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             needsConnected.update({newElement: comm.inputs})
 
         # UI elements
         elif comm.element == 'led':
-            newElement = led(*comm.args)
-            newElement.setID(id)
+            newElement = led(id, comm, comm.args)
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
             needsConnected.update({newElement: comm.inputs})
 
         elif comm.element == 'label':
-            newElement = label(*comm.args)
-            newElement.setID(id)
+            newElement = label(id, comm, comm.args)
             mainElement.addElement(newElement)
             mainWidget.addWidget(newElement.widget)
             needsConnected.update({newElement: comm.inputs})
 
         # Control elements
         elif comm.element == 'button':
-            newElement = button(*comm.args)
+            newElement = button(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             mainElement.addKeyBinds(newElement.keyBinds)
         
         elif comm.element == 'switch':
-            newElement = switch(*comm.args)
+            newElement = switch(id, comm, comm.args)
             newElement.outputs['y'].realias(comm.outputs[0])
-            newElement.setID(id)
             mainElement.addElement(newElement)
             mainElement.addKeyBinds(newElement.keyBinds)
 
         elif comm.element in registeredElements.keys():
-            newElement, newWidget = loadElement(registeredElements[comm.element], cwd=cwd, args=comm.args, id=id)
+            newElement, newWidget = loadElement(registeredElements[comm.element], cwd=cwd, callComm=comm, args=comm.args, id=id)
+            # cwd=None, callComm=None, args=[], id=0
             
             log.debug(newElement.inputs)
             log.debug(newElement.outputs)

@@ -2,8 +2,9 @@ from logic.core import element, pin
 from ui import widget, vec2
 
 class andGate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addInput(pin('b'))
         self.addOutput(pin('y'))
@@ -20,8 +21,9 @@ class andGate(element):
             #print('and gate set low')
 
 class orGate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addInput(pin('b'))
         self.addOutput(pin('y'))
@@ -38,8 +40,9 @@ class orGate(element):
             #print('or gate set low')
 
 class xorGate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addInput(pin('b'))
         self.addOutput(pin('y'))
@@ -56,8 +59,9 @@ class xorGate(element):
             #print('xor gate set low')
 
 class notGate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addOutput(pin('y'))
 
@@ -72,8 +76,9 @@ class notGate(element):
             #print('xnor gate set high')
 
 class nandGate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addInput(pin('b'))
         self.addOutput(pin('y'))
@@ -90,8 +95,9 @@ class nandGate(element):
             #print('and gate set low')
 
 class norGate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addInput(pin('b'))
         self.addOutput(pin('y'))
@@ -108,8 +114,9 @@ class norGate(element):
             #print('or gate set low')
 
 class xnorGate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addInput(pin('b'))
         self.addOutput(pin('y'))
@@ -126,8 +133,9 @@ class xnorGate(element):
             #print('xor gate set low')
 
 class truthTable(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.table = None
 
     def setupTable(self):
@@ -156,8 +164,9 @@ class truthTable(element):
                 outputPin.set(int(result[o]))
 
 class tristate(element):
-    def __init__(self):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(0)
         self.addInput(pin('a'))
         self.addInput(pin('e'))
         self.addOutput(pin('y'))
@@ -169,8 +178,10 @@ class tristate(element):
             self.outputs['y'].set(None)
             
 class led(element):
-    def __init__(self, colorR, colorG, colorB, posX, posY):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(5)
+        colorR, colorG, colorB, posX, posY = self.arguments
         self.litColor = (int(colorR), int(colorG), int(colorB))
         self.dimColor = (int(self.litColor[0] / 2), int(self.litColor[1] / 2), int(self.litColor[2] / 2))
         self.pos = vec2(int(posX), int(posY))
@@ -190,8 +201,10 @@ class led(element):
             self.widget.setBGColor(self.dimColor)
 
 class label(element):
-    def __init__(self, fgColorR, fgColorG, fgColorB, bgColorR, bgColorG, bgColorB, posX, posY, text, mode):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(10)
+        fgColorR, fgColorG, fgColorB, bgColorR, bgColorG, bgColorB, posX, posY, text, mode = arguments
         
         # Height calculations and newline management
         width, height = 0, 0
@@ -241,9 +254,10 @@ class label(element):
                 self.widget.setBGColor(self.bgDimColor)
 
 class button(element):
-    def __init__(self, keyBind):
-        element.__init__(self)
-        self.keyBinds = {keyBind: [self.keyEvent]}
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(1)
+        self.keyBinds = {arguments[0]: [self.keyEvent]}
         self.addOutput(pin('y'))
         self.outputs['y'].set(0)
 
@@ -260,11 +274,12 @@ class button(element):
             self.outputs['y'].set(0)
 
 class switch(element):
-    def __init__(self, keyBind):
-        element.__init__(self)
+    def __init__(self, id, command, arguments):
+        element.__init__(self, id, command, arguments)
+        self.ensureNumArguments(1)
         self.writeable = True
         self.value = 0
-        self.keyBinds = {keyBind: [self.keyEvent]}
+        self.keyBinds = {arguments[0]: [self.keyEvent]}
         self.addOutput(pin('y'))
         self.outputs['y'].set(0)
 

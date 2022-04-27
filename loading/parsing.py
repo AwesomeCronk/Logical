@@ -19,10 +19,11 @@ log = logging.getLogger('parsing')
 # Class to represent commands in .lgc or .ttb source
 class command():
     def __init__(
-        self, line, entry, text,
+        self, file, line, entry, text,
         element, inputs, outputs, args
     ):      # This line needs to cheer up...
 
+        self.file= file
         self.line = line        # Line number
         self.entry = entry      # Entry number
         self.text = text        # Entry source code
@@ -36,6 +37,7 @@ class command():
 
     def info(self):
         infoStr = self.__repr__()
+        infoStr += '\nfile: {}'.format(self.file)
         infoStr += '\nline: {}'.format(self.line)
         infoStr += '\nentry: {}'.format(self.entry)
         infoStr += '\ntext: {}'.format(self.text)
@@ -55,8 +57,11 @@ def parseCommands(lines, filePath='<no file>'):
         while '' in entries:
             entries.remove('')
 
-        for e in range(len(entries)):
-            entry = entries[e]      # Iterate through each entry on the line
+        for e, entry in enumerate(entries):
+            entry = entry.strip()
+            print(repr(entry))
+            if entry == '':
+                continue    # Skip blank lines
             element = entry.split()[0]   # The element being called
             other = ' '.join(entry.split()[1:])  # Everything else, to be consumed bit by bit
             
@@ -132,6 +137,7 @@ def parseCommands(lines, filePath='<no file>'):
                     throw(ParseError('{} must have file name and element name separated by {}'.format(includeSequence, pinSeparatorSequence), filePath, l))
 
             commands.append(command(
+                filePath,
                 l + lineNumberOffset,
                 e + entryNumberOffset,
                 lines[l],

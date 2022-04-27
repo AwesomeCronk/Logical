@@ -58,7 +58,7 @@ This document contains release notes for all versions from 0.1.0 on.
 * Set up command line args.
 * Replaced `keys` with `Logical -k`.
 
-### 0.9.0.pre
+### 0.9.0.dev
 * Added Linux support
 * Added a log file
 * Added an error system that isn't Python tracebacks
@@ -67,4 +67,5 @@ This document contains release notes for all versions from 0.1.0 on.
 * Fixed loops not working
 * Fixed includes failing on Linux
 * Fixed bussing inputs improperly mapped
-* Upgraded to Python 3.9.9
+* Upgraded to Python 3.9.12
+* Rewrote element argument system
